@@ -1,10 +1,10 @@
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
-\graphicspath{{images/}}
 
-\title{First document}
-\author{Jovial Joe Jayarson \thanks{Ebin P M}}
+\graphicspath{{images/}}
+\title{First Document}
+\author{Jovial Joe Jayarson \thanks{IES College of Engineering}}
 \date{November 2020}
 
 \begin{document}
@@ -28,14 +28,27 @@ The universe is immense and it seems to be homogeneous, in a large scale, everyw
 
 There's a picture of a galaxy above.
 
-\begin{figure}[h]
+\begin{figure}[h] % not sure of [h] exact meaning, but removing the same takes it beneath footer
     \centering
     \includegraphics[width=0.25\textwidth]{graph}
     \caption{3D Circular Pipe}
     \label{fig:3D Torus}
 \end{figure}
 
-As you can see in the figure \ref{fig:3D Torus}, the function equivalent around 0. Also, in the page \pageref{fig:3D Torus} 
+As you can see in the figure \ref{fig:3D Torus}, the function equivalent around 0. Also, in the page \pageref{fig:3D Torus}
 is the same example.
+
+Some unordered lists
+\begin{itemize}
+    \item The individual entries are indicated with a black dot, a so-called bullet.
+    \item The text in the entires may be of any length.
+\end{itemize}
+
+Some ordered lists
+\begin{enumerate}
+    \item This is the first entry of the list
+    \item The list number increases
+    \item As each entry is added
+\end{enumerate}
 
 \end{document}
