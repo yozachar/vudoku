@@ -7,10 +7,16 @@
 
 \begin{document}
 
-\maketitle
+\maketitle % This is needed for the title to be visible
 
-First document. This is a simple example, with no extra parameters or packages included.
+First document. This is a simple example, with no extra parameters or packages included. We have now added a title, author and date to our first \LaTeX{} document!
 
-We have now added a title, author and date to our first \LaTeX{} document!
+% This line here is a comment, it will not be printed in the document.
+
+Some of the \textbf{greatest} discoveries in \underline{science} were made by \textbf{\textit{accident}}. % What the \emph command actually does with its argument depends on the context - inside normal text the emphasized text is italicized, but this behaviour is reversed if used inside an italicized text.
+
+Some of the greatest \emph{discoveries} in science were made by accident.
+
+\textit{Some of the greatest \emph{discoveries} in science were made by accident.}
 
 \end{document}
