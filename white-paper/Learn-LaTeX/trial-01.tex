@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage[T1]{fontenc} % The T1 font encoding is an 8-bit encoding and uses fonts that have 256 glyphs. So an 'ö' is an actual single glyph in the font. The bigger problem is that without T1 you cannot copy/paste a name with a non-ascii glyph without getting them split up into their components.
 
 \graphicspath{{images/}}
 \title{Intro to \LaTeX{}}
@@ -102,5 +103,75 @@ Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\al
 
 \section*{Unnumbered Section}
 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisissem
+
+\section{Creating Tables}
+
+\subsection{Basic Tables}
+\begin{center}
+    \begin{tabular}{ c c c }
+        cell1 & cell2 & cell3 \\
+        cell4 & cell5 & cell6 \\
+        cell7 & cell8 & cell9
+    \end{tabular}
+\end{center}
+
+\subsection{Adding borders}
+\begin{center}
+    \begin{tabular}{ |c|c|c| }
+        \hline
+        cell1 & cell2 & cell3 \\
+        cell4 & cell5 & cell6 \\
+        cell7 & cell8 & cell9 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{itemize}
+    \item { | c | c | c | }: This declares that three columns, separated by a vertical line, are going to be used in the table. The | symbol specifies that these columns should be separated by a vertical line.
+    \item \verb|\hline|: This will insert a horizontal line. We have included horizontal lines at the top and bottom of the table here. There is no restriction on the number of times you can use \verb|\hline|.
+\end{itemize}
+
+Creating tables in LaTeX can be a bit tricky sometimes, so you may want to use the TablesGenerator.com online tool to export LaTeX code for tables. The File > Paste table data option lets you copy and paste data from spreadsheet applications.
+
+\begin{center}
+    \begin{tabular}{||c c c c||}
+        \hline
+        Col1 & Col2 & Col2  & Col3 \\ [0.5ex]
+        \hline\hline
+        1    & 6    & 87837 & 787  \\
+        \hline
+        2    & 7    & 78    & 5415 \\
+        \hline
+        3    & 545  & 778   & 7507 \\
+        \hline
+        4    & 545  & 18744 & 7560 \\
+        \hline
+        5    & 88   & 788   & 6344 \\ [1ex]
+        \hline
+    \end{tabular}
+\end{center}
+
+\section{Captions, labels and references}
+
+You can caption and reference tables in much the same way as images. The only difference is that instead of the figure environment, you use the table environment.
+
+able \ref{table:data} is an example of referenced \LaTeX{} elements.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{||c c c c||}
+        \hline
+        Col1 & Col2 & Col2  & Col3 \\ [0.5ex]
+        \hline\hline
+        1    & 6    & 87837 & 787  \\
+        2    & 7    & 78    & 5415 \\
+        3    & 545  & 778   & 7507 \\
+        4    & 545  & 18744 & 7560 \\
+        5    & 88   & 788   & 6344 \\ [1ex]
+        \hline
+    \end{tabular}
+    \caption{Table to test captions and labels}
+    \label{table:data}
+\end{table}
 
 \end{document}
