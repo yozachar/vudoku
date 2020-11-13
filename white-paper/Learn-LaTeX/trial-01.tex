@@ -1,12 +1,12 @@
 % Tutorial @ https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
 
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
 
 \graphicspath{{images/}}
-\title{First Document}
+\title{Intro to \LaTeX{}}
 \author{Jovial Joe Jayarson \thanks{IES College of Engineering}}
 \date{November 2020}
 
@@ -14,7 +14,21 @@
 
 \maketitle % This is needed for the title to be visible
 
+\begin{abstract}
+    This is a simple paragraph at the beginning of the document. A brief introduction about the main subject. The document contains the very basics of \LaTeX{} documentations. The tutorial is gratefully followed from Overleaf docs.
+\end{abstract}
+
+\chapter{\LaTeX{} 101} % \part and \chapter are only available in report and book document classes.
+
+% To start a new line without actually starting a new paragraph insert a break line point, this can be done by \\ (a double backslash as in the example) or the \newline command.
+
+% Care should be taken that multiple \\ or \newlines are not used to "simulate" paragraphs with larger spacing between them, as this can interfere with LaTeX's typesetting algorithms. The recommended method to do so is to keep using double blank lines to create new paragraphs without any \\, and then add \usepackage{parskip} to the preamble.
+
+\section{Preamble, Paragraphs and Emphasis}
+
 First document. This is a simple example, with no extra parameters or packages included. We have now added a title, author and date to our first \LaTeX{} document!
+
+This line will start a second Paragraph.
 
 % This line here is a comment, it will not be printed in the document.
 
@@ -24,13 +38,16 @@ Some of the greatest \emph{discoveries} in science were made by accident.
 
 \textit{Some of the greatest \emph{discoveries} in science were made by accident.}
 
+\section{Images and Figures}
 
+\subsection{Image}
 The universe is immense and it seems to be homogeneous, in a large scale, everywhere we look at.
 
 \includegraphics{universe} % no space between image names, good to omit extensions
 
 There's a picture of a galaxy above.
 
+\subsection{Figure}
 \begin{figure}[h] % not sure of [h] exact meaning, but removing the same takes it beneath footer
     \centering
     \includegraphics[width=0.25\textwidth]{graph}
@@ -40,6 +57,8 @@ There's a picture of a galaxy above.
 
 As you can see in the figure \ref{fig:3D Torus}, the function equivalent around 0. Also, in the page \pageref{fig:3D Torus}
 is the same example.
+
+\section{Lists}
 
 Some unordered lists
 \begin{itemize}
@@ -53,6 +72,8 @@ Some ordered lists
     \item The list number increases
     \item As each entry is added
 \end{enumerate}
+
+\section{Math in \LaTeX{}}
 
 % Adding Math to LaTeX
 In physics, the mass-energy equivalence is stated by the equation $E = mc^2$ discovered in 1905 by Albert Einstein. % same as \begin{math} ... \end{math}
@@ -78,5 +99,8 @@ We write integral using using $\int$ and fractions using $\frac{a}{b}$. Limits a
 Lower case Greek letters are written as $\omega$ $\delta$ etc. while upper case Greek letters are written as $\Omega$ $\Delta$.
 
 Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\alpha)$, $\log(x)$ etc.
+
+\section*{Unnumbered Section}
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam lobortis facilisissem
 
 \end{document}
