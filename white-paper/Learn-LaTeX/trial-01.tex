@@ -1,6 +1,9 @@
+% Tutorial @ https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+
 \documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
 \graphicspath{{images/}}
 \title{First Document}
@@ -50,5 +53,30 @@ Some ordered lists
     \item The list number increases
     \item As each entry is added
 \end{enumerate}
+
+% Adding Math to LaTeX
+In physics, the mass-energy equivalence is stated by the equation $E = mc^2$ discovered in 1905 by Albert Einstein. % same as \begin{math} ... \end{math}
+In natural units ($c = 1$) the formula expresses the identity
+\[ E = m \] % same as \begin{displaymath} ... \end{displaymath}
+In mathematics the most beautiful equation is stated as
+\begin{equation}
+    e^{i\pi} + 1 = 0
+\end{equation}
+
+% $$ ... $$ is discouraged as it can give inconsistent spacing, and may not work well with some math packages.
+
+% equation* environment is provided by an external package, [amsmath](https://www.overleaf.com/learn/Aligning_equations).
+
+Subscripts in mathematics are written as $a_b$ and superscripts are written as $a^b$. These can be combined and nested to write equations such as:
+
+\[ T^{i_1 i_2 \dots i_p}_{j_1 j_2 \dots j_q} = T(x^{i_1},\dots,x^{i_p},e_{j_1},\dots,e_{j_q}) \]
+
+We write integral using using $\int$ and fractions using $\frac{a}{b}$. Limits are placed on integral using subscripts and superscripts.
+
+\[ \int_0^1 \frac{dx}{e^x} =  \frac{e-1}{e} \]
+
+Lower case Greek letters are written as $\omega$ $\delta$ etc. while upper case Greek letters are written as $\Omega$ $\Delta$.
+
+Mathematical operators are prefixed with a backslash as $\sin(\beta)$, $\cos(\alpha)$, $\log(x)$ etc.
 
 \end{document}
