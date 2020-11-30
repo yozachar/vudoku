@@ -1,68 +1,100 @@
 \documentclass[12pt, a4paper]{report}
+%\usepackage{tgtermes}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage[T1]{fontenc}
 \usepackage[nottoc]{tocbibind}
-\usepackage[english]{babel}
+%\usepackage[english]{babel}
 \usepackage{geometry}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{fancyhdr}
 
 \newcommand\myshade{85}
-\colorlet{mylinkcolor}{violet}
-\colorlet{mycitecolor}{YellowOrange}
-\colorlet{myurlcolor}{Aquamarine}
+\colorlet{my_link_color}{violet}
+\colorlet{my_cite_color}{YellowOrange}
+\colorlet{my_url_color}{Aquamarine}
 
 \hypersetup{
-  linkcolor  = mylinkcolor!\myshade!black,
-  citecolor  = mycitecolor!\myshade!black,
-  urlcolor   = myurlcolor!\myshade!black,
+  linkcolor  = my_link_color!\myshade!black,
+  citecolor  = my_cite_color!\myshade!black,
+  urlcolor   = my_url_color!\myshade!black,
   colorlinks = true,
 }
 
-\graphicspath{{../images/}}
-\title{OpenAI GPT-3}
-\author{Jovial Joe Jayarson}
+\title{\textbf{OpenAI GPT-3} \\ \vspace{1cm} \large A seminar report submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
+\author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
+\date{December 5, 2020}
 
+%>>>>>>>>>>>>>>>>>>>>>>> Header & Footer >>>>>>>>>>>>>>>>>>>>>>>
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Department of CSE}
+\rhead{Seminar Report 2020-21}
+\lfoot{IES College of Engineering}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+%<<<<<<<<<<<<<<<<<<<<<<< Header & Footer <<<<<<<<<<<<<<<<<<<<<<<
+
+\setlength{\headheight}{32pt}
+\graphicspath{{../images/}}
 
 \begin{document}
-% \newgeometry{left=3cm,right=3cm,top=2cm,bottom=2cm}
 
-\maketitle
+\newgeometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Title >>>>>>>>>>>>>>>>>>>>>>>
+\makeatletter
+\thispagestyle{empty}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{\fill}
+        {\huge \@title }\\[0.5cm]
+        {\@author} \\[0.5cm]
+        {\@date}\\[10ex]
+        \includegraphics[width=0.5\linewidth]{iesce.png}\\[10ex]
+        {\large Department of Computer Science and Engineering \\ \textbf{IES College of Engineering, Chittilappilly - 680551}}
+        \vspace*{\fill}
+    \end{center}
+\end{titlepage}
+%<<<<<<<<<<<<<<<<<<<<<<< Title <<<<<<<<<<<<<<<<<<<<<<<
+
+\pagenumbering{roman}
 
 %>>>>>>>>>>>>>>>>>>>>>>> Certificate >>>>>>>>>>>>>>>>>>>>>>>
 \newpage
-
+\thispagestyle{plain}
+\vspace*{\fill}
 \begin{center}
-
     \textbf{\textsc{IES College of Engineering}}\\[0.5cm]
-    \textbf{\textsc{Department of Computer Science and Engineering}}\\[2.0cm]
+    \textbf{\textsc{Department of Computer Science and Engineering}}\\[1cm]
     \includegraphics{iesce.png}
     \section*{Certificate}
-    \vspace{1cm}
+    \addcontentsline{toc}{chapter}{Certificate}
+    This is to certify that the seminar report entitled \\[0.3cm] \textbf{\large OpenAI GPT-3} \\[0.3cm] submitted by \\[0.3cm] \textbf{Jovial Joe Jayarson} \\[0.3cm] in partial fulfilment of the requirements of the degree of \emph{Bachelor of Technology in Computer Science and Engineering}, to APJ Abdul Kalam Technological University is a record of \emph{bona fide}  work done by him under my supervision and guidance and this work has not been submitted elsewhere for any degree or diploma. \\ [2cm]
 \end{center}
-
-This is to certify that this is a bonafide record of the seminar \emph{OpenAI GPT-3}, presented by \textbf{Jovial Joe Jayarson} IES17CS01, during 7$^{th}$ semester, August - December 2020, in partial fulfilment of the requirements of the degree of Bachelor of Technology in Computer Science and Engineering.\\[1.0cm]
-
-\vfill
 
 \begin{table}[h]
     \centering
     \begin{tabular}{ c c c c }
-        Place & \rule{2cm}{0.15mm} & \rule{5cm}{0.15mm}   & \rule{5cm}{0.15mm}     \\
-              &                    & Mr. Ebin P M         & Dr. Kiruthiga G        \\
+              &                    & \rule{5cm}{0.15mm}   & \rule{5cm}{0.15mm}     \\
+        Place & \rule{2cm}{0.15mm} & Mr. Ebin P M         & Dr. Kiruthiga G        \\
               &                    & Asst. Professor, CSE & Head of the Department \\
         Date  & \rule{2cm}{0.15mm} & (Guide)              & CSE                    \\
     \end{tabular}
 \end{table}
-
+\vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Certificate <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Acknowledgement >>>>>>>>>>>>>>>>>>>>>>>
 \newpage
+\vspace*{\fill}
 \begin{center}
-    \section*{Acknowledgement}
+    \section*{Acknowledgements}
+    \addcontentsline{toc}{chapter}{Acknowledgements}
 \end{center}
 
 I gladly present this report on \emph{OpenAI GPT-3} as a part of the final year B.Tech Computer Science and Engineering seminar. Let me take opportunity to first thank God the Almighty for providing His grace and guidance in this dispensation.
@@ -72,70 +104,82 @@ Heartfelt gratitude to my guide Mr. Ebin P M, Assistant professor for his undivi
 \begin{center}
     May God bless us all.
 \end{center}
+\vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Acknowledgement <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Abstract >>>>>>>>>>>>>>>>>>>>>>>
 \newpage
-
-\begin{abstract}
-    Generative Pre-trained Transformer 3 (GPT-3) is an autoregressive language model that uses deep learning to produce human-like text. It is the third-generation language prediction model in the GPT-n series created by OpenAI\cite{wiki:gpt3}. A May 28, 2020 arXiv preprint by a group of 31 engineers and researchers at OpenAI, described the development of GPT-3, a third-generation ``state-of-the-art language model''. In his July 29, 2020 review in The New York Times, Farhad Manjoo said that GPT-3 - which can generate computer code and poetry, as well as prose - is not just `amazing', `spooky', and `humbling', but also `more than a little terrifying'\cite{art:hhwt}. GPT-3's full version has a capacity of 175 billion machine learning parameters. GPT-3, which was introduced in May 2020, and is in beta testing as of July 2020\cite{art:wtla}. One architecture used in natural language processing (NLP) is a neural network based on a deep learning model that was first introduced in 2017 - the Transformer\cite{2017arXiv170603762V}. GPT-3's higher number of parameters grants it a paramount level of accuracy relative to previous versions with smaller capacity. GPT-3's capacity is ten times larger than that of Microsoft's Turing NLG. On June 11, 2020, OpenAI announced that users could request access to its user-friendly GPT-3 API - a ``machine learning toolset'' - to help OpenAI `explore the strengths and limits' of this new technology. The invitation described how this API had a general-purpose `text in, text out' interface that can complete almost any English language task, instead of the usual single use-case. GPT-3's mind-boggling performance has convinced many that super-intelligence is closer than we think - or at least, that AI-generated code is closer than we think. It generates creative, insightful, deep, and even breathtakingly beautiful content\cite{art:wtla}.
-\end{abstract}
-
+\vspace*{\fill}
+\begin{center}
+    \section*{Abstract}
+    \addcontentsline{toc}{chapter}{Abstract}
+\end{center}
+The word `GPT-3' has brought the tech world to an unspoken frenzy. It seems to keep on appearing over and over again, all over the technical media corpus, like a wildfire across the forest. GPT-3 stands for Generative Pre-trained Transformer, which is a language model, created by the engineers at OpenAI. A language model takes in sequences of text input and spits out another sequence of coherent text, which is in some way related to the input. Parameters in a machine learning models can be thought of as knobs and dials of a function which is continuously tweaked until an optimal desired response is obtained from the model. This model in massive in the sense that it has huge number of parameters. Even more interesting is its incredible capability to generate coherent literature. The media is hyped with the mind boggling, selected results of GPT-3. The report aims to delves deep into GPT-3 to realize its architecture and how it works. To be unbiased, this report also explores what some of the critiques has voiced. Finally it concludes with certain interesting remarks on GPT-3.
+\vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Abstract <<<<<<<<<<<<<<<<<<<<<<<
+
 \tableofcontents
+\thispagestyle{fancy}
 
 %>>>>>>>>>>>>>>>>>>>>>>> Introduction >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
 \chapter*{Introduction}
 \label{chap:introduction}
+\thispagestyle{fancy}
+\pagenumbering{arabic}
 \addcontentsline{toc}{chapter}{\nameref{chap:introduction}}
+
+\hspace{0.5cm} Generative Pre-trained Transformer 3 (GPT-3) is an autoregressive language model that uses deep learning to produce human-like text. It is the third-generation language prediction model in the GPT-n series created by OpenAI\cite{wiki:gpt3}. A May 28, 2020 arXiv preprint by a group of 31 engineers and researchers at OpenAI, described the development of GPT-3, a third-generation ``state-of-the-art language model''. In his July 29, 2020 review in The New York Times, Farhad Manjoo said that GPT-3 - which can generate computer code and poetry, as well as prose - is not just `amazing', `spooky', and `humbling', but also `more than a little terrifying'\cite{art:hhwt}.
+
+GPT-3's full version has a capacity of 175 billion machine learning parameters. GPT-3, which was introduced in May 2020, and is in beta testing as of July 2020\cite{art:wtla}. One architecture used in natural language processing (NLP) is a neural network based on a deep learning model that was first introduced in 2017 - the Transformer\cite{2017arXiv170603762V}. GPT-3's higher number of parameters grants it a paramount level of accuracy relative to previous versions with smaller capacity. GPT-3's capacity is ten times larger than that of Microsoft's Turing NLG. On June 11, 2020, OpenAI announced that users could request access to its user-friendly GPT-3 API - a ``machine learning toolset'' - to help OpenAI `explore the strengths and limits' of this new technology.
+
+The invitation described how this API had a general-purpose `text in, text out' interface that can complete almost any English language task, instead of the usual single use-case. GPT-3's mind-boggling performance has convinced many that super-intelligence is closer than we think - or at least, that AI-generated code is closer than we think. It generates creative, insightful, deep, and even breathtakingly beautiful content\cite{art:wtla}.
 
 %<<<<<<<<<<<<<<<<<<<<<<< Introduction <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Literature >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
-\chapter*{Literature Survey}
-\label{chap:literature}
-\addcontentsline{toc}{chapter}{\nameref{chap:literature}}
+%\chapter*{Literature Survey}
+%\label{chap:literature}
+%\addcontentsline{toc}{chapter}{\nameref{chap:literature}}
 %<<<<<<<<<<<<<<<<<<<<<<< Literature <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Overview >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
-\chapter*{GPT-3 : An Overview}
+\chapter*{GPT-3 : Overview and Prerequisites}
 \label{chap:overview}
+\thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\nameref{chap:overview}}
 %<<<<<<<<<<<<<<<<<<<<<<< Overview <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Transformer >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
 \chapter*{GPT-3 : Part 1 - The Transformer}
 \label{chap:transformer}
+\thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\nameref{chap:transformer}}
 %<<<<<<<<<<<<<<<<<<<<<<< Transformer <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Demonstration >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
 \chapter*{GPT-3 : Part 2 - Demonstration}
 \label{chap:demonstration}
+\thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\nameref{chap:demonstration}}
 %<<<<<<<<<<<<<<<<<<<<<<< Demonstration <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Critiques >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
 \chapter*{GPT-3 : Part 3 - Issues and Critiques}
 \label{chap:critiques}
+\thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\nameref{chap:critiques}}
 %<<<<<<<<<<<<<<<<<<<<<<< Critiques <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Conclusion >>>>>>>>>>>>>>>>>>>>>>>
-\newpage
 \chapter*{Conclusion}
 \label{chap:conclusion}
+\thispagestyle{fancy}
 \addcontentsline{toc}{chapter}{\nameref{chap:conclusion}}
 %<<<<<<<<<<<<<<<<<<<<<<< Conclusion <<<<<<<<<<<<<<<<<<<<<<<
 
 
 \bibliographystyle{unsrt}
 \bibliography{references}
+\thispagestyle{fancy}
 
 \end{document}
