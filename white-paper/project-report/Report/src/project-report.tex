@@ -1,16 +1,19 @@
 \documentclass[12pt, a4paper]{report}
-%\usepackage{tgtermes} % for time romans font
-\usepackage{graphicx}
+%\usepackage{tgtermes} % for times romans font
+\usepackage{float}
+\usepackage{natbib}
 \usepackage{amsmath}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{etoolbox}
 \usepackage{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
-\usepackage{comment}
-\usepackage{natbib}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % use utf8x if utf8 causes error
-\usepackage[nottoc]{tocbibind}
 \usepackage[UKenglish]{babel}
+\usepackage[nottoc]{tocbibind}
+\usepackage[section]{placeins}
 \usepackage[dvipsnames]{xcolor}
 
 \begin{comment}
@@ -19,13 +22,6 @@
     bibtex build/main
     pdflatex -output-directory=build main.tex
     pdflatex -output-directory=build main.tex
-
-    \newcommand\myshade{40}
-    \colorlet{my_link_color}{violet}
-    \colorlet{my_cite_color}{Orange}
-    \colorlet{my_url_color}{blue}
-    %\DeclareUnicodeCharacter{00A0}{~}
-    % \cite{wiki:gpt3}} <== use this every time you need to cite
 \end{comment}
 
 \hypersetup{
@@ -47,6 +43,13 @@
 \author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
 
 %>>>>>>>>>>>>>>>>>>>>>>> Header & Footer >>>>>>>>>>>>>>>>>>>>>>>
+\makeatletter
+\patchcmd{\f@nch@head}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\headrule}{\hrule}{\color{gray}\hrule}{}{}
+\patchcmd{\f@nch@foot}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\footrule}{\hrule}{\color{gray}\hrule}{}{}
+\makeatother
+
 \pagestyle{fancy}
 \fancyhf{}
 \lhead{Department of CSE}
@@ -137,10 +140,16 @@ It is no secret that AI is an upcoming titan. Even though people are stunned to 
 %<<<<<<<<<<<<<<<<<<<<<<< Abstract <<<<<<<<<<<<<<<<<<<<<<<
 
 {
-
     \hypersetup{hidelinks}
+
     \tableofcontents
     \thispagestyle{fancy}
+
+    \listoffigures
+    \thispagestyle{fancy}
+
+    %\listoftables
+    %\thispagestyle{fancy}
 }
 
 %>>>>>>>>>>>>>>>>>>>>>>> Introduction >>>>>>>>>>>>>>>>>>>>>>>
@@ -204,9 +213,9 @@ just 0.32\%. In this paper, review of different methods handwritten digit recogn
 
 \textbf{Year:} 1986
 
-Recurrent neural networks are derived from feed-forward networks. The connections in a feed-forward network do not form a cycle. RNN is a class of neural network where the connections between nodes form a directed graph. This is always along a temporal sequence, so it exhibits a temporal dynamic behaviour. Dynamic systems are those that have a function which describes time dependence of a point in geometrical space. RNNs can use their internal state (or memory) to process variable length sequences of inputs.
+Recurrent neural networks are derived from feed-forward networks. The connections in a feed-forward network do not form a cycle. RNN is a class of neural network where the connections between nodes form a directed graph. This is always along a temporal sequence, so it exhibits a temporal dynamic behaviour. Dynamic systems are those that have a function which describes time dependence of a point in geometrical space. RNNs can use their internal state (or memory) to process variable length sequences of inputs \cite{wiki:rnns}. Section \ref{sec:perceptron} discusses more about vanilla networks.
 
-Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer. Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight. Nodes are either input nodes (receiving data from outside of the network), output nodes (yielding results), or hidden nodes (that modify the data en route from input to output). Each sequence produces an error as the sum of the deviations of all target signals from the corresponding activations computed by the network. For a training set of numerous sequences, the total error is the sum of the errors of all individual sequences. The following equations \ref{equ:4.1} was proposed by \textbf{Michael Irwin Jordan} as part of his research on \emph{Simple Recurrent Neural Network}:
+Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer. Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight. Nodes are either input nodes (receiving data from outside of the network), output nodes (yielding results), or hidden nodes (that modify the data en route from input to output). Each sequence produces an error as the sum of the deviations of all target signals from the corresponding activations computed by the network. For a training set of numerous sequences, the total error is the sum of the errors of all individual sequences. The following equation \ref{equ:4.1} was proposed by \textbf{Michael Irwin Jordan} as part of his research on \emph{Simple Recurrent Neural Network} \cite{wiki:rnns}:
 
 \[h_t = \sigma_h(W_h x_t + U_h y_{t-1} + b_h)\]
 \begin{equation}
@@ -214,16 +223,85 @@ Basic RNNs are a network of neuron-like nodes organized into successive layers. 
     y_t = \sigma_y(W_y h_t + b_y)
 \end{equation}
 
-Where, $x_t$ is input vector, $h_t$ is hidden layer vector
+Where, $x_t$ is input vector, $h_t$ is hidden layer vector, $y_t$ is output vector, $W, U$ and $b$ are parameter matrices and vector, respectively $\sigma_h$ and $\sigma_y$ are activation functions The following figure \ref{fig:4.1} gives the internal schematics of Recurrent Neural Networks.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Recurrent_neural_network_unfold.png}
+    \caption[RNN Unfold]{RNN Unfold \cite{wiki:rnns}}
+    \label{fig:4.1}
+\end{figure}
+
+Recurrent neural networks models contain a self-connected hidden layer. One benefit of the recurrent connection is that a `memory' of previous inputs remains in the network’s internal state, allowing it to make use of past context. This is significant for handwriting recognition as mentioned in \cite{art:consys}. A major problem with gradient descent for standard RNN architectures is that error gradients vanish exponentially quickly with the size of the time lag between important events \cite{wiki:rnns}.
 
 \section{Long Short Term Memory}
 \label{sec:lstm}
 
+\textbf{Year:} 1997
+
+Long short-term memory (LSTM) is a deep learning system that avoids the vanishing gradient problem. LSTM is normally augmented by recurrent gates called ``forget gates''. LSTM prevents backpropagated errors from vanishing or exploding. Instead, errors can flow backwards through unlimited numbers of virtual layers unfolded in space. That is, LSTM can learn tasks that require memories of events that happened thousands or even millions of discrete time steps earlier \cite{wiki:rnns}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{LSTM_cell.png}
+    \caption[LSTM Cell]{LSTM Cell \cite{wiki:lstm}}
+    \label{fig:4.2}
+\end{figure}
+
+A common LSTM unit, as shown in figure \ref{fig:4.2}, is composed of a cell, an \emph{input gate}, an \emph{output gate} and a \emph{forget gate}. The cell remembers values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. Some variations of the LSTM unit do not have one or more of these gates or maybe have other gates. For example, \emph{Gated Recurrent Units} (GRUs) do not have an output gate. LSTM networks are hence well-suited for classifying time series data.
+
+The compact forms of the equations for the forward pass of an LSTM unit with a forget gate are:
+
+\[f_t = \sigma_g(W_f x_t + U_f h_{t-1} + b_f)\]
+\[i_t = \sigma_g(W_i x_t + U_i h_{t-1} + b_i)\]
+\[o_t = \sigma_g(W_o x_t + U_o h_{t-1} + b_o)\]
+\[\tilde{c}_t = \sigma_c(W_c x_t + U_c h_{t-1} + b_c)\]
+\[c_t = f_t \circ c_{t-1} + i_t \circ \tilde{c}_t\]
+\begin{equation}
+    h_t = \sigma_t \circ \sigma_h(c_t)
+\end{equation}
+
+The initial values are $c_0 = 0$ and $h_0 = 0$ and the operator $\circ$ denotes the Hadamard element-wise product. Activations are $\sigma_g$ - a sigmoid function, $\sigma_c$ and $\sigma_h$  - a hyperbolic tangent functions. The variable are \cite{wiki:lstm}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ r l }
+        $x_t$           : & input vector to the LSTM unit            \\
+        $f_t$           : & forget gate's activation vector          \\
+        $i_{t}$         : & input or update gate's activation vector \\
+        $o_{t}$         : & output gate's activation vector          \\
+        $h_{t}$         : & hidden state vector                      \\
+        $\tilde{c}_{t}$ : & cell input activation vector             \\
+        $c_{t}$         : & cell state vector
+    \end{tabular}
+\end{table}
+
 \section{Convolution Neural Networks}
 \label{sec:cnnlr}
 
+\textbf{Year:} 1998
+
+A convolutional neural network (CNN), is a class of deep neural networks, most commonly applied to analyzing visual imagery. They are also known as shift invariant or \emph{space invariant artificial neural networks} (SIANN). CNNs have a wide variety of applications including, image and video recognition, recommender system, brain-computer interface etc. CNNs are regularized versions of multilayer perceptrons. Multilayer perceptrons usually mean fully connected networks, that is, each neuron in one layer is connected to all neurons in the next layer \cite{wiki:cnns}. 
+
+Convolutional networks were inspired by biological processes in that the connectivity pattern between neurons resembles the organization of the animal visual cortex. Figure \ref{fig:4.3} shows a common CNN architecture. CNNs use relatively less pre-processing compared to other image classification algorithms. Independence from prior knowledge and human effort in feature design is a major advantage. More about CNN in section \ref{sec:cnn}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Typical_cnn.png}
+    \caption[Typical CNN Architecture]{Typical CNN Architecture \cite{wiki:cnns}}
+    \label{fig:4.3}
+\end{figure}
+
 \section{The Transformer Network}
 \label{sec:ttn}
+
+\textbf{Year:} 2017
+
+The Transformer is a deep learning model primarily used in the field of natural language processing (NLP). Transformers are designed to handle sequential data, such as natural language unlike RNNs, Transformers do not require that the sequential data be processed in order. Thus Transformer allows for much more parallelization than RNNs and therefore reduced training hours. This has led to the development of pre-trained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which have been trained with huge general language datasets, and can be fine-tuned to specific language tasks.
+
+Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps. 
+
+The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \ref{sec:vt}.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Evolution <<<<<<<<<<<<<<<<<<<<<<<
 
