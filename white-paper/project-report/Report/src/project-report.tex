@@ -1,0 +1,279 @@
+\documentclass[12pt, a4paper]{report}
+%\usepackage{tgtermes} % for time romans font
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % use utf8x if utf8 causes error
+\usepackage[nottoc]{tocbibind}
+\usepackage[UKenglish]{babel}
+\usepackage[dvipsnames]{xcolor}
+
+\begin{comment}
+    mkdir build
+    pdflatex -output-directory=build main.tex
+    bibtex build/main
+    pdflatex -output-directory=build main.tex
+    pdflatex -output-directory=build main.tex
+
+    \newcommand\myshade{40}
+    \colorlet{my_link_color}{violet}
+    \colorlet{my_cite_color}{Orange}
+    \colorlet{my_url_color}{blue}
+    %\DeclareUnicodeCharacter{00A0}{~}
+    % \cite{wiki:gpt3}} <== use this every time you need to cite
+\end{comment}
+
+\hypersetup{
+  colorlinks      = true,
+  urlcolor        = brown,
+  linkcolor       = black,
+  citecolor       = black,
+  citebordercolor = red,
+  urlbordercolor  = white,
+  linkbordercolor = blue,
+}
+
+\graphicspath{{../images/}}
+\setlength{\headheight}{32pt}
+\setcitestyle{open={},close={},numbers}
+\AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+
+\title{\textbf{Vudoku - Visual Sudoku Solver} \\ \vspace{1cm} \large A project report submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
+\author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Header & Footer >>>>>>>>>>>>>>>>>>>>>>>
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Department of CSE}
+\rhead{Project Report 2020-21}
+\lfoot{IES College of Engineering}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%<<<<<<<<<<<<<<<<<<<<<<< Header & Footer <<<<<<<<<<<<<<<<<<<<<<<
+
+
+%#################################################################
+%                      Document Begins Here                      %
+%#################################################################
+\begin{document}
+
+\newgeometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Title >>>>>>>>>>>>>>>>>>>>>>>
+\makeatletter
+\thispagestyle{empty}
+\begin{titlepage}
+    \begin{center}
+        \vspace*{\fill}
+        {\huge \@title }\\[0.5cm]
+        {\@author} \\[0.5cm]
+        {\@date}\\[10ex]
+        \includegraphics[width=0.5\linewidth]{iesce.png}\\[10ex]
+        {\large Department of Computer Science and Engineering \\ \textbf{IES College of Engineering, Chittilappilly - 680551}}
+        \vspace*{\fill}
+    \end{center}
+\end{titlepage}
+%<<<<<<<<<<<<<<<<<<<<<<< Title <<<<<<<<<<<<<<<<<<<<<<<
+
+\pagenumbering{roman}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Certificate >>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\thispagestyle{plain}
+\vspace*{\fill}
+\begin{center}
+    \textbf{\textsc{IES College of Engineering}}\\[0.5cm]
+    \textbf{\textsc{Department of Computer Science and Engineering}}\\[1cm]
+    \includegraphics{iesce.png}
+    \section*{Certificate}
+    \addcontentsline{toc}{chapter}{Certificate}
+    This is to certify that the project report entitled \\[0.3cm] \textbf{\large Vudoku - Visual Sudoku Solver} \\[0.3cm] submitted by \\[0.3cm] \textbf{Jovial Joe Jayarson} \\[0.3cm] in partial fulfilment of the requirements of the degree of \emph{Bachelor of Technology in Computer Science and Engineering}, to APJ Abdul Kalam Technological University is a record of \emph{bona fide}  work done by him under my supervision and guidance and this work has not been submitted elsewhere for any degree or diploma. \\ [2cm]
+\end{center}
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ c c c c }
+              &                    & \rule{5cm}{0.15mm}   & \rule{5cm}{0.15mm}     \\
+        Place & \rule{2cm}{0.15mm} & Mr. Ebin P M         & Dr. Kiruthiga G        \\
+              &                    & Asst. Professor, CSE & Head of the Department \\
+        Date  & \rule{2cm}{0.15mm} & (Guide)              & CSE                    \\
+    \end{tabular}
+\end{table}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Certificate <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Acknowledgement >>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \section*{Acknowledgements}
+    \addcontentsline{toc}{chapter}{Acknowledgements}
+\end{center}
+
+I gladly present this report on \emph{Vudoku - Visual Sudoku Solver} as a part of the final year B.Tech Computer Science and Engineering seminar. Let me take opportunity to first thank God the Almighty for providing His grace and guidance in this dispensation. I express my sincere thanks to Dr. Brilly S Sangeetha, principal for providing us with all the facilities we required to make this happen. I also acknowledge the ever encouraging presence of Dr. Kriuthiga G, head of the department. Heartfelt gratitude to my guide Mr. Ebin P M, Assistant Professor, for his undivided attention, support and coaching. Last but not the least I convey my regards to all the well wishers, family and friends who have helped me during the needed times.
+
+\begin{center}
+    May God bless us all.
+\end{center}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Acknowledgement <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Abstract >>>>>>>>>>>>>>>>>>>>>>>
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \section*{Abstract}
+    \label{sec:abstract}
+    \addcontentsline{toc}{chapter}{Abstract}
+\end{center}
+It is no secret that AI is an upcoming titan. Even though people are stunned to hear that AI has been here for around a century, due to the advancement in computational methods and resources AI peaks like never before. As a tiny glimpse into the field of Digit Recognition, this project aims to understand the underlying cogs and wheels on which the neural networks spin. Ranging from core mathematical functions to flowery programming, this project will include all that is essential to recognize a digit from an image. Even though the project is primarily research oriented, on the application part of it, this can be used to identify licence plate, read bank cheques, grade primary class mathematics homework. Currently the project tries to solve Sudoku drawn and written by hand The paraphernalia for this project includes programming language: Python3/Nim; libraries: opencv, pandas, numpy, keras/tensorflow, matplotlib; datasets: MNIST handwritten digit database. Digit recognition is a classical problem which will introduce neurons, neural networks, connections hidden layers, weights, biases, activation functions like sigmoid and ReLU, back-propagation and other topics as well.
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Abstract <<<<<<<<<<<<<<<<<<<<<<<
+
+{
+
+    \hypersetup{hidelinks}
+    \tableofcontents
+    \thispagestyle{fancy}
+}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Introduction >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Introduction >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Introduction}
+\label{chap:introduction}
+\pagenumbering{arabic}
+\thispagestyle{fancy}
+
+\hspace{0.5cm} Digit Recognition is a classical machine learning problem. The objective is implicitly evident, it is to identify and classify (usually) handwritten digits. Machines are inherently incapable to understand, text, images and audio. These formats which carry information, needs to be converted into numbers, matrices or vectors which is a significant step, in any procedure, to solve problems using computers. Another vital stage for digit recognition is \emph{machine learning}. With classical problem solving techniques, humans provide computers with both data and rules as input. In contrast, we provides data and presumed result, as input to a machine learning system. And then we let it find out some \emph{rules}. A quick example would be to give three numbers $x$, $y$ and $z$ and tell a machine that - certain operation was performed on $x$ and $y$ to obtain $z$. Once a machine is fed with lots and lots of similar examples, it will be equipped find out some pattern behind it. At a later stage, it can very well predict, what operation(s) might have been performed on $x$ and $y$ to result in $z$.
+
+This report delves into a century long history of digit recognition, all the way from perceptron networks to recently released transformers. The means and ways, in which this problem was approached converges to SOTA (state of the art) models like in \cite{art:edrdcnn}. This report explores \emph{The Transformer}, released in 2017. \emph{Attention} mechanism in the Transformer \cite{2017arXiv170603762V} has sparked a lot of interest in the research community, not to mention the buzz associated with GPT-3, due to its mind-boggling capabilities flaunted all across the media. The very next year a preprint on \emph{Image Transformer} \cite{2018arXiv180205751P} was released. Interestingly Google research just released another preprint which dubs the whole idea of manipulating images with this new technique as \emph{Vision Transformer} \cite{2020arXiv201011929D}. Now at the core of this project, the digit recognition makes use of the Vision Transformer.
+
+The project is named \emph{Vudoku}, so the second part of the project involves solving classical computational problem. Sudoku is a mathematical problem and by default has $9\times 9$ grids. There are other variant to it but to keep things simple, the project moves along with the default one. Sudoku is classified as Exact Cover or Hitting Set problem \cite{wiki:exactcover}. Various algorithms has been developed over the years to solve it, like Backtracking, Stochastic algorithms, Constraint programming and so on. Given that the output of the digit recognition system is as \emph{value}, \emph{position} pairs, this project will consider some of these algorithms to solve sudoku and possibly visualize the steps.
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Introduction <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Overview >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Overview >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Overview and Prerequisites}
+\label{chap:overview}
+\thispagestyle{fancy}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Overview <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Literature >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Literature >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Literature Review}
+\label{chap:literature}
+\thispagestyle{fancy}
+
+\section{Handwritten Digit Recognition Using Machine Learning : A Review}
+\label{sec:litppr3}
+
+\textbf{Abstract (as is)}: The task for handwritten digit recognition has been troublesome due to various variations in writing styles. Therefore, we have tried to create a base for future researches in the area so that the researchers can overcome the existing problems. The existing methods and techniques for handwritten digit recognition were reviewed and understood to analyze the most suitable and best method for digit recognition. A number of 60,000 images were used as training sets of images with pixel
+size of $28\times 28$. The images/training sets were matched with original image. It was found out after complete analysis and review that classifier ensemble system has the least error rate of
+just 0.32\%. In this paper, review of different methods handwritten digit recognition were observed and analyzed.
+
+\section{An ensemble of simple convolutional neural network models for MNIST digit recognition}
+\label{sec:litppr4}
+
+\textbf{Abstract (as is)}: We report that a very high accuracy on the MNIST test set can be achieved by using simple convolutional neural network (CNN) models. We use three different models with $3\times 3$, $5\times 5$, and $7\times 7$ kernel size in the convolution layers. Each model consists of a set of convolution layers followed by a single fully connected layer. Every convolution layer uses batch normalization and ReLU activation, and pooling is not used. Rotation and translation is used to augment training data, which is frequently used in most image classification tasks. A majority voting using the three models independently trained on the training data set can achieve up to 99.87\% accuracy on the test set, which is one of the state-of-the-art results. A two-layer ensemble, a heterogeneous ensemble of three homogeneous ensemble networks, can achieve up to 99.91\% test accuracy. The results can be reproduced by using the code at \url{https://github.com/ansh941/MnistSimpleCNN}.
+
+\section{An Image is Worth 16x16 Words : Transformers For Image Recognition at Scale}
+\label{sec:litppr5}
+
+\textbf{Abstract (as is)}: While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Literature <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Evolution >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Evolution >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Evolution of Neural Networks}
+\label{chap:evolution}
+\thispagestyle{fancy}
+
+\hspace{0.5cm} It's of no surprise that the field of artificial intelligence has come a long way. This section deals with some of the famous models and how they are related to digit recognition. Starting from the ones released in 80's like \emph{Recurrent Neural Network (RNN)} to the latest 2017 model \emph{The Transformer}, much study has been conducted.
+
+\section{Recurrent Neural Network}
+\label{sec:RNN}
+
+\textbf{Year:} 1986
+
+Recurrent neural networks are derived from feed-forward networks. The connections in a feed-forward network do not form a cycle. RNN is a class of neural network where the connections between nodes form a directed graph. This is always along a temporal sequence, so it exhibits a temporal dynamic behaviour. Dynamic systems are those that have a function which describes time dependence of a point in geometrical space. RNNs can use their internal state (or memory) to process variable length sequences of inputs.
+
+Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer. Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight. Nodes are either input nodes (receiving data from outside of the network), output nodes (yielding results), or hidden nodes (that modify the data en route from input to output). Each sequence produces an error as the sum of the deviations of all target signals from the corresponding activations computed by the network. For a training set of numerous sequences, the total error is the sum of the errors of all individual sequences. The following equations \ref{equ:4.1} was proposed by \textbf{Michael Irwin Jordan} as part of his research on \emph{Simple Recurrent Neural Network}:
+
+\[h_t = \sigma_h(W_h x_t + U_h y_{t-1} + b_h)\]
+\begin{equation}
+    \label{equ:4.1}
+    y_t = \sigma_y(W_y h_t + b_y)
+\end{equation}
+
+Where, $x_t$ is input vector, $h_t$ is hidden layer vector
+
+\section{Long Short Term Memory}
+\label{sec:lstm}
+
+\section{Convolution Neural Networks}
+\label{sec:cnnlr}
+
+\section{The Transformer Network}
+\label{sec:ttn}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Evolution <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Existing >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Existing >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Existing or Related Systems}
+\label{chap:existing}
+\thispagestyle{fancy}
+
+\section{Vanilla ANN - The perceptron}
+\label{sec:perceptron}
+
+\section{A Closer Look At CNN}
+\label{sec:cnn}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Existing <<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Proposed >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Proposed >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Proposed System}
+\label{chap:proposed}
+\thispagestyle{fancy}
+
+\section{Vision Transformer}
+\label{sec:vt}
+
+\section{Project Modules}
+\label{sec:prjtmod}
+
+\subsection{Modified Vision Transformer}
+\label{subsec:mvt}
+
+\subsection{Sudoku Algorithm(s)}
+\label{subsec:sdkalgo}
+
+\subsection{Implementation and Analysis}
+\label{subsec:implmnt}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Proposed <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Conclusion >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Conclusion >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Conclusion}
+\label{chap:conclusion}
+\thispagestyle{fancy}
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Conclusion <<<<<<<<<<<<<<<<<<<<<<<
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\thispagestyle{fancy}
+
+\end{document}
