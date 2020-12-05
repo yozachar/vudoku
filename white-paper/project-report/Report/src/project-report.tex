@@ -96,7 +96,7 @@
     \includegraphics{iesce.png}
     \section*{Certificate}
     \addcontentsline{toc}{chapter}{Certificate}
-    This is to certify that the project report entitled \\[0.3cm] \textbf{\large Vudoku - Visual Sudoku Solver} \\[0.3cm] submitted by \\[0.3cm] \textbf{Jovial Joe Jayarson} \\[0.3cm] in partial fulfilment of the requirements of the degree of \emph{Bachelor of Technology in Computer Science and Engineering}, to APJ Abdul Kalam Technological University is a record of \emph{bona fide}  work done by him under my supervision and guidance and this work has not been submitted elsewhere for any degree or diploma. \\ [2cm]
+    This is to certify that the project report entitled \\[0.3cm] \textbf{\large Vudoku - Visual Sudoku Solver} \\[0.3cm] submitted by \\[0.3cm] \textbf{Jovial Joe Jayarson} \\[0.3cm] in partial fulfilment of the requirements of the degree of \emph{Bachelor of Technology in Computer Science and Engineering}, to APJ Abdul Kalam Technological University is a record of \emph{bona fide}  work done by him under my supervision and guidance and this work has not been submitted elsewhere for any degree or diploma. \\[2cm]
 \end{center}
 
 \begin{table}[h]
@@ -228,7 +228,7 @@ Where, $x_t$ is input vector, $h_t$ is hidden layer vector, $y_t$ is output vect
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{Recurrent_neural_network_unfold.png}
-    \caption[RNN Unfold]{RNN Unfold \cite{wiki:rnns}}
+    \caption[Recurrent Neural Networks Unfolded]{Recurrent Neural Networks Unfolded \cite{wiki:rnns}}
     \label{fig:4.1}
 \end{figure}
 
@@ -243,8 +243,8 @@ Long short-term memory (LSTM) is a deep learning system that avoids the vanishin
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{LSTM_cell.png}
-    \caption[LSTM Cell]{LSTM Cell \cite{wiki:lstm}}
+    \includegraphics[width=0.7\textwidth]{LSTM_cell.png}
+    \caption[Long Short Term Memory Cell]{Long Short Term Memory Cell \cite{wiki:lstm}}
     \label{fig:4.2}
 \end{figure}
 
@@ -281,16 +281,18 @@ The initial values are $c_0 = 0$ and $h_0 = 0$ and the operator $\circ$ denotes 
 
 \textbf{Year:} 1998
 
-A convolutional neural network (CNN), is a class of deep neural networks, most commonly applied to analyzing visual imagery. They are also known as shift invariant or \emph{space invariant artificial neural networks} (SIANN). CNNs have a wide variety of applications including, image and video recognition, recommender system, brain-computer interface etc. CNNs are regularized versions of multilayer perceptrons. Multilayer perceptrons usually mean fully connected networks, that is, each neuron in one layer is connected to all neurons in the next layer \cite{wiki:cnns}. 
-
-Convolutional networks were inspired by biological processes in that the connectivity pattern between neurons resembles the organization of the animal visual cortex. Figure \ref{fig:4.3} shows a common CNN architecture. CNNs use relatively less pre-processing compared to other image classification algorithms. Independence from prior knowledge and human effort in feature design is a major advantage. More about CNN in section \ref{sec:cnn}.
+A convolutional neural network (CNN), is a class of deep neural networks, most commonly applied to analyzing visual imagery. They are also known as shift invariant or \emph{space invariant artificial neural networks} (SIANN). CNNs have a wide variety of applications including, image and video recognition, recommender system, brain-computer interface etc.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{Typical_cnn.png}
+    \includegraphics[width=0.7\textwidth]{Typical_cnn.png}
     \caption[Typical CNN Architecture]{Typical CNN Architecture \cite{wiki:cnns}}
     \label{fig:4.3}
 \end{figure}
+
+CNNs are regularized versions of multilayer perceptrons. Multilayer perceptrons usually mean fully connected networks, that is, each neuron in one layer is connected to all neurons in the next layer.
+
+Convolutional networks were inspired by biological processes in that the connectivity pattern between neurons resembles the organization of the animal visual cortex. Figure \ref{fig:4.3} shows a common CNN architecture. CNNs use relatively less pre-processing compared to other image classification algorithms. Independence from prior knowledge and human effort in feature design is a major advantage \cite{wiki:cnns}. More about CNN in section \ref{sec:cnn}.
 
 \section{The Transformer Network}
 \label{sec:ttn}
@@ -299,7 +301,7 @@ Convolutional networks were inspired by biological processes in that the connect
 
 The Transformer is a deep learning model primarily used in the field of natural language processing (NLP). Transformers are designed to handle sequential data, such as natural language unlike RNNs, Transformers do not require that the sequential data be processed in order. Thus Transformer allows for much more parallelization than RNNs and therefore reduced training hours. This has led to the development of pre-trained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which have been trained with huge general language datasets, and can be fine-tuned to specific language tasks.
 
-Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps. 
+Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps \cite{wiki:transformer}.
 
 The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \ref{sec:vt}.
 \vspace*{\fill}
@@ -307,15 +309,117 @@ The basic building blocks of the Transformer are scaled dot-product attention un
 
 %>>>>>>>>>>>>>>>>>>>>>>> Existing >>>>>>>>>>>>>>>>>>>>>>>
 %>>>>>>>>>>>>>>>>>>>>>>> Existing >>>>>>>>>>>>>>>>>>>>>>>
-\chapter{Existing or Related Systems}
+\chapter{Concurrent Systems}
 \label{chap:existing}
 \thispagestyle{fancy}
+
+\hspace{0.5cm} There are several existing systems or models which can perform digit recognition. Some of these even have state of the art accuracy claims. This section delves into two significant artificial neural network models, namely \emph{The Perceptron} and \emph{Convolutional Neural Network}. Even though these networks can perform a variety of tasks, the focus will be upon digit classification.
 
 \section{Vanilla ANN - The perceptron}
 \label{sec:perceptron}
 
-\section{A Closer Look At CNN}
+\hspace{0.5cm} Vanilla Artificial Neural Network (ANN) is a primitive model. They are computing systems vaguely inspired by the biological neural networks. An ANN is based on a collection of connected units or nodes called artificial neurons, which loosely model the neurons in a biological brain. Each connection, like the synapses in a biological brain, can transmit a signal to other neurons.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[height=0.5\textwidth]{artificial_neural_network.png}
+    \caption[Simple Artificial Neural Network]{Simple Artificial Neural Network \cite{wiki:anns}}
+    \label{fig:5.1}
+\end{figure}
+
+An artificial neuron that receives a signal then processes it and can signal neurons connected to it. The `signal' at a connection is a real number, and the output of each neuron is computed by some non-linear function of the sum of its inputs. The connections are called edges. Neurons and edges typically have a weight that adjusts as learning proceeds. The weight increases or decreases the strength of the signal at a connection. Neurons may have a threshold such that a signal is sent only if the aggregate signal crosses that threshold.
+
+Typically, neurons are aggregated into layers. Different layers may perform different transformations on their inputs. Signals travel from the first layer (the input layer), to the last layer (the output layer), possibly after traversing the layers multiple times. \cite{wiki:anns}
+
+\subsection{Neurons}
+\label{subsec:neurons}
+ANNs are composed of artificial neurons, each artificial neuron has inputs and produce a single output which can be sent to multiple other neurons. To find the output of the neuron, first we take the weighted sum of all the inputs, weighted by the weights of the connections from the inputs to the neuron. We add a bias term to this sum. This weighted sum is then passed through a (usually nonlinear) activation function to produce the output \cite{wiki:anns}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{artificial_neuron.png}
+    \caption[Artificial Neuron]{Artificial Neuron}
+    \label{fig:5.2}
+\end{figure}
+
+\subsection{Weights and Biases}
+The network consists of connections, each connection providing the output of one neuron as an input to another neuron. Each connection is assigned a \emph{weight} $w_i$, that represents its relative importance. A given neuron can have multiple input and output connections. The \emph{activation} function $\sigma$, computes the input to a neuron from the outputs of its predecessor neurons and their connections as a weighted sum as shown in figure \ref{fig:5.2} A \emph{bias} $b$, term can be added to the result of the forward propagation \cite{wiki:anns}.
+
+\begin{equation}
+    \label{equ:5.1}
+    a_i^{(j)} = \sigma(w_{i0}a_0^{(j)} + w_{i1}a_1^{(j)} + \hdots + w_{in}a_n^{(j)} + b_0)
+\end{equation}
+
+The equation \ref{equ:5.1} is an example of an output from a single layer, it can be generalized and expressed neatly as in \ref{equ:5.2}.
+
+\begin{equation}
+    \label{equ:5.2}
+    a^{(L)} = \sigma(W^{(L)}a^{(L-1)} + b^{(L)})
+\end{equation}
+
+\subsection{Hyperparameters}
+A hyperparameter is a constant parameter whose value is set before the learning process begins. The values of parameters are derived via learning. Examples of hyperparameters include learning rate, the number of hidden layers and batch size. The values of some hyperparameters can be dependent on those of other hyperparameters. For example, the size of some layers can depend on the overall number of layers \cite{wiki:anns}.
+
+\subsection{Learning or Training}
+Learning is the adaptation of the network to better handle a task by considering sample observations. Learning involves adjusting the weights (and optional thresholds) of the network to improve the accuracy of the result. This is done by minimizing the observed errors. Learning is complete when examining additional observations does not usefully reduce the error rate \cite{wiki:anns}.
+
+\subsection{Backpropagation}
+Backpropagation is a method to adjust the connection weights to compensate for each error found during learning. The error amount is effectively divided among the connections. Technically, Backpropagation calculates the gradient (the derivative) of the cost function associated with a given state with respect to the weights. The weight updates can be done via stochastic gradient descent or other methods \cite{wiki:anns}.
+
+\subsection{Digit Recognition}
+Since supervised model is used to create a a digit classifier, during the training dispensation the models is provided with correctly labeled outputs (say $y$). If errors arise, they need to be minimized. The cost function is calculated as the square of the difference between the expected and actual output.
+
+\begin{equation}
+    \label{equ:5.3}
+    C_0 = (a^{(L)} - y)^2
+\end{equation}
+
+The RHS of \ref{equ:5.2} can re-written as $\sigma(z^{(L)})$. To minimize cost function the derivative needs to be found, and here chain rule can be applied:
+
+\begin{equation}
+    \label{equ:5.4}
+    \frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial C_0}{\partial a^{(L)}}
+\end{equation}
+
+Therefore for a single training sample the minimized cost function will be as in \ref{equ:5.5} and the net cost $\nabla C$ will be as shown in \ref{equ:5.7}.
+
+\begin{equation}
+    \label{equ:5.5}
+    \frac{\partial C_0}{\partial w^{(L)}} = a^{(L-1)} \cdot \sigma'(z^{(L)}) \cdot 2(a^{(L)} - y)
+\end{equation}
+
+\begin{equation}
+    \label{equ:5.6}
+    \frac{\partial C}{\partial w^{(L)}} = \frac{1}{n} \sum_{k = 0}^{n - 1} \frac{\partial C_k}{\partial w^{(L)}}
+\end{equation}
+
+\begin{equation}
+    \label{equ:5.7}
+    \nabla C = \begin{bmatrix}
+        \frac{\partial C}{\partial w^{(0)}} \\[1em]
+        \frac{\partial C}{\partial w^{(1)}} \\[1em]
+        \vdots                              \\[1em]
+        \frac{\partial C}{\partial w^{(L)}}
+    \end{bmatrix}
+\end{equation}
+
+This is propagated backwards, errors are minimised after each sample and hence the digits are recognized correctly.
+
+\section{Digit Recognition with CNN}
 \label{sec:cnn}
+
+General flow of digit recognition includes:
+\begin{enumerate}
+    \item \textbf{Image Acquisition :}
+    \item \textbf{Preprocessing :}
+    \item \textbf{Segmentation :}
+    \item \textbf{Feature Extraction :}
+    \item \textbf{Classification :}
+    \item \textbf{Post Processing :}
+\end{enumerate}
+
+\section{Vision Transformer}
+\label{sec:vt}
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Existing <<<<<<<<<<<<<<<<<<<<<<
 
@@ -324,9 +428,6 @@ The basic building blocks of the Transformer are scaled dot-product attention un
 \chapter{Proposed System}
 \label{chap:proposed}
 \thispagestyle{fancy}
-
-\section{Vision Transformer}
-\label{sec:vt}
 
 \section{Project Modules}
 \label{sec:prjtmod}
