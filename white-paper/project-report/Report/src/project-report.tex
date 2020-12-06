@@ -173,6 +173,49 @@ The project is named \emph{Vudoku}, so the second part of the project involves s
 \chapter{Overview and Prerequisites}
 \label{chap:overview}
 \thispagestyle{fancy}
+
+\section{Overview of the Topic}
+\label{sec:ovrtpc}
+
+\hspace{0.5cm} Complex problems exists all around us. Some of them are stumbled upon and other have be thoughtfully crafted. Solutions to these problems at times are intuitive and yet difficult to explain. Structured mathematical approach to problems has engineered some of the finest solutions to some of the toughest problem. In the era of computing, appetite to solve problems using machines has become a hobby. With technology at fingertips, it's no-brainer that upcoming generations have a choice to be way smarter.
+
+Speaking of generations, there are puzzles and trivia question that people like to solve. These are not always driven by any particular motive. Sudoku is a famous mathematical puzzle. The rules to solve this can be summarized as: \emph{All grids must be filled with numbers from 1 to 9 without repetition in either row, column or box}. Today any computer can solve this within seconds - if given with proper parameters. But computers by default do not possess visual perception. This is where image recognition steps in. This project can be thought of as an amalgamation of machine learning and classical computing. Instead of feeding a system with direct sudoku \emph{clues}, an image of sudoku is provided. The computer has to derive the clues out of an image and then pass them along with correct positions to the second modules which then tries to solve sudoku.
+
+\section{Prerequisites for the Project}
+\label{sec:prereq}
+
+\hspace{0.5cm} Since this project strives to reach minimum research standard, reader is advised to have knowledge about related topics. This section tries to cover some of them but the rest is left at reader's discretion to follow up.
+
+\subsection{Mathematics to solve Sudoku}
+\label{subsec:mpf}
+
+\subsubsection{NP-Complete}
+In computational complexity theory, a problem is NP-complete when:
+\begin{itemize}
+    \item A nondeterministic Turing machine can solve it in polynomial-time.
+    \item A deterministic Turing machine can solve it in large time complexity classes and can verify its solutions in polynomial time.
+    \item It can be used to simulate any other problem with similar solvability. \cite{wiki:npcmpt}
+\end{itemize}
+
+\subsubsection{Combinatorics}
+Combinatorics is an area of mathematics primarily concerned with counting, both as a means and an end in obtaining results \cite{wiki:combt}.
+
+\subsubsection{Group Theory}
+\label{subsec:combnt}
+In mathematics and abstract algebra, group theory studies the algebraic structures known as groups. In mathematics, a group is a set equipped with a binary operation that combines any two elements to form a third element in such a way that four conditions called group axioms are satisfied, namely `closure', `associativity', `identity` and `invertibility' \cite{wiki:grpt} \cite{wiki:grps}.
+
+\subsection{Machine Learning and related Terminology}
+\label{mlrt}
+
+\subsubsection{Gradient Descent}
+Gradient descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient (or approximate gradient) of the function at the current point, because this is the direction of steepest descent. Conversely, stepping in the direction of the gradient will lead to a local maximum of that function; the procedure is then known as gradient ascent. \cite{wiki:grdsc}.
+
+\subsubsection{Fourier Transform}
+In mathematics, a Fourier transform (FT) is a mathematical transform that decomposes a function (often a function of time, or a signal) into its constituent frequencies, such as the expression of a musical chord in terms of the volumes and frequencies of its constituent notes. The term Fourier transform refers to both the frequency domain representation and the mathematical operation that associates the frequency domain representation to a function of time \cite{wiki:fortrsfm} This is used in image preprocessing step in CNN \ref{subsec:objrecfund}.
+
+\subsubsection{Activation Function}
+In artificial neural networks, the activation function of a node defines the output of that node given an input or set of inputs. A standard integrated circuit can be seen as a digital network of activation functions that can be ``ON'' or ``OFF'', depending on input. \cite{wiki:actfnc}
+
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Overview <<<<<<<<<<<<<<<<<<<<<<<
 
@@ -404,7 +447,7 @@ Therefore for a single training sample the minimized cost function will be as in
     \end{bmatrix}
 \end{equation}
 
-This is propagated backwards, errors are minimised after each sample and hence the digits are recognized correctly.
+This is propagated backwards, errors are minimised after each sample and hence the digits are recognized correctly \cite{yt:3b1b:nnp1}.
 
 \section{Digit Recognition with CNN}
 \label{sec:cnn}
@@ -504,8 +547,23 @@ The Transformer uses constant latent vector size $D$ throughout all of it layers
 \label{chap:proposed}
 \thispagestyle{fancy}
 
+\hspace{0.5cm} We've so far approached the project from machine learning perspective. Being a research oriented project, it focuses on the field of digit recognition. Yet to remind the reader about another part which is as relevant - is to solve sudoku. Sudoku is a known mathematical game by nearly each a every person on the plant. So initially it might sound simple and that is quite natural as our cognitive thinking skills tackles a problem with vigorous intuitiveness. But a machine needs to be told to solve a task in the sequence of steps, which is called an algorithm.
+
+Various algorithms exists to solve sudoku, some of which are `backtracking', `stochastic search', `exact cover' and `constrain programming' \cite{wiki:solvsdkalgo}. This project can be said to have two broad parts - \emph{Artificial Intelligence} and \emph{Sudoku Solver}. Figure \ref{fig:6.1} showcases an overly simplified project logic.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[height=0.5\textwidth]{vudoku_arch01.png}
+    \caption[Vudoku: Simplified Architecture]{Vudoku: Simplified Architecture}
+    \label{fig:6.1}
+\end{figure}
+
+The fundamental idea is to capture sudoku pattern from images (even handwritten ones) using the latest Vision Transformer and solve them by an effective algorithm.
+
 \section{Project Modules}
 \label{sec:prjtmod}
+
+\hspace{0.5cm} It is always recommended to approach a problem part by part. Following the divide and conquer method
 
 \subsection{Sudoku Algorithm(s)}
 \label{subsec:sdkalgo}
