@@ -408,15 +408,54 @@ This is propagated backwards, errors are minimised after each sample and hence t
 \section{Digit Recognition with CNN}
 \label{sec:cnn}
 
-General flow of digit recognition includes:
+\hspace{0.5cm} As stated in section \ref{sec:cnnlr}, digit recognition is a powerful deep learning model mostly used with digital image manipulation tasks. It is unsurprisingly complex, yet beautiful in construct. The accuracy with which CNNs classify object is at par. No wonder why the current SOTA holder is a CNN based model. This section tries to delve a little more deeper into what exactly CNNs does under the hood.
+
+\subsection{Object Recognition Fundamentals}
+\label{subsec:objrecfund}
+General flow of digit recognition includes \cite{art:medium:hdreccnn}:
 \begin{enumerate}
-    \item \textbf{Image Acquisition :}
-    \item \textbf{Preprocessing :}
-    \item \textbf{Segmentation :}
-    \item \textbf{Feature Extraction :}
-    \item \textbf{Classification :}
-    \item \textbf{Post Processing :}
+    \item \textbf{Image Acquisition :}  This stage receives an input image which can from in any format from any source. They can be of image formats like: .png, .jpeg or capture from a camera or scanner.
+    \item \textbf{Preprocessing :} Here the input image undergoes a number of procedures which tries to minimize those factors which may cause the accuracy to drop. It usually works upon images to reduce and if possible remove distortions.
+    \item \textbf{Segmentation :} It is used to isolate focused parts of the input. Histogram process is use retrieve the entities from the image. Contents are processed in a tree like structure.
+    \item \textbf{Feature Extraction :} Converts an image into \emph{n-dimensional array tensor}. It extracts those features from the sample which are most importance for classification. Various techniques include Principle Component Analysis (PCA), Chain Code (CC) etc.
+    \item \textbf{Classification :} Extracted characteristics is used to make decisions. Different classifier algorithms are used and they compare the input with the training sample. \emph{Softmax} regressions is applied to rate the accuracy in terms of probability.
+    \item \textbf{Post Processing :} To correct misclassified results, shape recognition is used. Then along with the language knowledge, the errors can be minimized in case of handwriting recognition.
 \end{enumerate}
+
+\subsection{Demystifying CNNs}
+\label{subsec:layrcnn}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{cnn_layers.png}
+    \caption[Layers in Convolutional Neural Network]{Layers in Convolutional Neural Network}
+    \label{fig:5.3}
+\end{figure}
+
+\subsubsection{Tensor}
+\label{subsub:tensor}
+
+In mathematics, a tensor is an algebraic object that describes a (multilinear) relationship between sets of algebraic objects related to a vector space. Objects that tensors may map between, include vectors and scalars, and even other tensors. Tensors can take several different forms – for example: scalars and vectors etc \cite{wiki:tensor}.
+
+\subsubsection{Convolution}
+\label{subsub:convolution}
+
+Convolutional layers convolve the input and pass its result to the next layer. The input is a tensor with shape (number of images) x (image height) x (image width) x (image depth). It becomes abstracted to a feature map, with shape (number of images) x (feature map height) x (feature map width) x (feature map channels) \cite{wiki:cnns}.
+
+\subsubsection{Pooling}
+\label{subsub:pooling}
+
+Pooling layers reduce the dimensions of the data by combining the outputs of neuron clusters at one layer into a single neuron in the next layer. Local pooling combines small clusters, typically $2\times 2$. They are applied with a stride $S$, of 2 downsamples at every depth slice in the input by 2 along both width and height, discarding 75\% of the activations \cite{wiki:cnns}:
+
+\begin{equation}
+    \label{equ:5.8}
+    f_{X,Y}(S) = \max_{a,b = 0}^1 S_{2X + a, 2Y + b}
+\end{equation}
+
+\subsubsection{Fully Connected Layer}
+\label{subsub:fullycnlr}
+
+Fully connected layers connect every neuron in one layer to every neuron in another layer. It is in principle the same as the traditional multi-layer perceptron neural network (MLP). The flattened matrix goes through a fully connected layer to classify the images \cite{wiki:cnns} and thus recognize handwritten digits aptly.
 
 \section{Vision Transformer}
 \label{sec:vt}
