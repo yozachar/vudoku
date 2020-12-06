@@ -9,10 +9,11 @@
 \usepackage{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
+\usepackage{amsfonts}
+\usepackage{tocbibind} % adds 'Contents' to TOC
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % use utf8x if utf8 causes error
 \usepackage[UKenglish]{babel}
-\usepackage[nottoc]{tocbibind}
 \usepackage[section]{placeins}
 \usepackage[dvipsnames]{xcolor}
 
@@ -232,7 +233,7 @@ Where, $x_t$ is input vector, $h_t$ is hidden layer vector, $y_t$ is output vect
     \label{fig:4.1}
 \end{figure}
 
-Recurrent neural networks models contain a self-connected hidden layer. One benefit of the recurrent connection is that a `memory' of previous inputs remains in the network’s internal state, allowing it to make use of past context. This is significant for handwriting recognition as mentioned in \cite{art:consys}. A major problem with gradient descent for standard RNN architectures is that error gradients vanish exponentially quickly with the size of the time lag between important events \cite{wiki:rnns}.
+Recurrent neural networks models contain a self-connected hidden layer. One benefit of the recurrent connection is that a `memory' of previous inputs remains in the network’s internal state, allowing it to make use of past context. This is significant for handwriting recognition as mentioned in \cite{art:ieee:consys}. A major problem with gradient descent for standard RNN architectures is that error gradients vanish exponentially quickly with the size of the time lag between important events \cite{wiki:rnns}.
 
 \section{Long Short Term Memory}
 \label{sec:lstm}
@@ -303,7 +304,7 @@ The Transformer is a deep learning model primarily used in the field of natural 
 
 Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps \cite{wiki:transformer}.
 
-The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \ref{sec:vt}.
+The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \ref{sec:vit}.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Evolution <<<<<<<<<<<<<<<<<<<<<<<
 
@@ -458,7 +459,42 @@ Pooling layers reduce the dimensions of the data by combining the outputs of neu
 Fully connected layers connect every neuron in one layer to every neuron in another layer. It is in principle the same as the traditional multi-layer perceptron neural network (MLP). The flattened matrix goes through a fully connected layer to classify the images \cite{wiki:cnns} and thus recognize handwritten digits aptly.
 
 \section{Vision Transformer}
-\label{sec:vt}
+\label{sec:vit}
+
+\hspace{0.5cm} On October 22, 2020 Google Research, Brain Team released an arXiv preprint on \emph{Vision Transformer} \cite{2020arXiv201011929D}. A paper on \emph{Image Transformer} was released in 2018 \cite{2018arXiv180205751P} which performed tasks like generative image modelling and super-resolution scaling. The latter model as expected diverted to fulfill different purpose. Inspired by the Transformer scaling successes in NLP, \cite{2020arXiv201011929D} experiments with applying a standard Transformer \cite{2017arXiv170603762V} directly to images, with the fewest possible modifications.
+
+\subsection{ViT Architecture}
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{vision_transformer.png}
+    \caption[Vision Transformer Architecture]{Vision Transformer Architecture \cite{2020arXiv201011929D}}
+    \label{fig:5.4}
+\end{figure}
+
+The input image is split into fixed-size patches and each one of them is linearly embedded and position embeddings are added. The resulting sequence of vectors is fed to a standard Transformer
+encoder \cite{2017arXiv170603762V}. In order to perform classification, ViT uses the standard approach of adding an extra learnable `classification token' to the sequence.
+
+The standard Transformer receives as input a 1D sequence of token embeddings. To handle 2D images, image $x \in \mathbb{R}^{H\times W\times C}$ is reshaped into a sequence of flattened 2D patches $x_p \in \mathbb{R}^{N\times (P^2 \cdot C)}$ where:
+
+\begin{itemize}
+    \item $(H, W)$ is the resolution of original image,
+    \item $C$ is the number of channels
+    \item $(P, P)$ is the resolution of each image patch and
+    \item $N = HW/P^2$ is the resulting number of patches.
+\end{itemize}
+
+The Transformer uses constant latent vector size $D$ throughout all of it layers fo the flatten patches are mapped to $D$ dimensions, with a trainable linear projection. This is termed as \emph{patch embeddings}. A learnable embedded is pre-appended to the sequence embedding, whose state at the output of the Transformer encoder $(\textbf{z}_L^0)$ serves as the image representation $y$. Both during pre-training and fine-tuning, a classification head is attached to $(\textbf{z}_L^0)$. The classification head is implemented by a Multi-layer Perceptron (MLP) with one hidden layer at pre-training time and by a single linear layer at fine-tuning time \cite{2020arXiv201011929D}.
+
+\subsection{Hybrid Architecture}
+\label{subsec:hybrdarch}
+
+\hspace{0.5cm} As an alternative to raw image patches, the input sequence can be formed from feature maps of a CNN \cite{art:ieee:backprophzcr}. In this hybrid model, the patch embedding projection is applied to patches extracted from a CNN feature map. As a special case, the patches can have spatial size $1\times 1$, which means that the input sequence is obtained by simply flattening the spatial dimensions of the feature map and projecting to the Transformer dimension. The classification input embedding and position embeddings are added as described above \cite{2020arXiv201011929D}.
+
+\subsection{Fine Tuning ViT}
+\label{subsec:finevit}
+
+\hspace{0.5cm} Typically, ViT is pre-trained on large datasets, and fine-tuned to (smaller) downstream tasks. For this, the pre-trained prediction head is removed and a zero-initialized $D\times K$ feed-forward layer is attached, where $K$ is the number of downstream classes. It is often beneficial to fine-tune at higher resolution than pre-training. When feeding images of higher resolution, the patch size is kept the same, which results in a larger effective sequence length. The Vision Transformer can handle arbitrary sequence lengths (up to memory constraints), however, the pre-trained position embeddings may no longer be meaningful. Therefore 2D interpolation of the pre-trained position embeddings is performed, according to their location in the original image \cite{2020arXiv201011929D}.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Existing <<<<<<<<<<<<<<<<<<<<<<
 
@@ -470,9 +506,6 @@ Fully connected layers connect every neuron in one layer to every neuron in anot
 
 \section{Project Modules}
 \label{sec:prjtmod}
-
-\subsection{Modified Vision Transformer}
-\label{subsec:mvt}
 
 \subsection{Sudoku Algorithm(s)}
 \label{subsec:sdkalgo}
