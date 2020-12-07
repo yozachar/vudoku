@@ -103,11 +103,11 @@
 
 \begin{table}[h]
     \centering
-    \begin{tabular}{ c c c c }
-              &                    & \rule{5cm}{0.15mm}   & \rule{5cm}{0.15mm}     \\
-        Place & \rule{2cm}{0.15mm} & Mr. Ebin P M         & Dr. Kiruthiga G        \\
-              &                    & Asst. Professor, CSE & Head of the Department \\
-        Date  & \rule{2cm}{0.15mm} & (Guide)              & CSE                    \\
+    \begin{tabular}{ l l c c }
+                        &          & \rule{4.5cm}{0.15mm}  & \rule{4.5cm}{0.15mm}     \\
+        \textbf{Place}: & Thrissur & \textbf{Mr. Ebin P M} & \textbf{Dr. Kiruthiga G} \\
+                        &          & Asst. Professor, CSE  & Head of the Department   \\
+        \textbf{Date}:  &          & (Guide)               & CSE                      \\
     \end{tabular}
 \end{table}
 \vspace*{\fill}
@@ -117,16 +117,17 @@
 \newpage
 \vspace*{\fill}
 \begin{center}
-    \section*{Acknowledgements}
+    \section*{Acknowledgement}
     \addcontentsline{toc}{chapter}{Acknowledgements}
 \end{center}
 
-I gladly present this report on \emph{Vudoku - Visual Sudoku Solver} as part of the final year B.Tech Computer Science and Engineering project. Let me take opportunity to first thank the God Almighty for providing His grace and guidance in this dispensation.
+I'm excited as I present this report on \emph{Vudoku - Visual Sudoku Solver} as part of the final year B.Tech Computer Science and Engineering project. Allow me to take this opportunity to first thank the God Almighty for providing His grace and guidance in this dispensation.
 
-I express my sincere thanks to \emph{Dr. Brilly S Sangeetha}, Principal, for providing us with all the facilities we required to make this happen. I also acknowledge the ever encouraging presence of \emph{Dr. Kriuthiga G}, Head of the Department. Heartfelt gratitude to my guide \emph{Mr. Ebin P M}, Assistant Professor, for his undivided attention, support and coaching.
+Sincere thanks to \emph{Dr. Brilly S Sangeetha}, Principal, for providing all the required facilities to make this stage, of the project a great success. I acknowledge, with all respect, the encouraging presence of \emph{Dr. Kriuthiga G}, Head of the Department, all along the project. I stand with unspeakable gratitude to my guide \emph{Mr. Ebin P M}, Assistant Professor, for his motivation,attention, and support throughout the project.
 
-Last but not the least I convey my regards to all the well wishers, family and friends who have helped me during the needed times.
+Last but not the least, I convey my warm regards to all the well wishers, family members and friends who have helped me during needed times.
 
+\vspace{0.5em}
 \begin{center}
     May God bless us all.
 \end{center}
@@ -230,20 +231,24 @@ In artificial neural networks, the activation function of a node defines the out
 \label{chap:literature}
 \thispagestyle{fancy}
 
+\section{Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks}
+\label{sec:litppr1}
+
+\textbf{Abstract (as is)}: Recognizing arbitrary multi-character text in unconstrained natural photographs is a hard problem. In this paper, we address an equally hard sub-problem in this domain viz. recognizing arbitrary multi-digit numbers from Street View imagery. Traditional approaches to solve this problem typically separate out the localization, segmentation, and recognition steps. In this paper we propose a unified approach that integrates these three steps via the use of a deep convolutional neural network that operates directly on the image pixels. We employ the DistBelief \cite{art:lsddn} implementation of deep neural networks in order to train large, distributed neural networks on high quality images. We find that the performance of this approach increases with the depth of the convolutional network, with the best performance occurring in the deepest architecture we trained, with eleven hidden layers. We evaluate this approach on the publicly available SVHN dataset and achieve over 96\% accuracy in recognizing complete street numbers. We show that on a per-digit recognition task, we improve upon the state-of-the-art, achieving 97.84\% accuracy. We also evaluate this approach on an even more challenging dataset generated from Street View imagery containing several tens of millions of street number annotations and achieve over 90\% accuracy. To further explore the applicability of the proposed system to broader text recognition tasks, we apply it to transcribing synthetic distorted text from a popular CAPTCHA service, reCAPTCHA. reCAPTCHA is one of the most secure reverse turing tests that uses distorted text as one of the cues to distinguish humans from bots. With the proposed approach we report a 99.8\% accuracy on transcribing the hardest category of reCAPTCHA puzzles. Our evaluations on both tasks, the street number recognition as well as reCAPTCHA puzzle transcription, indicate that at specific operating thresholds, the performance of the proposed system is comparable to, and in some cases exceeds, that of human operators.
 \section{Handwritten Digit Recognition Using Machine Learning : A Review}
-\label{sec:litppr3}
+\label{sec:litppr2}
 
 \textbf{Abstract (as is)}: The task for handwritten digit recognition has been troublesome due to various variations in writing styles. Therefore, we have tried to create a base for future researches in the area so that the researchers can overcome the existing problems. The existing methods and techniques for handwritten digit recognition were reviewed and understood to analyze the most suitable and best method for digit recognition. A number of 60,000 images were used as training sets of images with pixel
 size of $28\times 28$. The images/training sets were matched with original image. It was found out after complete analysis and review that classifier ensemble system has the least error rate of
 just 0.32\%. In this paper, review of different methods handwritten digit recognition were observed and analyzed.
 
 \section{An ensemble of simple convolutional neural network models for MNIST digit recognition}
-\label{sec:litppr4}
+\label{sec:litppr3}
 
 \textbf{Abstract (as is)}: We report that a very high accuracy on the MNIST test set can be achieved by using simple convolutional neural network (CNN) models. We use three different models with $3\times 3$, $5\times 5$, and $7\times 7$ kernel size in the convolution layers. Each model consists of a set of convolution layers followed by a single fully connected layer. Every convolution layer uses batch normalization and ReLU activation, and pooling is not used. Rotation and translation is used to augment training data, which is frequently used in most image classification tasks. A majority voting using the three models independently trained on the training data set can achieve up to 99.87\% accuracy on the test set, which is one of the state-of-the-art results. A two-layer ensemble, a heterogeneous ensemble of three homogeneous ensemble networks, can achieve up to 99.91\% test accuracy. The results can be reproduced by using the code at \url{https://github.com/ansh941/MnistSimpleCNN}.
 
 \section{An Image is Worth 16x16 Words : Transformers For Image Recognition at Scale}
-\label{sec:litppr5}
+\label{sec:litppr4}
 
 \textbf{Abstract (as is)}: While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.
 \vspace*{\fill}
@@ -455,7 +460,7 @@ This is propagated backwards, errors are minimised after each sample and hence t
 \section{Digit Recognition with CNN}
 \label{sec:cnn}
 
-\hspace{0.5cm} As stated in section \eqref{sec:cnnlr}, digit recognition is a powerful deep learning model mostly used with digital image manipulation tasks. It is unsurprisingly complex, yet beautiful in construct. The accuracy with which CNNs classify object is at par. No wonder why the current SOTA holder is a CNN based model. This section tries to delve a little more deeper into what exactly CNNs does under the hood.
+\hspace{0.5cm} As stated in section \eqref{sec:cnnlr}, digit recognition is a powerful deep learning model mostly used with digital image manipulation tasks. It is unsurprisingly complex, yet beautiful in construct. The accuracy with which CNNs classifies objects is at par. No wonder why the current state-of-the-art is a CNN based model. This section tries to delve a little more deeper into what exactly CNNs does under the hood.
 
 \subsection{Object Recognition Fundamentals}
 \label{subsec:objrecfund}
@@ -519,8 +524,7 @@ Fully connected layers connect every neuron in one layer to every neuron in anot
     \label{fig:5.4}
 \end{figure}
 
-The input image is split into fixed-size patches and each one of them is linearly embedded and position embeddings are added. The resulting sequence of vectors is fed to a standard Transformer
-encoder \cite{2017arXiv170603762V}. In order to perform classification, ViT uses the standard approach of adding an extra learnable `classification token' to the sequence.
+The input image is split into fixed-size patches and each one of them is linearly embedded and position embeddings are added \cite{wiki:word2vec}. The resulting sequence of vectors is fed to a standard Transformer encoder \cite{2017arXiv170603762V}. In order to perform classification, ViT uses the standard approach of adding an extra learnable `classification token' to the sequence.
 
 The standard Transformer receives as input a 1D sequence of token embeddings. To handle 2D images, image $x \in \mathbb{R}^{H\times W\times C}$ is reshaped into a sequence of flattened 2D patches $x_p \in \mathbb{R}^{N\times (P^2 \cdot C)}$ where:
 
@@ -624,7 +628,7 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
 \label{subsec:sdksolchk}
 \hspace{0.5cm} Since inputs can be noisy, constrains are applied during training to avoid garbage values from the Sudoku solver. Some of the basic conditions to solve Sudoku are hardcoded into this module. One of the simplest constrain is a puzzle should have at the minimum 17 clues and there is a solvable puzzle with at most 21 clues for every solved grid. rows, columns or boxes with repeated values is an invalid input. Digits with positions beyond the $9\times 9$ gird automatically disqualifies a Sudoku.
 
-\subsection{Solve Sudoku}
+\subsection{Sudoku Solver}
 \label{subsec:solvsdk}
 
 \hspace{0.5cm} Once a correct set of inputs are received from the Transformer, this module works to solve them as effectively as possible. As stated in the beginning of \eqref{chap:proposed}, there are multiple algorithms available to solve Sudoku. Theoretically, this section tries to implement constrain programming and stochastic search approach or \emph{algorithm} to arrive at a solutions. But in practice, the code will be more convoluted and inspired by \cite{gh:AliShazly:sudkpy}. Instead strictly following a single algorithm, it could be a mixture so as to get a optimal solution. The figure \eqref{fig:6.5} displays the final proposed architecture of this mini dissertation.
@@ -639,7 +643,7 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
 \subsection{Visualize Solution}
 \label{subsec:vrfysol}
 
-\hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{Hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \eqref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as peripheral bonus.
+\hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{art:hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \eqref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as a peripheral bonus.
 
 \section{Project Requirements}
 
