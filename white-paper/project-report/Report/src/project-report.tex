@@ -30,7 +30,7 @@
   urlcolor        = brown,
   linkcolor       = black,
   citecolor       = black,
-  citebordercolor = red,
+  citebordercolor = green,
   urlbordercolor  = white,
   linkbordercolor = blue,
 }
@@ -164,7 +164,7 @@ It is no secret that AI is an upcoming titan. Even though people are stunned to 
 
 This report delves into a century long history of digit recognition, all the way from perceptron networks to recently released transformers. The means and ways, in which this problem was approached converges to SOTA (state of the art) models like in \cite{art:edrdcnn}. This report explores \emph{The Transformer}, released in 2017. \emph{Attention} mechanism in the Transformer \cite{2017arXiv170603762V} has sparked a lot of interest in the research community, not to mention the buzz associated with GPT-3, due to its mind-boggling capabilities flaunted all across the media. The very next year a preprint on \emph{Image Transformer} \cite{2018arXiv180205751P} was released. Interestingly Google research just released another preprint which dubs the whole idea of manipulating images with this new technique as \emph{Vision Transformer} \cite{2020arXiv201011929D}. Now at the core of this project, the digit recognition makes use of the Vision Transformer.
 
-The project is named \emph{Vudoku}, so the second part of the project involves solving classical computational problem. Sudoku is a mathematical problem and by default has $9\times 9$ grids. There are other variant to it but to keep things simple, the project moves along with the default one. Sudoku is classified as Exact Cover or Hitting Set problem \cite{wiki:exactcover}. Various algorithms has been developed over the years to solve it, like Backtracking, Stochastic algorithms, Constraint programming and so on. Given that the output of the digit recognition system is as \emph{value}, \emph{position} pairs, this project will consider some of these algorithms to solve sudoku and possibly visualize the steps.
+The project is named \emph{Vudoku}, so the second part of the project involves solving classical computational problem. Sudoku is a mathematical problem and by default has $9\times 9$ grids. There are other variant to it but to keep things simple, the project moves along with the default one. Sudoku is classified as Exact Cover or Hitting Set problem \cite{wiki:exactcover}. Various algorithms has been developed over the years to solve it, like Backtracking, Stochastic algorithms, Constraint programming and so on. Given that the output of the digit recognition system is as \emph{value}, \emph{position} pairs, this project will consider some of these algorithms to solve Sudoku and possibly visualize the steps.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Introduction <<<<<<<<<<<<<<<<<<<<<<<
 
@@ -179,7 +179,7 @@ The project is named \emph{Vudoku}, so the second part of the project involves s
 
 \hspace{0.5cm} Complex problems exists all around us. Some of them are stumbled upon and other have be thoughtfully crafted. Solutions to these problems at times are intuitive and yet difficult to explain. Structured mathematical approach to problems has engineered some of the finest solutions to some of the toughest problem. In the era of computing, appetite to solve problems using machines has become a hobby. With technology at fingertips, it's no-brainer that upcoming generations have a choice to be way smarter.
 
-Speaking of generations, there are puzzles and trivia question that people like to solve. These are not always driven by any particular motive. Sudoku is a famous mathematical puzzle. The rules to solve this can be summarized as: \emph{All grids must be filled with numbers from 1 to 9 without repetition in either row, column or box}. Today any computer can solve this within seconds - if given with proper parameters. But computers by default do not possess visual perception. This is where image recognition steps in. This project can be thought of as an amalgamation of machine learning and classical computing. Instead of feeding a system with direct sudoku \emph{clues}, an image of sudoku is provided. The computer has to derive the clues out of an image and then pass them along with correct positions to the second modules which then tries to solve sudoku.
+Speaking of generations, there are puzzles and trivia question that people like to solve. These are not always driven by any particular motive. Sudoku is a famous mathematical puzzle. The rules to solve this can be summarized as: \emph{All grids must be filled with numbers from 1 to 9 without repetition in either row, column or box}. Today any computer can solve this within seconds - if given with proper parameters. But computers by default do not possess visual perception. This is where image recognition steps in. This project can be thought of as an amalgamation of machine learning and classical computing. Instead of feeding a system with direct Sudoku \emph{clues}, an image of Sudoku is provided. The computer has to derive the clues out of an image and then pass them along with correct positions to the second modules which then tries to solve Sudoku.
 
 \section{Prerequisites for the Project}
 \label{sec:prereq}
@@ -507,6 +507,7 @@ Fully connected layers connect every neuron in one layer to every neuron in anot
 \hspace{0.5cm} On October 22, 2020 Google Research, Brain Team released an arXiv preprint on \emph{Vision Transformer} \cite{2020arXiv201011929D}. A paper on \emph{Image Transformer} was released in 2018 \cite{2018arXiv180205751P} which performed tasks like generative image modelling and super-resolution scaling. The latter model as expected diverted to fulfill different purpose. Inspired by the Transformer scaling successes in NLP, \cite{2020arXiv201011929D} experiments with applying a standard Transformer \cite{2017arXiv170603762V} directly to images, with the fewest possible modifications.
 
 \subsection{ViT Architecture}
+\label{subsec:vitarch}
 
 \begin{figure}[!htbp]
     \centering
@@ -547,9 +548,9 @@ The Transformer uses constant latent vector size $D$ throughout all of it layers
 \label{chap:proposed}
 \thispagestyle{fancy}
 
-\hspace{0.5cm} We've so far approached the project from machine learning perspective. Being a research oriented project, it focuses on the field of digit recognition. Yet to remind the reader about another part which is as relevant - is to solve sudoku. Sudoku is a known mathematical game by nearly each a every person on the plant. So initially it might sound simple and that is quite natural as our cognitive thinking skills tackles a problem with vigorous intuitiveness. But a machine needs to be told to solve a task in the sequence of steps, which is called an algorithm.
+\hspace{0.5cm} We've so far approached the project from machine learning perspective. Being a research oriented project, it focuses on the field of digit recognition. Yet to remind the reader of another part which is as relevant is Sudoku. Solving Sudoku might sound simple initially and that is quite natural. Our cognitive thinking skills tackles a problem with vigorous intuitiveness. But a machine needs to be told to solve a task in the sequence of steps, which is called an algorithm.
 
-Various algorithms exists to solve sudoku, some of which are `backtracking', `stochastic search', `exact cover' and `constrain programming' \cite{wiki:solvsdkalgo}. This project can be said to have two broad parts - \emph{Artificial Intelligence} and \emph{Sudoku Solver}. Figure \ref{fig:6.1} showcases an overly simplified project logic.
+Various algorithms exists to solve Sudoku, some of which are `backtracking', `stochastic search', `exact cover' and `constrain programming' \cite{wiki:solvsdkalgo}. This project can be said to have two broad parts - \emph{Artificial Intelligence} and \emph{Sudoku Solver}. Figure \ref{fig:6.1} showcases an overly simplified project logic.
 
 \begin{figure}[!htbp]
     \centering
@@ -558,18 +559,103 @@ Various algorithms exists to solve sudoku, some of which are `backtracking', `st
     \label{fig:6.1}
 \end{figure}
 
-The fundamental idea is to capture sudoku pattern from images (even handwritten ones) using the latest Vision Transformer and solve them by an effective algorithm.
+The fundamental idea is to capture Sudoku pattern from images (even handwritten ones) using the latest Vision Transformer and solve them by an effective or optimal algorithm.
 
 \section{Project Modules}
 \label{sec:prjtmod}
 
-\hspace{0.5cm} It is always recommended to approach a problem part by part. Following the divide and conquer method
+\hspace{0.5cm} Applying divide and conquer method, this project can be broken in to different segments based on their functionality. Broadly speaking this project has a AI and non-AI module. The AI comprises of the \emph{decision maker} and non-AI that of \emph{Sudoku solver} as in figure \ref{fig:6.1}.
 
-\subsection{Sudoku Algorithm(s)}
-\label{subsec:sdkalgo}
+\subsection{Image Input Module}
+\label{subsec:ipvit}
 
-\subsection{Implementation and Analysis}
-\label{subsec:implmnt}
+\hspace{0.5cm} A little more expanded in architecture is shown in figure \ref{fig:6.2}. The input image is split into patches, which is depicted by those yellow blocks, as discussed in \ref{subsec:vitarch}. They are encoded and positional embeddings are provided. As it reaches the Transformer encoder, they are converted into computer readable vectors. A hypothesis is that the output in desired format can be extrapolated from the decoder.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{vudoku_arch02.png}
+    \caption[Vudoku: Expanded Architecture]{Vudoku: Expanded Architecture}
+    \label{fig:6.2}
+\end{figure}
+
+\subsection{Encoder and Decoder}
+\label{subsec:encdec}
+
+\hspace{0.5cm} The Vision Transformer (ViT) \ref{sec:vit} tires to keep to the original Transformer architecture, hence similar encoder and decoder are used.
+
+\subsubsection{Encoder}
+The encoder is composed of a stack of $N = 6$ identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. A residual connection \cite{2016arXiv160202410J} around each of the two sub-layers, followed by layer normalization \cite{2016arXiv160706450L}. That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself \cite{2017arXiv170603762V}.
+
+\subsubsection{Decoder}
+The decoder is also composed of a stack of $N = 6$ identical layers. In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. Similar to the encoder, residual connections are employed around each of the sub-layers, followed by layer normalization. The self-attention sublayer is also modified in the decoder stack to prevent positions from attending to subsequent positions. This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $i$ can depend only on the known outputs at positions less than $i$ \cite{2017arXiv170603762V}.
+
+\subsection{Attention Mechanism}
+\label{subsec:attnmec}
+
+\hspace{0.5cm} An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.7\textwidth]{scaled_dot_attention.png}
+        \caption[Scaled Dot-Product Attention]{\centering Scaled Dot-Product Attention \cite{2017arXiv170603762V}}
+        \label{fig:6.3}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.7\textwidth]{masked_multihead_attention.png}
+        \caption[Masked Multi-head Attention]{\centering Masked Multi-head Attention \cite{2017arXiv170603762V}}
+        \label{fig:6.4}
+    \end{minipage}
+\end{figure}
+
+The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. The dot products of the query with all keys is computed then each one divided by $\sqrt{d_k}$. Finally a \emph{softmax} function is applied to obtain the weights on the values. In practice, the attention function on a set of queries is computed simultaneously, packed together into a matrix $Q$. The keys and values are also packed together into matrices $K$ and $V$ see figures \ref{fig:6.2} and \ref{fig:6.3}. The matrix of outputs is computed as \cite{2017arXiv170603762V}:
+
+\begin{equation}
+    \label{equ:6.1}
+    \textnormal{Attention}(Q, K, V) = \textnormal{softmax}(\frac{(Q K^T)}{\sqrt{d_k}})V
+\end{equation}
+
+\subsection{Sudoku Solvability Checker}
+\label{subsec:sdksolchk}
+\hspace{0.5cm} Since inputs can be noisy, constrains are applied during training to avoid garbage values from the Sudoku solver. Some of the basic conditions to solve Sudoku are hardcoded into this module. One of the simplest constrain is a puzzle should have at the minimum 17 clues and there is a solvable puzzle with at most 21 clues for every solved grid. rows, columns or boxes with repeated values is an invalid input. Digits with positions beyond the $9\times 9$ gird automatically disqualifies a Sudoku.
+
+\subsection{Solve Sudoku}
+\label{subsec:solvsdk}
+
+\hspace{0.5cm} Once a correct set of inputs are received from the Transformer, this module works to solve them as effectively as possible. As stated in the beginning of \ref{chap:proposed}, there are multiple algorithms available to solve Sudoku. Theoretically, this section tries to implement constrain programming and stochastic search approach or \emph{algorithm} to arrive at a solutions. But in practice, the code will be more convoluted and inspired by \cite{gh:AliShazly:sudkpy}. Instead strictly following a single algorithm, it could be a mixture so as to get a optimal solution. The figure \ref{fig:6.5} displays the final proposed architecture of this mini dissertation.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{vudoku_arch03.png}
+    \caption[Vudoku: Final Architecture]{Vudoku: Final Architecture}
+    \label{fig:6.5}
+\end{figure}
+
+\subsection{Visualize Solution}
+\label{subsec:vrfysol}
+
+\hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{Hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \ref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as peripheral bonus.
+
+\section{Project Requirements}
+
+\hspace{0.5cm} This section spotlights paraphernalia required to create Vudoku. The followed tables provides a compact list of necessary items.
+
+\begin{center}
+    \begin{tabular}{c c}
+        \textbf{Hardware}                          & \textbf{Software}                           \\
+        \hline                                                                                   \\
+        \textbf{CPU:} 2+ Cores, 2.46+ GHz          & \textbf{Code Editor:} VSCode/OSS            \\
+        \textbf{RAM:} 6 - 8 GB                     & \textbf{Language(s):} Python/Nim            \\
+        \textbf{Disk:} 5+ GB                       & \textbf{Libraries:} OpenCV, Tensorflow etc. \\
+        \textbf{Capture Device:} Camera or Scanner & \textbf{Dataset:} MNIST
+    \end{tabular}
+\end{center}
+
+Some of the components mentioned are expensive, so those who desire to test the code, but hardware is not feasible, alternatives exist. Google provides and online platform called Colaboratory (Colabs for short) which is basically Jupyter Notebooks on a remote system. Another one Kaggle, which was later acquired by Google, is also a similar but far more powerful platform, commonly for data science and related tasks. High performance Tensor Processing Units (TPUs) are available to tinker with. Both of the platforms provide free access to massive computational resources.
+
+For exhaustive development a version control system is inevitable. This project will be versioned using \emph{Git} and the code is hosted on a GitHub repository at \url{https://github.com/joe733/vudoku}. The source code is distributed under MIT licence.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Proposed <<<<<<<<<<<<<<<<<<<<<<<
 
