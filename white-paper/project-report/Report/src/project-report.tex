@@ -27,9 +27,9 @@
 
 \hypersetup{
   colorlinks      = true,
-  urlcolor        = brown,
-  linkcolor       = black,
-  citecolor       = black,
+  urlcolor        = gray,
+  linkcolor       = magenta,
+  citecolor       = brown,
   citebordercolor = green,
   urlbordercolor  = white,
   linkbordercolor = blue,
@@ -37,7 +37,7 @@
 
 \graphicspath{{../images/}}
 \setlength{\headheight}{32pt}
-\setcitestyle{open={},close={},numbers}
+%\setcitestyle{open={},close={},numbers}
 \AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
 
 \title{\textbf{Vudoku - Visual Sudoku Solver} \\ \vspace{1cm} \large A project report submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
@@ -165,7 +165,7 @@ It is no secret that AI is an upcoming titan. Even though people are stunned to 
 \pagenumbering{arabic}
 \thispagestyle{fancy}
 
-\hspace{0.5cm} Digit Recognition is a classical machine learning problem. The objective is implicitly evident, it is to identify and classify (usually) handwritten digits. Machines are inherently incapable to understand, text, images and audio. These formats which carry information, needs to be converted into numbers, matrices or vectors which is a significant step, in any procedure, to solve problems using computers. Another vital stage for digit recognition is \emph{machine learning}. With classical problem solving techniques, humans provide computers with both data and rules as input. In contrast, we provides data and presumed result, as input to a machine learning system. And then we let it find out some \emph{rules}. A quick example would be to give three numbers $x$, $y$ and $z$ and tell a machine that - certain operation was performed on $x$ and $y$ to obtain $z$. Once a machine is fed with lots and lots of similar examples, it will be equipped find out some pattern behind it. At a later stage, it can very well predict, what operation(s) might have been performed on $x$ and $y$ to result in $z$.
+\hspace{0.5cm} Digit Recognition is a classical machine learning problem. The objective is implicitly evident, it is to identify and classify (usually) handwritten digits. Machines are inherently incapable to understand, text, images and audio. These formats which carry information, needs to be converted into numbers, matrices or vectors which is a significant step, in any procedure, to solve problems using computers. Another vital stage for digit recognition is \emph{machine learning}. With classical problem solving techniques, humans provide computers with both data and rules as input. In contrast, we provides data and presumed result, as input to a machine learning system. And then we let it find out some \emph{rules}. A quick example would be to give three numbers $x$, $y$ and $z$ and tell a machine that - certain operation was performed on $x$ and $y$ to obtain $z$. Once a machine is fed with lots and lots of similar examples, it will be equipped find out some pattern behind it. At a later stage, it can very well predict, what operations might have been performed on $x$ and $y$ to result in $z$.
 
 This report delves into a century long history of digit recognition, all the way from perceptron networks to recently released transformers. The means and ways, in which this problem was approached converges to SOTA (state of the art) models like in \cite{art:edrdcnn}. This report explores \emph{The Transformer}, released in 2017. \emph{Attention} mechanism in the Transformer \cite{2017arXiv170603762V} has sparked a lot of interest in the research community, not to mention the buzz associated with GPT-3, due to its mind-boggling capabilities flaunted all across the media. The very next year a preprint on \emph{Image Transformer} \cite{2018arXiv180205751P} was released. Interestingly Google research just released another preprint which dubs the whole idea of manipulating images with this new technique as \emph{Vision Transformer} \cite{2020arXiv201011929D}. Now at the core of this project, the digit recognition makes use of the Vision Transformer.
 
@@ -216,7 +216,7 @@ In mathematics and abstract algebra, group theory studies the algebraic structur
 Gradient descent is a first-order iterative optimization algorithm for finding a local minimum of a differentiable function. The idea is to take repeated steps in the opposite direction of the gradient (or approximate gradient) of the function at the current point, because this is the direction of steepest descent. Conversely, stepping in the direction of the gradient will lead to a local maximum of that function; the procedure is then known as gradient ascent. \cite{wiki:grdsc}.
 
 \subsubsection{Fourier Transform}
-In mathematics, a Fourier transform (FT) is a mathematical transform that decomposes a function (often a function of time, or a signal) into its constituent frequencies, such as the expression of a musical chord in terms of the volumes and frequencies of its constituent notes. The term Fourier transform refers to both the frequency domain representation and the mathematical operation that associates the frequency domain representation to a function of time \cite{wiki:fortrsfm} This is used in image preprocessing step in CNN \ref{subsec:objrecfund}.
+In mathematics, a Fourier transform (FT) is a mathematical transform that decomposes a function (often a function of time, or a signal) into its constituent frequencies, such as the expression of a musical chord in terms of the volumes and frequencies of its constituent notes. The term Fourier transform refers to both the frequency domain representation and the mathematical operation that associates the frequency domain representation to a function of time \cite{wiki:fortrsfm} This is used in image preprocessing step in CNN \eqref{subsec:objrecfund}.
 
 \subsubsection{Activation Function}
 In artificial neural networks, the activation function of a node defines the output of that node given an input or set of inputs. A standard integrated circuit can be seen as a digital network of activation functions that can be ``ON'' or ``OFF'', depending on input. \cite{wiki:actfnc}
@@ -262,9 +262,9 @@ just 0.32\%. In this paper, review of different methods handwritten digit recogn
 
 \textbf{Year:} 1986
 
-Recurrent neural networks are derived from feed-forward networks. The connections in a feed-forward network do not form a cycle. RNN is a class of neural network where the connections between nodes form a directed graph. This is always along a temporal sequence, so it exhibits a temporal dynamic behaviour. Dynamic systems are those that have a function which describes time dependence of a point in geometrical space. RNNs can use their internal state (or memory) to process variable length sequences of inputs \cite{wiki:rnns}. Section \ref{sec:perceptron} discusses more about vanilla networks.
+Recurrent neural networks are derived from feed-forward networks. The connections in a feed-forward network do not form a cycle. RNN is a class of neural network where the connections between nodes form a directed graph. This is always along a temporal sequence, so it exhibits a temporal dynamic behaviour. Dynamic systems are those that have a function which describes time dependence of a point in geometrical space. RNNs can use their internal state (or memory) to process variable length sequences of inputs \cite{wiki:rnns}. Section \eqref{sec:perceptron} discusses more about vanilla networks.
 
-Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer. Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight. Nodes are either input nodes (receiving data from outside of the network), output nodes (yielding results), or hidden nodes (that modify the data en route from input to output). Each sequence produces an error as the sum of the deviations of all target signals from the corresponding activations computed by the network. For a training set of numerous sequences, the total error is the sum of the errors of all individual sequences. The following equation \ref{equ:4.1} was proposed by \textbf{Michael Irwin Jordan} as part of his research on \emph{Simple Recurrent Neural Network} \cite{wiki:rnns}:
+Basic RNNs are a network of neuron-like nodes organized into successive layers. Each node in a given layer is connected with a directed (one-way) connection to every other node in the next successive layer. Each node (neuron) has a time-varying real-valued activation. Each connection (synapse) has a modifiable real-valued weight. Nodes are either input nodes (receiving data from outside of the network), output nodes (yielding results), or hidden nodes (that modify the data en route from input to output). Each sequence produces an error as the sum of the deviations of all target signals from the corresponding activations computed by the network. For a training set of numerous sequences, the total error is the sum of the errors of all individual sequences. The following equation \eqref{equ:4.1} was proposed by \textbf{Michael Irwin Jordan} as part of his research on \emph{Simple Recurrent Neural Network} \cite{wiki:rnns}:
 
 \[h_t = \sigma_h(W_h x_t + U_h y_{t-1} + b_h)\]
 \begin{equation}
@@ -272,7 +272,7 @@ Basic RNNs are a network of neuron-like nodes organized into successive layers. 
     y_t = \sigma_y(W_y h_t + b_y)
 \end{equation}
 
-Where, $x_t$ is input vector, $h_t$ is hidden layer vector, $y_t$ is output vector, $W, U$ and $b$ are parameter matrices and vector, respectively $\sigma_h$ and $\sigma_y$ are activation functions The following figure \ref{fig:4.1} gives the internal schematics of Recurrent Neural Networks.
+Where, $x_t$ is input vector, $h_t$ is hidden layer vector, $y_t$ is output vector, $W, U$ and $b$ are parameter matrices and vector, respectively $\sigma_h$ and $\sigma_y$ are activation functions The following figure \eqref{fig:4.1} gives the internal schematics of Recurrent Neural Networks.
 
 \begin{figure}[!htbp]
     \centering
@@ -297,7 +297,7 @@ Long short-term memory (LSTM) is a deep learning system that avoids the vanishin
     \label{fig:4.2}
 \end{figure}
 
-A common LSTM unit, as shown in figure \ref{fig:4.2}, is composed of a cell, an \emph{input gate}, an \emph{output gate} and a \emph{forget gate}. The cell remembers values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. Some variations of the LSTM unit do not have one or more of these gates or maybe have other gates. For example, \emph{Gated Recurrent Units} (GRUs) do not have an output gate. LSTM networks are hence well-suited for classifying time series data.
+A common LSTM unit, as shown in figure \eqref{fig:4.2}, is composed of a cell, an \emph{input gate}, an \emph{output gate} and a \emph{forget gate}. The cell remembers values over arbitrary time intervals and the three gates regulate the flow of information into and out of the cell. Some variations of the LSTM unit do not have one or more of these gates or maybe have other gates. For example, \emph{Gated Recurrent Units} (GRUs) do not have an output gate. LSTM networks are hence well-suited for classifying time series data.
 
 The compact forms of the equations for the forward pass of an LSTM unit with a forget gate are:
 
@@ -341,7 +341,7 @@ A convolutional neural network (CNN), is a class of deep neural networks, most c
 
 CNNs are regularized versions of multilayer perceptrons. Multilayer perceptrons usually mean fully connected networks, that is, each neuron in one layer is connected to all neurons in the next layer.
 
-Convolutional networks were inspired by biological processes in that the connectivity pattern between neurons resembles the organization of the animal visual cortex. Figure \ref{fig:4.3} shows a common CNN architecture. CNNs use relatively less pre-processing compared to other image classification algorithms. Independence from prior knowledge and human effort in feature design is a major advantage \cite{wiki:cnns}. More about CNN in section \ref{sec:cnn}.
+Convolutional networks were inspired by biological processes in that the connectivity pattern between neurons resembles the organization of the animal visual cortex. Figure \eqref{fig:4.3} shows a common CNN architecture. CNNs use relatively less pre-processing compared to other image classification algorithms. Independence from prior knowledge and human effort in feature design is a major advantage \cite{wiki:cnns}. More about CNN in section \eqref{sec:cnn}.
 
 \section{The Transformer Network}
 \label{sec:ttn}
@@ -352,7 +352,7 @@ The Transformer is a deep learning model primarily used in the field of natural 
 
 Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps \cite{wiki:transformer}.
 
-The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \ref{sec:vit}.
+The basic building blocks of the Transformer are scaled dot-product attention units. When a sentence is passed into a Transformer model, attention weights are calculated between every token simultaneously. The attention unit produces embeddings for every token in context that contain information not only about the token itself, but also a weighted combination of other relevant tokens weighted by the attention weights. More about Transformer and Attention in section \eqref{sec:vit}.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Evolution <<<<<<<<<<<<<<<<<<<<<<<
 
@@ -392,14 +392,14 @@ ANNs are composed of artificial neurons, each artificial neuron has inputs and p
 \end{figure}
 
 \subsection{Weights and Biases}
-The network consists of connections, each connection providing the output of one neuron as an input to another neuron. Each connection is assigned a \emph{weight} $w_i$, that represents its relative importance. A given neuron can have multiple input and output connections. The \emph{activation} function $\sigma$, computes the input to a neuron from the outputs of its predecessor neurons and their connections as a weighted sum as shown in figure \ref{fig:5.2} A \emph{bias} $b$, term can be added to the result of the forward propagation \cite{wiki:anns}.
+The network consists of connections, each connection providing the output of one neuron as an input to another neuron. Each connection is assigned a \emph{weight} $w_i$, that represents its relative importance. A given neuron can have multiple input and output connections. The \emph{activation} function $\sigma$, computes the input to a neuron from the outputs of its predecessor neurons and their connections as a weighted sum as shown in figure \eqref{fig:5.2} A \emph{bias} $b$, term can be added to the result of the forward propagation \cite{wiki:anns}.
 
 \begin{equation}
     \label{equ:5.1}
     a_i^{(j)} = \sigma(w_{i0}a_0^{(j)} + w_{i1}a_1^{(j)} + \hdots + w_{in}a_n^{(j)} + b_0)
 \end{equation}
 
-The equation \ref{equ:5.1} is an example of an output from a single layer, it can be generalized and expressed neatly as in \ref{equ:5.2}.
+The equation \eqref{equ:5.1} is an example of an output from a single layer, it can be generalized and expressed neatly as in \eqref{equ:5.2}.
 
 \begin{equation}
     \label{equ:5.2}
@@ -423,14 +423,14 @@ Since supervised model is used to create a a digit classifier, during the traini
     C_0 = (a^{(L)} - y)^2
 \end{equation}
 
-The RHS of \ref{equ:5.2} can re-written as $\sigma(z^{(L)})$. To minimize cost function the derivative needs to be found, and here chain rule can be applied:
+The RHS of \eqref{equ:5.2} can re-written as $\sigma(z^{(L)})$. To minimize cost function the derivative needs to be found, and here chain rule can be applied:
 
 \begin{equation}
     \label{equ:5.4}
     \frac{\partial C_0}{\partial w^{(L)}} = \frac{\partial z^{(L)}}{\partial w^{(L)}} \cdot \frac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \frac{\partial C_0}{\partial a^{(L)}}
 \end{equation}
 
-Therefore for a single training sample the minimized cost function will be as in \ref{equ:5.5} and the net cost $\nabla C$ will be as shown in \ref{equ:5.7}.
+Therefore for a single training sample the minimized cost function will be as in \eqref{equ:5.5} and the net cost $\nabla C$ will be as shown in \eqref{equ:5.7}.
 
 \begin{equation}
     \label{equ:5.5}
@@ -457,7 +457,7 @@ This is propagated backwards, errors are minimised after each sample and hence t
 \section{Digit Recognition with CNN}
 \label{sec:cnn}
 
-\hspace{0.5cm} As stated in section \ref{sec:cnnlr}, digit recognition is a powerful deep learning model mostly used with digital image manipulation tasks. It is unsurprisingly complex, yet beautiful in construct. The accuracy with which CNNs classify object is at par. No wonder why the current SOTA holder is a CNN based model. This section tries to delve a little more deeper into what exactly CNNs does under the hood.
+\hspace{0.5cm} As stated in section \eqref{sec:cnnlr}, digit recognition is a powerful deep learning model mostly used with digital image manipulation tasks. It is unsurprisingly complex, yet beautiful in construct. The accuracy with which CNNs classify object is at par. No wonder why the current SOTA holder is a CNN based model. This section tries to delve a little more deeper into what exactly CNNs does under the hood.
 
 \subsection{Object Recognition Fundamentals}
 \label{subsec:objrecfund}
@@ -555,7 +555,7 @@ The Transformer uses constant latent vector size $D$ throughout all of it layers
 
 \hspace{0.5cm} We've so far approached the project from machine learning perspective. Being a research oriented project, it focuses on the field of digit recognition. Yet to remind the reader of another part which is as relevant is Sudoku. Solving Sudoku might sound simple initially and that is quite natural. Our cognitive thinking skills tackles a problem with vigorous intuitiveness. But a machine needs to be told to solve a task in the sequence of steps, which is called an algorithm.
 
-Various algorithms exists to solve Sudoku, some of which are `backtracking', `stochastic search', `exact cover' and `constrain programming' \cite{wiki:solvsdkalgo}. This project can be said to have two broad parts - \emph{Artificial Intelligence} and \emph{Sudoku Solver}. Figure \ref{fig:6.1} showcases an overly simplified project logic.
+Various algorithms exists to solve Sudoku, some of which are `backtracking', `stochastic search', `exact cover' and `constrain programming' \cite{wiki:solvsdkalgo}. This project can be said to have two broad parts - \emph{Artificial Intelligence} and \emph{Sudoku Solver}. Figure \eqref{fig:6.1} showcases an overly simplified project logic.
 
 \begin{figure}[!htbp]
     \centering
@@ -569,12 +569,12 @@ The fundamental idea is to capture Sudoku pattern from images (even handwritten 
 \section{Project Modules}
 \label{sec:prjtmod}
 
-\hspace{0.5cm} Applying divide and conquer method, this project can be broken in to different segments based on their functionality. Broadly speaking this project has a AI and non-AI module. The AI comprises of the \emph{decision maker} and non-AI that of \emph{Sudoku solver} as in figure \ref{fig:6.1}.
+\hspace{0.5cm} Applying divide and conquer method, this project can be broken in to different segments based on their functionality. Broadly speaking this project has a AI and non-AI module. The AI comprises of the \emph{decision maker} and non-AI that of \emph{Sudoku solver} as in figure \eqref{fig:6.1}.
 
 \subsection{Image Input Module}
 \label{subsec:ipvit}
 
-\hspace{0.5cm} A little more expanded in architecture is shown in figure \ref{fig:6.2}. The input image is split into patches, which is depicted by those yellow blocks, as discussed in \ref{subsec:vitarch}. They are encoded and positional embeddings are provided. As it reaches the Transformer encoder, they are converted into computer readable vectors. A hypothesis is that the output in desired format can be extrapolated from the decoder.
+\hspace{0.5cm} A little more expanded in architecture is shown in figure \eqref{fig:6.2}. The input image is split into patches, which is depicted by those yellow blocks, as discussed in \eqref{subsec:vitarch}. They are encoded and positional embeddings are provided. As it reaches the Transformer encoder, they are converted into computer readable vectors. A hypothesis is that the output in desired format can be extrapolated from the decoder.
 
 \begin{figure}[!htbp]
     \centering
@@ -586,7 +586,7 @@ The fundamental idea is to capture Sudoku pattern from images (even handwritten 
 \subsection{Encoder and Decoder}
 \label{subsec:encdec}
 
-\hspace{0.5cm} The Vision Transformer (ViT) \ref{sec:vit} tires to keep to the original Transformer architecture, hence similar encoder and decoder are used.
+\hspace{0.5cm} The Vision Transformer (ViT) \eqref{sec:vit} tires to keep to the original Transformer architecture, hence similar encoder and decoder are used.
 
 \subsubsection{Encoder}
 The encoder is composed of a stack of $N = 6$ identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. A residual connection \cite{2016arXiv160202410J} around each of the two sub-layers, followed by layer normalization \cite{2016arXiv160706450L}. That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself \cite{2017arXiv170603762V}.
@@ -615,7 +615,7 @@ The decoder is also composed of a stack of $N = 6$ identical layers. In addition
     \end{minipage}
 \end{figure}
 
-The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. The dot products of the query with all keys is computed then each one divided by $\sqrt{d_k}$. Finally a \emph{softmax} function is applied to obtain the weights on the values. In practice, the attention function on a set of queries is computed simultaneously, packed together into a matrix $Q$. The keys and values are also packed together into matrices $K$ and $V$ see figures \ref{fig:6.2} and \ref{fig:6.3}. The matrix of outputs is computed as \cite{2017arXiv170603762V}:
+The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. The dot products of the query with all keys is computed then each one divided by $\sqrt{d_k}$. Finally a \emph{softmax} function is applied to obtain the weights on the values. In practice, the attention function on a set of queries is computed simultaneously, packed together into a matrix $Q$. The keys and values are also packed together into matrices $K$ and $V$ see figures \eqref{fig:6.2} and \eqref{fig:6.3}. The matrix of outputs is computed as \cite{2017arXiv170603762V}:
 
 \begin{equation}
     \label{equ:6.1}
@@ -629,7 +629,7 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
 \subsection{Solve Sudoku}
 \label{subsec:solvsdk}
 
-\hspace{0.5cm} Once a correct set of inputs are received from the Transformer, this module works to solve them as effectively as possible. As stated in the beginning of \ref{chap:proposed}, there are multiple algorithms available to solve Sudoku. Theoretically, this section tries to implement constrain programming and stochastic search approach or \emph{algorithm} to arrive at a solutions. But in practice, the code will be more convoluted and inspired by \cite{gh:AliShazly:sudkpy}. Instead strictly following a single algorithm, it could be a mixture so as to get a optimal solution. The figure \ref{fig:6.5} displays the final proposed architecture of this mini dissertation.
+\hspace{0.5cm} Once a correct set of inputs are received from the Transformer, this module works to solve them as effectively as possible. As stated in the beginning of \eqref{chap:proposed}, there are multiple algorithms available to solve Sudoku. Theoretically, this section tries to implement constrain programming and stochastic search approach or \emph{algorithm} to arrive at a solutions. But in practice, the code will be more convoluted and inspired by \cite{gh:AliShazly:sudkpy}. Instead strictly following a single algorithm, it could be a mixture so as to get a optimal solution. The figure \eqref{fig:6.5} displays the final proposed architecture of this mini dissertation.
 
 \begin{figure}[!htbp]
     \centering
@@ -641,7 +641,7 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
 \subsection{Visualize Solution}
 \label{subsec:vrfysol}
 
-\hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{Hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \ref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as peripheral bonus.
+\hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{Hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \eqref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as peripheral bonus.
 
 \section{Project Requirements}
 
