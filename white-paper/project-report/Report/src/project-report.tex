@@ -6,7 +6,6 @@
 \usepackage{comment}
 \usepackage{graphicx}
 \usepackage{etoolbox}
-\usepackage{hyperref}
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{amsfonts}
@@ -16,6 +15,7 @@
 \usepackage[UKenglish]{babel}
 \usepackage[section]{placeins}
 \usepackage[dvipsnames]{xcolor}
+\usepackage[pdftex, pdfauthor={Jovial Joe Jayarson}, pdftitle={Vudoku - Visual Sudoku Solver}, pdfsubject={Digit Recognition - Project Report}]{hyperref}
 
 \begin{comment}
     mkdir build
@@ -640,8 +640,8 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
     \label{fig:6.5}
 \end{figure}
 
-\subsection{Visualize Solution}
-\label{subsec:vrfysol}
+\subsection{Solution Visualizer}
+\label{subsec:vizsol}
 
 \hspace{0.5cm} Solving Sudoku is one thing and visualizing it is another. Software libraries like matplotlib \cite{art:hunter:2007} and engines like manim \cite{gh:3b1b:manim} can be used to showcase how the Sudoku is being solved step by step before stopping and resetting the model state as shown in figure \eqref{fig:6.5}. This part of the project is educational as it gives a clearer picture of the process that takes places within the model. Note visualization is not quite easy as it sounds and hence this module will be considered as a peripheral bonus.
 
