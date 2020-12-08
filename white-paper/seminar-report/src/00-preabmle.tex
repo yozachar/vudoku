@@ -1,0 +1,36 @@
+\hypersetup{
+    colorlinks      = true,
+    urlcolor        = gray,
+    linkcolor       = magenta,
+    citecolor       = brown,
+    citebordercolor = green,
+    urlbordercolor  = white,
+    linkbordercolor = blue,
+}
+
+\graphicspath{{../images/}}
+\setlength{\headheight}{32pt}
+%\setcitestyle{open={},close={},numbers}
+\AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+
+\title{\textbf{OpenAI GPT-3} \\ \vspace{1cm} \large A seminar report submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
+\author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
+\date{5$^{\textnormal{th}}$ December 2020}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Header & Footer >>>>>>>>>>>>>>>>>>>>>>>
+\makeatletter
+\patchcmd{\f@nch@head}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\headrule}{\hrule}{\color{gray}\hrule}{}{}
+\patchcmd{\f@nch@foot}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\footrule}{\hrule}{\color{gray}\hrule}{}{}
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Department of CSE}
+\rhead{Seminar Report 2020-21}
+\lfoot{IES College of Engineering}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%<<<<<<<<<<<<<<<<<<<<<<< Header & Footer <<<<<<<<<<<<<<<<<<<<<<<
