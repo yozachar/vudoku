@@ -7,6 +7,7 @@
 \usepackage{etoolbox}
 \usepackage{geometry}
 \usepackage{fancyhdr}
+\usepackage{setspace}
 \usepackage{amsfonts}
 \usepackage{tocbibind} % adds 'Contents' to TOC
 \usepackage[T1]{fontenc}
@@ -30,6 +31,7 @@
 \setlength{\headheight}{32pt}
 %\setcitestyle{open={},close={},numbers}
 \AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+\AtBeginEnvironment{quote}{\singlespacing\small}
 
 \title{\textbf{OpenAI GPT-3} \\ \vspace{1cm} \large A seminar report submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
 \author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
