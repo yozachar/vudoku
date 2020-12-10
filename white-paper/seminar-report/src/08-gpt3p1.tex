@@ -1,3 +1,4 @@
+% !TeX root = ./seminar-report.tex
 \chapter*{GPT-3 : Part 1 - The Transformer}
 \label{chap:transformer}
 \thispagestyle{fancy}
@@ -5,7 +6,7 @@
 
 \hspace{0.5cm} Introduced in 2017, The Transformer is a deep learning model primarily used in the field of natural language processing (NLP). Transformers are designed to handle sequential data, such as natural language unlike RNNs, Transformers do not require that the sequential data be processed in order. Thus Transformer allows for much more parallelization than RNNs and therefore reduced training hours. This has led to the development of pre-trained systems such as BERT (Bidirectional Encoder Representations from Transformers) and GPT (Generative Pre-trained Transformer), which have been trained with huge general language datasets, and can be fine-tuned to specific language tasks.
 
-Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps \cite{wiki:transformer} as shown in figure \ref{fig:trnsfrmarch}.
+Transformer is an encoder-decoder architecture. The \emph{encoder} consists of a set of encoding layers that processes the input iteratively one layer after another and the \emph{decoder} consists of a set of decoding layers that does the same thing to the output of the encoder. Each encoder and decoder layer makes use of an \emph{attention mechanism}, which for each input, weighs the relevance of every other input and draws information from them accordingly to produce the output. Each decoder layer also has an additional attention mechanism which draws information from the outputs of previous decoders, before the decoder layer draws information from the encodings. Both the encoder and decoder layers have a feed-forward neural network for additional processing of the outputs, and contain residual connections and layer normalization steps \cite{wiki:transformer} as shown in figure \eqref{fig:trnsfrmarch}.
 
 \begin{figure}[!htbp]
     \centering
@@ -20,7 +21,7 @@ The basic building blocks of the Transformer are scaled dot-product attention un
 \label{sec:encdr}
 \addcontentsline{toc}{section}{\nameref{sec:encdr}}
 
-\hspace{0.5cm} The encoder is composed of a stack of $N = 6$ identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. A residual connection \cite{2016arXiv160202410J} around each of the two sub-layers, followed by layer normalization \cite{2016arXiv160706450L}. That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself \cite{2017arXiv170603762V}.
+\hspace{0.5cm} The encoder is composed of a stack of $N = 6$ identical layers. Each layer has two sub-layers. The first is a multi-head self-attention mechanism, and the second is a simple, position-wise fully connected feed-forward network. A residual connection \cite{2016arXiv160202410J} around each of the two sub-layers, followed by layer normalization \cite{2016arXiv160706450L}. That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself. To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $d_{model} = 512$ \cite{2017arXiv170603762V}.
 
 \section*{Decoder}
 \label{sec:decdr}
@@ -31,6 +32,14 @@ The basic building blocks of the Transformer are scaled dot-product attention un
 \section*{Attention Mechanism}
 \label{sec:attnmec}
 \addcontentsline{toc}{section}{\nameref{sec:attnmec}}
+
+\hspace{0.5cm} An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
+
+The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. The dot products of the query with all keys is computed then each one divided by $\sqrt{d_k}$. Finally a \emph{softmax} function is applied to obtain the weights on the values. In practice, the attention function on a set of queries is computed simultaneously, packed together into a matrix $Q$. The keys and values are also packed together into matrices $K$ and $V$ as shown in figures \eqref{fig:sdpa} and \eqref{fig:mmha}. The matrix of outputs is computed as \cite{2017arXiv170603762V}:
+
+\[\textnormal{Attention}(Q, K, V) = \textnormal{softmax}(\frac{(Q K^T)}{\sqrt{d_k}})V\]
+
+The two most commonly used attention functions are additive attention \cite{2014arXiv14090473B}, and dot-product (multiplicative) attention. Dot-product attention is identical to our algorithm, except for the scaling factor of $\frac{1}{\sqrt{d_k}}$ . Additive attention computes the compatibility function using a feed-forward network with a single hidden layer. Dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
 
 \begin{figure}[!htbp]
     \centering
@@ -48,11 +57,21 @@ The basic building blocks of the Transformer are scaled dot-product attention un
     \end{minipage}
 \end{figure}
 
-\hspace{0.5cm} An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query, keys, values, and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
+While for small values of $d_k$ the two mechanisms perform similarly, additive attention outperforms
+dot product attention without scaling for larger values of $d_k$ \cite{2017arXiv170303906B}. For large values of $d_k$, the dot products might grow large in magnitude, pushing the \emph{softmax} function into regions where it has extremely small gradients. To counteract this probable effect, the dot products is scaled by $\frac{1}{\sqrt{d_k}}$ \cite{2017arXiv170603762V}.
 
-The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. The dot products of the query with all keys is computed then each one divided by $\sqrt{d_k}$. Finally a \emph{softmax} function is applied to obtain the weights on the values. In practice, the attention function on a set of queries is computed simultaneously, packed together into a matrix $Q$. The keys and values are also packed together into matrices $K$ and $V$ as shown in figures \eqref{fig:sdpa} and \eqref{fig:mmha}. The matrix of outputs is computed as \cite{2017arXiv170603762V}:
+\section*{Multi-Head Attention}
+\label{sec:mlthdatn}
+\addcontentsline{toc}{section}{\nameref{sec:mlthdatn}}
 
-\[\textnormal{Attention}(Q, K, V) = \textnormal{softmax}(\frac{(Q K^T)}{\sqrt{d_k}})V\]
+\hspace{0.5cm} Instead of performing a single attention function with $d_{model}$ - dimensional keys, values and queries, it was found that it's beneficial to linearly project the queries, keys and values $h$ times with different, learned linear projections to $d_k$ , $d_k$ and $d_v$ dimensions, respectively. On each of these projected versions of queries, keys and values the attention function was performed in parallel, yielding $d_v$ - dimensional output values. These are concatenated and once again projected, resulting in the final values, as depicted in figure \eqref{fig:mmha}.
 
+Multi-head attention allows the model to jointly attend to information from different representation
+subspaces at different positions. With a single attention head, averaging inhibits this.
+
+\[\textnormal{MultiHead}(Q, K, V) = \textnormal{Concat(head}_1, \hdots, \textnormal{head}_\textnormal{h})W^O \]
+\[\textnormal{where head}_\textnormal{i} = \textnormal{Attention}(QW_i^Q, KW_i^K, VW_i^V)\]
+
+Where the projections are parameter matrices $W_i^Q \in \mathbb{R}^{d_{model}\times d_k}$, $W_i^V \in \mathbb{R}^{d_{model}\times d_v}$ and $W^O \in \mathbb{R}^{hd_v\times d_{model}}$ \cite{2017arXiv170603762V}.
 
 \vspace*{\fill}
