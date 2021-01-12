@@ -1,0 +1,57 @@
+\documentclass[a4paper]{article}
+
+\usepackage{geometry}
+\usepackage{outlines}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[pdftex, pdfauthor={Jovial Joe Jayarson}, pdftitle={Vudoku - Visual Sudoku Solver}, pdfsubject={Digit Recognition - Project Report}]{hyperref}
+
+\hypersetup{
+  colorlinks      = true,
+  urlcolor        = gray,
+  linkcolor       = magenta,
+  citecolor       = brown,
+  citebordercolor = green,
+  urlbordercolor  = white,
+  linkbordercolor = blue,
+}
+\AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+
+\title{Vudoku - Status Report 01}
+\author{Jovial Joe Jayarson}
+
+\begin{document}
+
+\newgeometry{left=2cm,right=2cm,top=2cm,bottom=2cm}
+
+\maketitle
+
+\section*{Abstract}
+\hspace{0.5cm} The primary objective is to classify and recognize handwritten digits. This research is aimed at understanding the underlying concepts and proofs required for digit recognition. But beyond that it also tries to implement (actually apply) the recently released transformer network \cite{2017arXiv170603762V} to this problem. Further to make this more interactive the project tries to solve a standard Sudoku grid.
+
+\section*{Inspiration}
+This research project is heavily inspired from \cite{gh:AliShazly:sudkpy}, which uses CNN for digit recognition.
+
+\section*{Stages and Details}
+The project can be broadly considered in two stages:
+\begin{outline}[enumerate]
+    \1 Sudoku Recognition
+        \2 Digit Recognition: This module recognizes the handwritten (or otherwise) digits given in the input image or frame of images.
+        \2 Edge Detection: Sudoku is a grid. Edges must be clearly differentiable.
+        \2 Clue Position Inference: To solve some clues are provided at certain locations ($X$, $Y$) in the grid. They need to be correctly identified.
+    \1 Solving Sudoku
+        \2 Prelim Checks: Some condition are to be checked to ensure solvability of a Sudoku gird. Invalid configuration are discarded.
+        \2 Algorithm: To obtain optimized results this could be hybrid approach - including both constrain programming and/or stochastic search.
+\end{outline}
+
+\section*{Challenges and Expected Outcome}
+\hspace{0.5cm} The output is expected as a system which takes an input \textit{image} of standard Sudoku grid and solves it. One of the main challenges would be to perform this with realtime input, like from a camera The reference project uses Augmented Reality to project solution, but that could take a lot more to learn about.
+
+\section*{Support}
+\hspace{0.5cm} Apart from the given references, a lot more of internet has be crawled to gather as much meaningful information from various journals, blogs and articles. Further I've enrolled in a Deep Learning course provided by IIT-M through Swayam/NPTEL, which I believe will be a great help.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
