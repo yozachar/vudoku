@@ -1,0 +1,60 @@
+\documentclass[12pt, a4paper]{report}
+
+\input{00-preabmle.tex}
+
+%#################################################################
+%                      Document Begins Here                      %
+%#################################################################
+
+\begin{document}
+
+\newgeometry{left=3cm,right=3cm,top=3cm,bottom=3cm}
+
+\input{./01-title.tex}
+
+\pagenumbering{roman}
+
+\input{./02-certificate.tex}
+\input{./03-acknowledgement.tex}
+\input{./04-abstract.tex}
+
+{
+    \hypersetup{hidelinks}
+
+    \tableofcontents
+    \thispagestyle{fancy}
+
+    \listoffigures
+    \thispagestyle{fancy}
+
+    %\listoftables
+    %\thispagestyle{fancy}
+}
+
+\input{05-introduction.tex}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Literature >>>>>>>>>>>>>>>>>>>>>>>
+%\chapter*{Literature Survey}
+%\label{chap:literature}
+%\addcontentsline{toc}{chapter}{\nameref{chap:literature}}
+%<<<<<<<<<<<<<<<<<<<<<<< Literature <<<<<<<<<<<<<<<<<<<<<<<
+
+\input{06-overview.tex}
+
+\input{07-prerequisites.tex}
+
+\input{08-gpt3p0.tex}
+
+\input{09-gpt3p1.tex}
+
+\input{10-gpt3p2.tex}
+
+\input{11-gpt3p3.tex}
+
+\input{12-conclusion.tex}
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+\thispagestyle{fancy}
+
+\end{document}
