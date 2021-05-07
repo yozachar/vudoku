@@ -1,0 +1,81 @@
+\documentclass[twocolumn, switch]{article}
+
+\usepackage{preprint}
+
+%% Math packages
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+
+%% Bibliography options
+\usepackage[numbers,square]{natbib}
+\bibliographystyle{unsrtnat}
+
+%% General packages
+\usepackage[utf8]{inputenc}	% allow utf-8 input
+\usepackage[T1]{fontenc}	% use 8-bit T1 fonts
+\usepackage{xcolor}         % colors for hyperlinks
+\usepackage{hyperref}   	% Color Box links to references, figures, etc.
+\usepackage{booktabs} 		% professional-quality tables
+\usepackage{nicefrac}		% compact symbols for 1/2, etc.
+\usepackage{microtype}		% micro-typography
+\usepackage{lineno}		    % Line numbers
+\usepackage{float}			% Allows for figures within multi-column
+%\usepackage{multicol}		% Multiple columns (Method B)
+
+\usepackage{lipsum}         %  Filler text
+
+ %% Special figure caption options
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[name={Supplementary Figure}]{suppfigure}
+\usepackage{sidecap}
+\sidecaptionvpos{figure}{c}
+
+%%%%%%%%%%%%%%%%   Title   %%%%%%%%%%%%%%%%
+\title{Digit Recognition : A Review}
+
+% Add watermark with submission status
+\usepackage{xwatermark}
+% Left watermark
+\newwatermark[firstpage, color=gray!60, angle=90, scale=0.48, xpos=-4.05in, ypos=0]{\color{gray}{Publication doi}} % {\href{https://doi.org/}
+
+
+%%%%%%%%%%%%%%%  Author list  %%%%%%%%%%%%%%%
+\author{Jovial Joe Jayarson
+    \thanks{https://joe733.github.com/profile} \\
+    Department of Computer Science and Engineering\\
+    APJ Abdul Kalam Technological University\\
+    Kerala, PA 695016 \\
+    \texttt{jovial7joe@ies-ktu.edu}
+}
+
+\begin{document}
+
+\twocolumn[
+    % Method A for two-column formatting
+    \begin{@twocolumnfalse}
+        \maketitle
+        \begin{abstract}
+            This review is a brief walk through of the methodologies used for digit recognition over the evolutionary timeline of artificial intelligence. Being a classical problem to solve, digit recognition has been tried time and again. The scientific world has been relentless in this field, as a result countless journals have been written. This paper aims to lay a stepping stone for future researchers to have a quick recap on the existing techniques for digit recognition. There are many AI models for various purposes, but as stated, those models which aimed to accomplish digit recognition task, are focused, in this review. Starting from vanilla or plain Artificial Neural Networks, this paper  highlights characteristics, brief workings, advantages and some other aspects, all the way to the latest Transformer model.
+        \end{abstract}
+        \vspace{0.35cm}
+    \end{@twocolumnfalse}
+]
+
+\section{Introduction}
+    \-\hspace{1cm} It's no big surprise that today's computers have ability to infer contents from an image at granular level. Computer Vision helps self driving cars to \textit{see} things much like a person. That kind of precision was not achieved overnight. So it is a good idea to take a look into the past and comprehend what paved way for such an accomplishment. One of the well defined problem is digit recognition, easy to understand and follow up.
+    
+    \-\hspace{1cm} This paper is primarily divided into three sections namely \textit{Pioneers}, \textit{Middle Ages} and \textit{Millennials}. The section \textbf{Pioneers} \ref{sec:pioneers} explores the early century developments. Further along \textbf{Middle Ages} \ref{sec:midages} brings to light the fascinating work done to improvize digit recognition techniques. \textbf{Millennials} \ref{sec:millennials} deals with the advanced and contemporary models some of which promise to outperform even state of the art models. Finally this mini dissertation concludes with certain interesting remarks and future prospects of \textit{digit recognition}.
+
+\section{Pioneers} \label{sec:pioneers}
+    
+\lipsum[3]
+\section{Middle Ages} \label{sec:midages}
+\lipsum[3]
+\section{Millennials} \label{sec:millennials}
+\lipsum[3]
+\section{Conclusion}
+\lipsum[3]
+\section*{Acknowledgements}
+\lipsum[3]
+\section*{References}
+\lipsum[3]
+\end{document}
