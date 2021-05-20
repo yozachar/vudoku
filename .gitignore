@@ -415,6 +415,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Pickled stuff
+*.pkl
+
 # <<< Python <<<
 
 # >>> Nim >>>
