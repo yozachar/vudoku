@@ -419,6 +419,9 @@ dmypy.json
 # Pickled stuff
 *.pkl
 
+# HDF5 Saved Models
+*.h5
+
 # <<< Python <<<
 
 # >>> Nim >>>
