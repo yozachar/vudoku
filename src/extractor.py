@@ -25,16 +25,16 @@ class DigitExtractor:
 
         basewidth = 28
         resized_img = Image.fromarray(self.cells[9])
-        wpercent = (basewidth / float(resized_img.size[0]))
-        hsize = int((float(resized_img.size[1]) * float(wpercent)))
-        resized_img = resized_img.resize((basewidth, hsize), Image.ANTIALIAS)
+        w_percent = (basewidth / float(resized_img.size[0]))
+        h_size = int((float(resized_img.size[1]) * float(w_percent)))
+        resized_img = resized_img.resize((basewidth, h_size), Image.ANTIALIAS)
         self.temp_digit = np.asarray(resized_img)  # dtype=np.float32
 
         # cv.imshow(winname='python', mat=self.cell_digit)
         # cv.waitKey(10**5)
         # print(pipe.predict(self.cell_digit.reshape(1,-1)))
 
-        cv.imwrite(filename='cell1.jpg', img=self.temp_digit)
+        cv.imwrite(filename='sample/cell1.jpg', img=self.temp_digit)
 
         return self.temp_digit
 
@@ -50,7 +50,7 @@ class DigitExtractor:
         print(digit)
         # extract_digits.cv.waitKey(10**5)
 
-        # College all digit, the empy cells are marked as zero the converted into a string
+        # College all digit, the empty cells are marked as zero the converted into a string
 
 
 # img = cv.imread(filename='result.jpg')

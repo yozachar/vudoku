@@ -10,9 +10,9 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
 
-class DigitClassifer:
+class DigitClassifier:
     def __init__(self):
-        # initalize classifer
+        # initialize classifier
         self.batch_size = 128
         self.num_classes = 10
         self.epochs = 12
@@ -97,4 +97,4 @@ class DigitClassifer:
         self.model.save(filepath='mnist_trained_model.h5')
 
 
-clf = DigitClassifer()
+clf = DigitClassifier()
