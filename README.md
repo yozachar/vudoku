@@ -1,7 +1,7 @@
 # Vudoku - A Visual Sudoku Solver
 
-[![Gitmoji](https://img.shields.io/badge/gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
-[![Status](https://img.shields.io/badge/Project%20Completed-85%25-orange)](https://github.com/joe733/vudoku)
+[![Git-emoji](https://img.shields.io/badge/Gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
+[![Status](https://img.shields.io/badge/Project%20Completed-87%25-orange)](https://github.com/joe733/vudoku)
 
 ## Sudoku
 
@@ -49,19 +49,20 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 
 ## Task List
 
-- [X] Get input frames from still images or video capture.
-- [X] Preprocess image, prep it to extract Sudoku grid.
-- [X] Grab the Sudoku box using contours of the maximum area.
-- [ ] Rectify flipped images after perspective transform.
-- [X] Split the grid into Sudoku boxes to extract digits.
-- [X] Train a logistic regression classifier on MNIST data set. Current random accuracy is `91%`.
-- [ ] Get the digits recognized correctly.
-  - [ ] Preprocess the image (of a single digit) to remove excess / thick border.
-  - [ ] Scale and center the image.
-  - [ ] If nothing works, try a different solver or even another classifier.
-  - [ ] Encode the classified image into a 81 bit string.
+- [X] Get input frames from still images or video capture
+- [X] Preprocess image, prep it to extract Sudoku grid
+- [X] Grab the Sudoku box using contours of the maximum area
+- [ ] Rectify flipped images after perspective transform
+- [X] Split the grid into Sudoku boxes to extract digits
+- [X] Train a logistic regression classifier on MNIST data set - current random accuracy is around `91%`
+- [ ] Work on improving sudoku grabbing quality
+  - [X] Get the digits recognized correctly
+  - [ ] Preprocess the image (of a single digit) to remove excess / thick border
+  - [ ] Scale and center the image
+  - [X] ~~If nothing works, try a different solver or even another classifier.~~
+  - [ ] Encode the classified image into a 81 bit string
 - [X] Solve the Sudoku using simple backtracking
-- [X] Additional module just to validate solved sudoku
+- [X] ~~Additional module just to validate solved sudoku~~
 - [ ] Restructure the code and add a logical connections and control flow
 
 ### Extras
