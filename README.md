@@ -47,6 +47,15 @@ This project aims to solve 9x9 Sudoku squares using computer vision techniques. 
 
 Asking a computer to solve it requires translating Sudoku into code. This can be achieved in many ways, linear arrays, encoded and decoded strings, two dimensional arrays etc. This project uses simple string expression.
 
+## How to try
+
+> This app is in the process of deployment on Streamlit.
+
+- Meanwhile you can clone the repository
+- Create a conda environment `conda env create -f environment.yml`
+- Open terminal in the root of the clone repository and run `streamlit run src/main.py`
+- It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:`](http://localhost:8501/)
+
 ## Task List
 
 - [X] Get input frames from still images or video capture
@@ -63,7 +72,8 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
   - [ ] Encode the classified image into a 81 bit string
 - [X] Solve the Sudoku using simple backtracking
 - [X] ~~Additional module just to validate solved sudoku~~
-- [ ] Restructure the code and add a logical connections and control flow
+- [X] Restructure the code and add a logical connections and control flow
+- [X] Adds Streamlit GUI support
 
 ### Extras
 
