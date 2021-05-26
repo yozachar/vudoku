@@ -5,7 +5,7 @@ from keras import backend as kb
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.utils.np_utils import to_categorical
-# says it changed to => keras.utils.to_categorical
+# says it changed to => keras.utils.to_categorical ?np_utils?
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 

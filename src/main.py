@@ -9,7 +9,6 @@ from scavenger import sr
 from extractor import de, np
 from solver import SudokuSolver
 
-import os
 import streamlit as st
 from webcam import webcam
 
