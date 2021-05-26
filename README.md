@@ -54,7 +54,7 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 - Meanwhile you can clone the repository
 - Create a conda environment `conda env create -f environment.yml`
 - Open terminal in the root of the clone repository and run `streamlit run src/main.py`
-- It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:`](http://localhost:8501/)
+- It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:8501`](http://localhost:8501/)
 
 ## Task List
 
