@@ -420,7 +420,7 @@ dmypy.json
 *.pkl
 
 # HDF5 Saved Models
-*.h5
+# *.h5
 
 # <<< Python <<<
 
