@@ -1,0 +1,7 @@
+tensorflow==2.5.0
+streamlit_webcam_example
+streamlit
+Pillow
+Keras
+opencv-python-headless
+numpy
