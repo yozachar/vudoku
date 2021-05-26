@@ -8,18 +8,16 @@ class SudokuSolver:
     def solveRecursively(self):
         cell = self.isEmptyCell()
         if not cell:
-            # , ''.join(str(i) for i in self.board.flatten().tolist())
-            return True
+            return True, self.board
         else:
             row, col = cell
         for sol in range(1, 10):
             if self.isValid(sol, (row, col)):
                 self.board[row][col] = sol
                 if self.solveRecursively():
-                    # , ''.join(str(i) for i in self.board.flatten().tolist())
-                    return True
+                    return True, self.board
                 self.board[row][col] = 0
-        return False
+        return False, None
 
     def isValid(self, num, pos):
         # check row
@@ -45,7 +43,3 @@ class SudokuSolver:
                 if self.board[i][j] == 0:
                     return (i, j)  # row, col
         return None
-
-
-ss = SudokuSolver()
-# print(ss.solveRecursively())

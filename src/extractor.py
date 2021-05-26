@@ -51,6 +51,9 @@ class DigitExtractor:
         # extract_digits.cv.waitKey(10**5)
 
         # College all digit, the empty cells are marked as zero the converted into a string
+    
+    def miner(self, image):
+        return ''
 
 
 # img = cv.imread(filename='result.jpg')
