@@ -8,14 +8,20 @@ class DigitExtractor:
     def __init__(self):
         self.cells = []
         self.temp_digit = None
-
-    def splitGrid(self, frame) -> list:
-        rows = np.array_split(frame, 9, 0)
-        for row in rows:
-            columns = np.array_split(row, 9, 1)
-            for column in columns:
-                self.cells.append(column)
-
+        self.string = ''
+    
+    def preprocess(self, image):
+        # resize image
+        basewidth = 28
+        resized_img = Image.fromarray(self, image)
+        w_percent = (basewidth / float(resized_img.size[0]))
+        h_size = int((float(resized_img.size[1]) * float(w_percent)))
+        resized_img = resized_img.resize((basewidth, h_size), Image.ANTIALIAS)
+        
+        # clean and center digits
+        
+        self.temp_digit = np.asarray(resized_img)  # dtype=np.float32 ?
+        
         #cv.imshow('grid', cv.imread('result.jpg'))
         # margin = 4
         # crop_img = cells[5][margin:-margin, margin:-margin].copy()
@@ -23,40 +29,34 @@ class DigitExtractor:
         # cv.imwrite(filename='cell1.jpg', img=crop_img)
         # cv.waitKey(10**5)
 
-        basewidth = 28
-        resized_img = Image.fromarray(self.cells[9])
-        w_percent = (basewidth / float(resized_img.size[0]))
-        h_size = int((float(resized_img.size[1]) * float(w_percent)))
-        resized_img = resized_img.resize((basewidth, h_size), Image.ANTIALIAS)
-        self.temp_digit = np.asarray(resized_img)  # dtype=np.float32
-
         # cv.imshow(winname='python', mat=self.cell_digit)
         # cv.waitKey(10**5)
         # print(pipe.predict(self.cell_digit.reshape(1,-1)))
 
-        cv.imwrite(filename='sample/cell1.jpg', img=self.temp_digit)
-
-        return self.temp_digit
+    def splitGrid(self, frame):
+        # perform additional preprocessing if required
+        rows = np.array_split(ary=frame, indices_or_sections=9, axis=0)
+        for row in rows:
+            columns = np.array_split(ary=row, indices_or_sections=9, axis=1)
+            for column in columns:
+                self.preprocess(image=column)
+                self.cells.append(self.temp_digit)
 
     def genString(self):
+        # check if model exists if not, prompt user to run classifier
         model = models.load_model(filepath='mnist_trained_model.h5')
 
-        reshaped_img = self.temp_digit.reshape(1, 28, 28, 1)
-        # extract_digits.cv.imshow('r', self.temp_digit)
-        # new_img = x_train[0].reshape(1, 28, 28, 1)
-        # extract_digits.cv.imshow('x', x_train[0])
-        predictions = model.predict(reshaped_img)
-        digit = predictions[0].tolist().index(max(predictions[0].tolist()))
-        print(digit)
-        # extract_digits.cv.waitKey(10**5)
-
-        # College all digit, the empty cells are marked as zero the converted into a string
+        for cell in self.cells:
+            # Mark empty cells are marked as zero the converted into a string
+            rs_cell = cell.reshape(1, 28, 28, 1)
+            predictions = model.predict(rs_cell)
+            digit = predictions[0].tolist().index(max(predictions[0].tolist()))
+            self.string += str(digit)
     
     def miner(self, image):
-        return ''
+        self.splitGrid(frame=image)
+        self.genString()
+        return self.string
 
 
-# img = cv.imread(filename='result.jpg')
-# frame = cv.cvtColor(src=img, code=cv.COLOR_BGR2GRAY)
 de = DigitExtractor()
-# de.splitGrid(frame=frame)
