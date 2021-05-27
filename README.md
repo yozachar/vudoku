@@ -1,7 +1,7 @@
 # Vudoku - A Visual Sudoku Solver
 
 [![Git-emoji](https://img.shields.io/badge/Gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
-[![Status](https://img.shields.io/badge/Project%20Completed-87%25-orange)](https://github.com/joe733/vudoku)
+[![Status](https://img.shields.io/badge/Project%20Completed-90%25-green)](https://github.com/joe733/vudoku)
 
 ## Sudoku
 
