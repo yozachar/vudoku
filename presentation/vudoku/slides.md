@@ -36,6 +36,8 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
+src: ./table-of-contents.md
+---
 
 # What is Slidev?
 
