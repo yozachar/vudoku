@@ -9,6 +9,7 @@
 \usepackage{geometry}
 \usepackage{fancyhdr}
 \usepackage{amsfonts}
+\usepackage{titlesec}
 \usepackage{tocbibind} % adds 'Contents' to TOC
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc} % use utf8x only if utf8 causes error
@@ -42,8 +43,10 @@
 \setlength{\headheight}{32pt}
 %\setcitestyle{open={},close={},numbers}
 \AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries\centering}{\chaptertitlename\ \thechapter}{20pt}{\huge}
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
 
-\title{\textbf{Vudoku - Visual Sudoku Solver} \\ \vspace{1cm} \large A preliminary project report 2020 - 2021, \\ submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
+\title{\textbf{Vudoku - Visual Sudoku Solver} \\ \vspace{1cm} \large A preliminary project report during 2020 - 2021, \\ submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
 \author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
 \date{}
 
@@ -59,8 +62,8 @@
 \fancyhf{}
 \lhead{Department of CSE}
 \rhead{Project Report 2020-21}
-\lfoot{IES College of Engineering}
-\rfoot{\thepage}
+\cfoot{\thepage}
+\rfoot{IES College of Engineering}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
 %<<<<<<<<<<<<<<<<<<<<<<< Header & Footer <<<<<<<<<<<<<<<<<<<<<<<
@@ -99,7 +102,7 @@
     \textbf{\textsc{IES College of Engineering}}\\[0.5cm]
     \textbf{\textsc{Department of Computer Science and Engineering}}\\[1cm]
     \includegraphics{iesce.png}
-    \section*{Certificate}
+    \section*{\centering Certificate}
     \addcontentsline{toc}{chapter}{Certificate}
     This is to certify that the preliminary project report entitled \\[0.3cm] \textbf{\large Vudoku - Visual Sudoku Solver} \\[0.3cm] submitted by \\[0.3cm] \textbf{Jovial Joe Jayarson} \\[0.3cm] in partial fulfilment of the requirements of the degree of \emph{Bachelor of Technology in Computer Science and Engineering}, to APJ Abdul Kalam Technological University is a record of \emph{bona fide}  work done by him under my supervision and guidance and this work has not been submitted elsewhere for any degree or diploma. \\[2cm]
 \end{center}
@@ -107,10 +110,10 @@
 \begin{table}[h]
     \centering
     \begin{tabular}{ l l c c }
-                        &           & \hbox to 4.5cm{\leaders\hbox to 5pt{\hss . \hss}\hfil}  & \hbox to 4.5cm{\leaders\hbox to 5pt{\hss . \hss}\hfil} \\
-        \textbf{Place}: & Thrissur  & \textbf{Mr. Ebin P M} & \textbf{Dr. Kiruthiga G}  \\
-                        &           & Asst. Professor, CSE  & Head of the Department    \\
-        \textbf{Date}:  & \mydate   & (Project Guide)       & CSE                       \\
+                        &          & \hbox to 4.5cm{\leaders\hbox to 5pt{\hss . \hss}\hfil} & \hbox to 4.5cm{\leaders\hbox to 5pt{\hss . \hss}\hfil} \\
+        \textbf{Place}: & Thrissur & \textbf{Mr. Ebin P M}                                  & \textbf{Dr. Kiruthiga G}                               \\
+                        &          & Asst. Professor, CSE                                   & Head of the Department                                 \\
+        \textbf{Date}:  & \mydate  & (Project Guide)                                        & CSE                                                    \\
     \end{tabular}
 \end{table}
 \vspace*{\fill}
@@ -120,7 +123,7 @@
 \newpage
 \vspace*{\fill}
 \begin{center}
-    \section*{Acknowledgement}
+    \section*{\centering \huge Acknowledgement}
     \addcontentsline{toc}{chapter}{Acknowledgements}
 \end{center}
 
@@ -130,12 +133,14 @@
 
 \noindent I acknowledge, the ever encouraging presence of \textbf{Dr. Kriuthiga G}, Head of the Department, all along the making of this project.\\
 
-\noindent Unspeakable thanks to my guide \textbf{Mr. Ebin P M}, Assistant Professor, for his constant motivation, attention, and support throughout the project.\\
+\noindent My indebtedness to the project guide \textbf{Mr. Ebin P M}, Assistant Professor, for his constant support, motivation, attention, pointers, counsel, correction, direction and inspiration throughout the project.\\
 
-\noindent Last but not the least, I convey my warm regards to my family members and my friends all the well wishers, who have been there during those needed times.\\
+\noindent Heartfelt thanks to the project coordinators \textbf{Ms. Shejina N M}, and \textbf{Ms. Ameefa P K}, Assistant Professors, who kept reminding me of the deadlines and appreciated at each step of progress.\\
+
+\noindent Last but not the least, I convey my warm regards to my family members, my friends and all well wishers, who had been there during the needed times.\\
 
 \begin{center}
-    May God bless us all.\\[5cm]
+    May God bless us all.\\[4cm]
     Jovial Joe Jayarson\\
     IES17CS016\\
     IES College of Engineering\\
@@ -148,11 +153,11 @@
 \newpage
 \vspace*{\fill}
 \begin{center}
-    \section*{Abstract}
+    \section*{\centering \huge Abstract}
     \label{sec:abstract}
     \addcontentsline{toc}{chapter}{Abstract}
 \end{center}
-It is no secret that AI is an upcoming titan. Even though people are stunned to hear that AI has been here for around a century, due to the advancement in computational methods and resources, today AI peaks like never before. As a tiny glimpse into the field of Digit Recognition, this project aims to understand the underlying cogs and wheels on which the neural networks spin. Ranging from core mathematical functions to flowery programming, this project will include all that is essential to recognize digits from an image. Even though the project is primarily research oriented, on the application part of it, this can be used to identify licence plate, read bank cheques, grade mathematics homework. Currently the project tries to solve Sudoku drawn and written by hand The paraphernalia for this project includes programming language: Python3/Nim; libraries: OpenCV, Numpy, Keras/Tensorflow, Matplotlib; datasets: MNIST handwritten digit database. Digit recognition is a classical problem which will introduce neurons, neural networks, connections hidden layers, weights, biases, activation functions like sigmoid, back-propagation and other related topics as well. Algorithm to solve Sudoku are also explored in this project.
+It is no secret that AI is an upcoming titan. Even though people are stunned to hear that AI has been here for around a century, due to the advancement in computational methods and resources, today AI peaks like never before. As a tiny glimpse into the field of Digit Recognition, this project aims to understand the underlying cogs and wheels on which the neural networks spin. Ranging from core mathematical functions to flowery programming, this project will include all that is essential to recognize digits from an image. Even though the project is primarily research oriented, on the application part of it, this can be used to identify licence plate, read bank cheques, grade mathematics homework and as such. Currently the project tries to solve Sudoku drawn and written by hand. The paraphernalia for this project includes programming language: \textit{Python3/Nim}; libraries: \textit{OpenCV, Numpy, Keras/Tensorflow, Matplotlib, Streamlit}; datasets: \textit{MNIST handwritten digit database}. Digit recognition is a classical problem which will introduce neurons, neural networks, connections hidden layers, weights, biases, activation functions like sigmoid, back-propagation and other related topics as well. Algorithm(s) used to solve Sudoku are also explored in this project.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Abstract <<<<<<<<<<<<<<<<<<<<<<<
 
@@ -261,6 +266,12 @@ just 0.32\%. In this paper, review of different methods handwritten digit recogn
 \label{sec:litppr4}
 
 \textbf{Abstract (as is)}: While the Transformer architecture has become the de-facto standard for natural language processing tasks, its applications to computer vision remain limited. In vision, attention is either applied in conjunction with convolutional networks, or used to replace certain components of convolutional networks while keeping their overall structure in place. We show that this reliance on CNNs is not necessary and a pure transformer applied directly to sequences of image patches can perform very well on image classification tasks. When pre-trained on large amounts of data and transferred to multiple mid-sized or small image recognition benchmarks (ImageNet, CIFAR-100, VTAB, etc.), Vision Transformer (ViT) attains excellent results compared to state-of-the-art convolutional networks while requiring substantially fewer computational resources to train.
+
+\section{MDig: Multi-digit Recognition using Convolutional Nerual Network on Mobile}
+\label{sec:litppr5}
+
+\textbf{Abstract (as is)}: Multi-character recognition in arbitrary photographs on mobile platform is difficult, in terms of both accuracy and real-time performance. In this paper, we focus on the domain of hand-written multi-digit recognition. Convolutional neural network (CNN) is the state-of-the-art solution for object recognition, and presents a workload that is both compute and data intensive. To reduce the workload, we train a shallow CNN offline, achieving 99.07\% top-1 accuracy. And we utilize pre-processing and segmentation to reduce input image size fed into CNN. For CNN implementation on the mobile platform, we adopt and modify DeepBeliefSDK to support batching fully-connected layers. On NVIDIA SHIELD tablet, the application processes a frame and extracts 32 digits in approximately 60ms, and batching the fully-connected layers reduces the CNN runtime by another 12\%.
+
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Literature <<<<<<<<<<<<<<<<<<<<<<<
 
