@@ -719,17 +719,22 @@ To follow along it's best to refer the \href{https://github.com/joe733/vudoku}{r
         |- main.py
         |- scavenger.py
         |- solver.py
-    |- README.md
-    |- LICENSE
 \end{lstlisting}
 
-\begin{quote}
-    \textbf{Note to the reader:} \textit{There has been and will be changes to the source code overtime, you may find this report outdated, in such cases, you're more than welcome to comment on the \href{https://github.com/joe733/vudoku}{project's} repository \href{https://github.com/joe733/vudoku/issues}{issue} / \href{https://github.com/joe733/vudoku/discussions}{discussion} pages.}
-\end{quote}
+\textbf{Note to the reader:} \textit{There has been and will be changes to the source code overtime, you may find this report outdated, in such cases, you're more than welcome to comment on the \href{https://github.com/joe733/vudoku}{project's} repository \href{https://github.com/joe733/vudoku/issues}{issue} / \href{https://github.com/joe733/vudoku/discussions}{discussion} pages.}
 
 \section{Digit Recognition Module}
 \label{sec:drm}
-\hspace{0.5cm} Since Vudoku aims to solve Sudoku visually it takes an input image and processes it to recognize digits in it. This module \textit{classifier.py} is not deployed on production system, instead it's used to genrate classification models which are saved for later use. The digit recognition model is structured as a sandwich of layers which is elucidated in the following sections.
+\hspace{0.5cm} Since Vudoku aims to solve Sudoku visually it takes an input image and processes it to recognize digits in it. This module \textit{classifier.py} is not deployed on production system, instead it's used to genrate classification models which are saved for later use. A sample of dataset, on which this model is trained, is shown in figure \eqref{fig:7.1}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{mnist_classification.png}
+    \caption[MNIST Digit Classification]{MNIST Digit Classification}
+    \label{fig:7.1}
+\end{figure}
+
+The digit recognition model is structured as a sandwich of layers which is elucidated in the following sections.
 
 \subsection{Sequential Model}
 \label{subsec:seqmod}
@@ -765,9 +770,40 @@ Pooling is basically \textit{downscaling} the image obtained from the previous l
 
 \subsection{Losses and Optimization}
 \label{subsec:losoptz}
-\hspace{0.5cm} The model uses \textit{categorical\_crossentropy loss}. It returns the sum of product of true values and log of output values for each observation - or average over all samples.
 
-\textit{Adadelta optimization} is a stochastic gradient descent method that is based on adaptive learning rate per dimensionto address two drawbacks: one \textit{the continual decay of learning rates throughout training} and \textit{the need for a manually selected global learning rate}. Adadelta is a more robust extension of Adagrad that adapts learning rates based on a moving window of gradient updates, instead of accumulating all past gradients.
+\hspace{0.5cm} Every machine learning model has errors, due to which the accuracy is lost. Such loss is calculated to realize an optimization which will give the best result.
+
+\subsubsection{Categorical Crossentropy Loss}
+\label{subsubsec:catcrplos}
+\hspace{0.5cm} The model calculates \textit{categorical\_crossentropy loss}. It returns the sum of product of true values and log of output values for each observation or an average over all samples.
+
+$$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{true} \log p_i^\text{predict}$$
+
+\subsubsection{Adelta Optimization}
+\label{subsubsec:adltoptz}
+\hspace{0.5cm} It is a stochastic gradient descent method that is based on adaptive learning rate per dimensionto address two drawbacks: one \textit{the continual decay of learning rates throughout training} and \textit{the need for a manually selected global learning rate}. Adadelta is a more robust extension of Adagrad that adapts learning rates based on a moving window of gradient updates, instead of accumulating all past gradients.
+
+\newpage
+\thispagestyle{fancy}
+\section{Image Processing Modules}
+\label{sec:cptpromd}
+The input image is captured from a light senstive device and then processed before passing it onto the classifier. This is achieved by \textit{scavenger.py} and \textit{extractor.py} modules. The figure \eqref{fig:7.2} is an example input image which undergoes pre-processing.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.7\textwidth]{sample_puzzle.jpg}
+        \caption[Sample Input]{\centering Sampel Input}
+        \label{fig:7.2}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[height=0.7\textwidth]{puzzle_corners.jpg}
+        \caption[Marked Contours]{\centering Marked Contours}
+        \label{fig:7.3}
+    \end{minipage}
+\end{figure}
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Implementation <<<<<<<<<<<<<<<<<<<<<<<
 
