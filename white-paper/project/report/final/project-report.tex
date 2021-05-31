@@ -1,9 +1,12 @@
 \documentclass[12pt, a4paper]{report}
 %\usepackage{tgtermes} % for times romans font
 \usepackage{float}
+% \usepackage{minted}
 \usepackage{natbib}
 \usepackage{amsmath}
 \usepackage{comment}
+\usepackage{outlines}
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage{etoolbox}
 \usepackage{geometry}
@@ -686,6 +689,87 @@ Some of the components mentioned are expensive, so those who desire to test the 
 For exhaustive development a version control system is inevitable. This project will be versioned using \emph{Git} and the code is hosted on a GitHub repository at \url{https://github.com/joe733/vudoku}. The source code is distributed under MIT licence.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Proposed <<<<<<<<<<<<<<<<<<<<<<<
+
+%>>>>>>>>>>>>>>>>>>>>>>> Implementation >>>>>>>>>>>>>>>>>>>>>>>
+%>>>>>>>>>>>>>>>>>>>>>>> Implementation >>>>>>>>>>>>>>>>>>>>>>>
+\chapter{Implementation}
+\label{chap:implementation}
+\thispagestyle{fancy}
+\hspace{0.5cm} Theory remains as good as debunked until proved otherwise. This chapter conserns with groundwork of the project. It follows object oriented and scripting paradigm. Breaking it down the there are:
+
+\begin{outline}
+    \1 three operational modules namely
+        \2 \textit{scavenger.py} - obtains sudoku from image
+        \2 \textit{extractor.py} - grabs grid and digits from sudoku
+        \2 \textit{solver.py} - solves the puzzle
+    \1 a primary script
+        \2 \textit{main.py} - control script of the project
+    \1  neual network model
+        \2 \textit{classifier.py} - a dense CNN keras model
+\end{outline}
+
+To follow along it's best to refer the \href{https://github.com/joe733/vudoku}{repository}. It has the following directory structure:
+
+\begin{lstlisting}
+    |- src/
+        |- samples/
+            |- sample images
+        |- classifier.py
+        |- extractor.py
+        |- main.py
+        |- scavenger.py
+        |- solver.py
+    |- README.md
+    |- LICENSE
+\end{lstlisting}
+
+\begin{quote}
+    \textbf{Note to the reader:} \textit{There has been and will be changes to the source code overtime, you may find this report outdated, in such cases, you're more than welcome to comment on the \href{https://github.com/joe733/vudoku}{project's} repository \href{https://github.com/joe733/vudoku/issues}{issue} / \href{https://github.com/joe733/vudoku/discussions}{discussion} pages.}
+\end{quote}
+
+\section{Digit Recognition Module}
+\label{sec:drm}
+\hspace{0.5cm} Since Vudoku aims to solve Sudoku visually it takes an input image and processes it to recognize digits in it. This module \textit{classifier.py} is not deployed on production system, instead it's used to genrate classification models which are saved for later use. The digit recognition model is structured as a sandwich of layers which is elucidated in the following sections.
+
+\subsection{Sequential Model}
+\label{subsec:seqmod}
+
+\hspace{0.5cm} A Sequential model is appropriate for a plain stack of layers where each layer has exactly one input tensor and one output tensor \cite{wpg:kerasseqmod}. Here every unit in the currect layer is connected to every unit in the previous layer. This model consits of the following layers in order:
+
+\begin{lstlisting}
+    2D Convolution Layer with ReLu activation
+    + another 2D Convolution Layer with ReLu activation
+    + a 2D MaxPooling layer + Dropout Layer
+    + Flatten Layer + Dense Layer with ReLu activation
+    + Dropout Layer + Dense Layer with SoftMax activation
+\end{lstlisting}
+
+
+\subsubsection{Convolution Layer 2D \texorpdfstring{$\times$}{x}  2} % PDF book marks maynot contain such symbols on heading as they serve as bookmarks
+\label{subsubsec:convl2d2}
+\hspace{0.5cm} This layer creates a convolution kernel that is convoluted whith the input layer to produce a tensor of outputs. When using this layer as the first layer in the model, a keyword argument \textit{input\_shape} is provided as a tuple (28, 28) which comes from the fact that MNIST dataset has 28 $\times$ 28 sized images only. There are two of these layer back-to-back which is because higher-level patterns cannot be seen with just one convolutional layer. 
+
+\subsubsection{MaxPooling layer 2D}
+\label{subsubsec:maxpool2d}
+Pooling is basically \textit{downscaling} the image obtained from the previous layers. It can be compared to shrinking an image to reduce its pixel density. Downscaling is performed using a hardcoded tensor operation such as \textit{max}, rather than through a learned transformation, because the relatively expensive operation of learning the weights \cite{2017arXiv170603059K} is not needed. This way, useful spatial hierarchy at a fraction of the cost is obtained. A good spatial hierarchies summarize the data substantially when moving from bottom to top.
+
+\subsubsection{Flatten and Dropout \texorpdfstring{$\times$}{x} 2}
+\label{subsubsec:drptfltn}
+\hspace{0.5cm} Flattening a tensor means to remove all of the dimensions except for one. This is exactly what the \textit{Flatten} layer does.
+
+\textit{Dropout} layer randomly sets input units to 0 with a frequency of rate at each step during training time, which helps prevent overfitting. Inputs not set to 0 are scaled up by 1/(1 - rate) such that the sum over all inputs is unchanged.
+
+\subsubsection{Dense Layer \texorpdfstring{$\times$}{x} 2}
+\label{subsubsec:dnslyr}
+\hspace{0.5cm} Dense layer is the regular deeply connected neural network layer. Which means each neuron in the dense layer receives input from all neurons of its previous layer. In the background, the dense layer performs a matrix-vector multiplication. Activation function is useful to introduce non linearity into the neural network so that the network can learn complex relationship between input and output data \cite{art:kerasdense}. The final dense layer with a SoftMax activation is the output layer.
+
+\subsection{Losses and Optimization}
+\label{subsec:losoptz}
+\hspace{0.5cm} The model uses \textit{categorical\_crossentropy loss}. It returns the sum of product of true values and log of output values for each observation - or average over all samples.
+
+\textit{Adadelta optimization} is a stochastic gradient descent method that is based on adaptive learning rate per dimensionto address two drawbacks: one \textit{the continual decay of learning rates throughout training} and \textit{the need for a manually selected global learning rate}. Adadelta is a more robust extension of Adagrad that adapts learning rates based on a moving window of gradient updates, instead of accumulating all past gradients.
+\vspace*{\fill}
+%<<<<<<<<<<<<<<<<<<<<<<< Implementation <<<<<<<<<<<<<<<<<<<<<<<
 
 %>>>>>>>>>>>>>>>>>>>>>>> Conclusion >>>>>>>>>>>>>>>>>>>>>>>
 %>>>>>>>>>>>>>>>>>>>>>>> Conclusion >>>>>>>>>>>>>>>>>>>>>>>
