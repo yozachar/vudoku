@@ -810,10 +810,19 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 \hspace{0.5cm} The \textit{scavenger.py} module imports powerful \textit{OpenCV} library to perform \textit{color to grayscale}, \textit{gaussian blur}, \textit{adaptive threshold}, \textit{bitwise not} and \textit{dilation} operations in order. This will remove the noise in image and will provide a grayscale image. Next it finds all the contours in the image and then finds those with maximum area, finally it create an approximate perimeter to obtain the contour points as seen in figure \eqref{fig:7.3}. This is then passed onto the perspective transform which expects four corners of the grid and calculates the euclidean distance which is mapped to an empty image of the same dimension resulting in figure \eqref{fig:7.4}.
 
 \begin{figure}[!htbp]
+\centering
+\begin{minipage}{0.45\textwidth}
     \centering
-    \includegraphics[width=0.4\textwidth]{transformed_puzzle.jpg}
-    \caption[Transformed Image]{\centering Transformed Image}
+    \includegraphics[width=0.5\textwidth]{transformed_puzzle.jpg}
+    \caption[Sample Input]{\centering Sampel Input}
     \label{fig:7.4}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[height=0.5\textwidth]{ui_wireframe.png}
+    \caption[Wireframe UI]{\centering Wireframe UI}
+    \label{fig:7.5}
+\end{minipage}
 \end{figure}
 
 \subsection{Digit Extraction}
@@ -822,6 +831,22 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 
 A caveat with the classification model is that it has been trained only on numbers and so its univeral knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the clasiifier wrongly verdicts an empty cell as a digit. The current workaroud is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
 
+\section{Solver Module}
+\label{sec:solver}
+\hspace{0.5cm} The Sudoku from an image is encoded into an 81 bit long string with zeros indicating empty cells. This solver module performs a very simple backtracking operation. It first reshapes the input string into a 9 $\times$ 9 numpy array. Then for each row, at each empty cell, here 0, is replaced with a valid number.
+
+The validitiy of a number is checked by traversing the current row, column and the box. If validated then the operation is repeated. If not then it traces back to the previous empty cell an replaces the current number with an incremented one.
+
+\section{Main Script}
+\label{sec:mainscrpt}
+\hspace{0.5cm} This is a small controls script which provides an overall finish to the project. It includes Streamlit \cite{gh:Streamlit:streamlit}, Webcam and/or Streamlit\_Webrtc for the frontend. They manage async operations with the UI. Rest of it is function calls to the imported local modules. The following figure \eqref{fig:7.6} shows the processing of a live image from left to right.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[height=0.5\textwidth]{ui_processing.png}
+    \caption[Live Image Processing]{Live Image Processing}
+    \label{fig:7.6}
+\end{figure}
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Implementation <<<<<<<<<<<<<<<<<<<<<<<
 
