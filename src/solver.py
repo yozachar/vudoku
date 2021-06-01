@@ -21,25 +21,25 @@ class SudokuSolver:
 
     def isValid(self, num, pos):
         # check row
-        for i in range(len(self.board[0])):
-            if self.board[pos[0]][i] == num and pos[1] != i:
+        for idx in range(len(self.board[0])):
+            if self.board[pos[0]][idx] == num and pos[1] != idx:
                 return False
         # check column
-        for i in range(len(self.board)):
-            if self.board[i][pos[1]] == num and pos[0] != i:
+        for jdx in range(len(self.board)):
+            if self.board[jdx][pos[1]] == num and pos[0] != jdx:
                 return False
         # check box
         box_x = pos[1] // 3
         box_y = pos[0] // 3
-        for i in range(box_y*3, box_y*3 + 3):
-            for j in range(box_x*3, box_x*3 + 3):
-                if self.board[i][j] == num and (i, j) != pos:
+        for idx in range(box_y*3, box_y*3 + 3):
+            for jdx in range(box_x*3, box_x*3 + 3):
+                if self.board[idx][jdx] == num and (idx, jdx) != pos:
                     return False
         return True
 
     def isEmptyCell(self):
-        for i in range(len(self.board)):
-            for j in range(len(self.board[0])):
-                if self.board[i][j] == 0:
-                    return (i, j)  # row, col
+        for idx in range(len(self.board)):
+            for jdx in range(len(self.board[0])):
+                if self.board[idx][jdx] == 0:
+                    return (idx, jdx)  # row, col
         return None
