@@ -1,0 +1,75 @@
+%\usepackage{tgtermes} % for times romans font
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{xpatch}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{etoolbox}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{blindtext}
+\usepackage{tocbibind} % adds 'Contents' to TOC
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % use utf8x if utf8 causes error
+\usepackage[UKenglish]{babel}
+\usepackage[section]{placeins}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[useregional]{datetime2}
+\usepackage[pdftex, pdfauthor={Jovial Joe Jayarson}, pdftitle={OpenAI GPT-3}, pdfsubject={Language Model - Seminar Report}]{hyperref}
+
+\newcommand{\mydate}{\DTMdisplaydate{2020}{12}{05}{-1}}
+
+\hypersetup{
+    colorlinks      = true,
+    urlcolor        = gray,
+    linkcolor       = magenta,
+    citecolor       = brown,
+    citebordercolor = green,
+    urlbordercolor  = white,
+    linkbordercolor = blue,
+}
+
+\graphicspath{{../images/}}
+\setlength{\headheight}{32pt}
+%\setcitestyle{open={},close={},numbers}
+\AtBeginDocument{\hypersetup{pdfborder={0 0 1}}}
+\AtBeginEnvironment{quote}{\singlespacing\small}
+
+\title{\textbf{OpenAI GPT-3} \\ \vspace{1cm} \large A seminar report during 2020 - 2021, \\ submitted to APJ Abdul Kalam Technological University in partial fulfillment of the requirements for the award of the degree of \\ \vspace{0.5cm} \large \textbf{Bachelor of Technology \\ in \\ Computer Science and Engineering} \\ \vspace{0.5cm} \large by}
+\author{\textbf{Jovial Joe Jayarson (IES17CS016)}}
+\date{}
+
+%>>>>>>>>>>>>>>>>>>>>>>> Header & Footer >>>>>>>>>>>>>>>>>>>>>>>
+\makeatletter
+\patchcmd{\f@nch@head}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\headrule}{\hrule}{\color{gray}\hrule}{}{}
+\patchcmd{\f@nch@foot}{\rlap}{\color{gray}\rlap}{}{}
+%\patchcmd{\footrule}{\hrule}{\color{gray}\hrule}{}{}
+
+\xpatchcmd{\@makeschapterhead}{%
+  \Huge \bfseries  #1\par\nobreak%
+}{%
+  \Huge \bfseries\centering #1\par\nobreak%
+}{\typeout{Patched makeschapterhead}}{\typeout{patching of @makeschapterhead failed}}
+
+
+\xpatchcmd{\@makechapterhead}{%
+  \huge\bfseries \@chapapp\space \thechapter
+}{%
+  \huge\bfseries\centering \@chapapp\space \thechapter
+}{\typeout{Patched @makechapterhead}}{\typeout{Patching of @makechapterhead failed}}
+
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Department of CSE}
+\rhead{Seminar Report 2020-21}
+\cfoot{\thepage}
+\rfoot{IES College of Engineering}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+%<<<<<<<<<<<<<<<<<<<<<<< Header & Footer <<<<<<<<<<<<<<<<<<<<<<<
