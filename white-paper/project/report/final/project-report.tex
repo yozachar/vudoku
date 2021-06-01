@@ -721,7 +721,7 @@ To follow along it's best to refer the \href{https://github.com/joe733/vudoku}{r
         |- solver.py
 \end{lstlisting}
 
-\textbf{Note to the reader:} \textit{There has been and will be changes to the source code overtime, you may find this report outdated, in such cases, you're more than welcome to comment on the \href{https://github.com/joe733/vudoku}{project's} repository \href{https://github.com/joe733/vudoku/issues}{issue} / \href{https://github.com/joe733/vudoku/discussions}{discussion} pages.}
+\textbf{Note to the reader:} \textit{There has been and will be changes to the source code overtime, you may find this report outdated, if so, you're more than welcome to comment on the \href{https://github.com/joe733/vudoku}{project's} repository \href{https://github.com/joe733/vudoku/issues}{issue} / \href{https://github.com/joe733/vudoku/discussions}{discussion} pages.}
 
 \section{Digit Recognition Module}
 \label{sec:drm}
@@ -787,7 +787,7 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 \thispagestyle{fancy}
 \section{Image Processing Modules}
 \label{sec:cptpromd}
-The input image is captured from a light senstive device and then processed before passing it onto the classifier. This is achieved by \textit{scavenger.py} and \textit{extractor.py} modules. The figure \eqref{fig:7.2} is an example input image which undergoes pre-processing.
+\hspace{0.5cm} The input image is captured from a light senstive device and then processed before passing it onto the classifier. This is achieved by \textit{scavenger.py} and \textit{extractor.py} modules. The figure \eqref{fig:7.2} is an example input image which undergoes pre-processing.
 
 \begin{figure}[!htbp]
     \centering
@@ -804,6 +804,24 @@ The input image is captured from a light senstive device and then processed befo
         \label{fig:7.3}
     \end{minipage}
 \end{figure}
+
+\subsection{Preprocessing and Transformation}
+\label{subsec:prepntrnsfm}
+\hspace{0.5cm} The \textit{scavenger.py} module imports powerful \textit{OpenCV} library to perform \textit{color to grayscale}, \textit{gaussian blur}, \textit{adaptive threshold}, \textit{bitwise not} and \textit{dilation} operations in order. This will remove the noise in image and will provide a grayscale image. Next it finds all the contours in the image and then finds those with maximum area, finally it create an approximate perimeter to obtain the contour points as seen in figure \eqref{fig:7.3}. This is then passed onto the perspective transform which expects four corners of the grid and calculates the euclidean distance which is mapped to an empty image of the same dimension resulting in figure \eqref{fig:7.4}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{transformed_puzzle.jpg}
+    \caption[Transformed Image]{\centering Transformed Image}
+    \label{fig:7.4}
+\end{figure}
+
+\subsection{Digit Extraction}
+\label{subsec:extraction}
+\hspace{0.5cm} This submodule reads in the saved model \eqref{sec:drm} and accepts the transformed grid \eqref{fig:7.4} as input. Then it uses a simple logic and the powerful \textit{numpy} to split the image into a 9 $\times$ 9 grid. This method is not fool proof but efficient. Since the input image can be of variable size it needs to be resized into a 28 $\times$ 28 dimension otherwise the model will reject the input image.
+
+A caveat with the classification model is that it has been trained only on numbers and so its univeral knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the clasiifier wrongly verdicts an empty cell as a digit. The current workaroud is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
+
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Implementation <<<<<<<<<<<<<<<<<<<<<<<
 
