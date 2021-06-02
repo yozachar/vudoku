@@ -695,12 +695,12 @@ For exhaustive development a version control system is inevitable. This project 
 \chapter{Implementation}
 \label{chap:implementation}
 \thispagestyle{fancy}
-\hspace{0.5cm} Theory remains as good as debunked until proved otherwise. This chapter conserns with groundwork of the project. It follows object oriented and scripting paradigm. Breaking it down the there are:
+\hspace{0.5cm} Theory remains as good as debunked until proved otherwise. This chapter concerns with groundwork of the project. It follows object oriented and scripting paradigm. Breaking it down the there are:
 
 \begin{outline}
     \1 three operational modules namely
-        \2 \textit{scavenger.py} - obtains sudoku from image
-        \2 \textit{extractor.py} - grabs grid and digits from sudoku
+        \2 \textit{scavenger.py} - obtains Sudoku from image
+        \2 \textit{extractor.py} - grabs grid and digits from Sudoku
         \2 \textit{solver.py} - solves the puzzle
     \1 a primary script
         \2 \textit{main.py} - control script of the project
@@ -725,7 +725,7 @@ To follow along it's best to refer the \href{https://github.com/joe733/vudoku}{r
 
 \section{Digit Recognition Module}
 \label{sec:drm}
-\hspace{0.5cm} Since Vudoku aims to solve Sudoku visually it takes an input image and processes it to recognize digits in it. This module \textit{classifier.py} is not deployed on production system, instead it's used to genrate classification models which are saved for later use. A sample of dataset, on which this model is trained, is shown in figure \eqref{fig:7.1}.
+\hspace{0.5cm} Since Vudoku aims to solve Sudoku visually it takes an input image and processes it to recognize digits in it. This module \textit{classifier.py} is not deployed on production system, instead it's used to generate classification models which are saved for later use. A sample of dataset, on which this model is trained, is shown in figure \eqref{fig:7.1}.
 
 \begin{figure}[!htbp]
     \centering
@@ -739,7 +739,7 @@ The digit recognition model is structured as a sandwich of layers which is eluci
 \subsection{Sequential Model}
 \label{subsec:seqmod}
 
-\hspace{0.5cm} A Sequential model is appropriate for a plain stack of layers where each layer has exactly one input tensor and one output tensor \cite{wpg:kerasseqmod}. Here every unit in the currect layer is connected to every unit in the previous layer. This model consits of the following layers in order:
+\hspace{0.5cm} A Sequential model is appropriate for a plain stack of layers where each layer has exactly one input tensor and one output tensor \cite{wpg:kerasseqmod}. Here every unit in the current layer is connected to every unit in the previous layer. This model consists of the following layers in order:
 
 \begin{lstlisting}
     2D Convolution Layer with ReLu activation
@@ -752,17 +752,17 @@ The digit recognition model is structured as a sandwich of layers which is eluci
 
 \subsubsection{Convolution Layer 2D \texorpdfstring{$\times$}{x}  2} % PDF book marks maynot contain such symbols on heading as they serve as bookmarks
 \label{subsubsec:convl2d2}
-\hspace{0.5cm} This layer creates a convolution kernel that is convoluted whith the input layer to produce a tensor of outputs. When using this layer as the first layer in the model, a keyword argument \textit{input\_shape} is provided as a tuple (28, 28) which comes from the fact that MNIST dataset has 28 $\times$ 28 sized images only. There are two of these layer back-to-back which is because higher-level patterns cannot be seen with just one convolutional layer. 
+\hspace{0.5cm} This layer creates a convolution kernel that is convoluted with the input layer to produce a tensor of outputs. When using this layer as the first layer in the model, a keyword argument \textit{input\_shape} is provided as a tuple (28, 28) which comes from the fact that MNIST dataset has 28 $\times$ 28 sized images only. There are two of these layer back-to-back which is because higher-level patterns cannot be seen with just one convolution layer. 
 
 \subsubsection{MaxPooling layer 2D}
 \label{subsubsec:maxpool2d}
-Pooling is basically \textit{downscaling} the image obtained from the previous layers. It can be compared to shrinking an image to reduce its pixel density. Downscaling is performed using a hardcoded tensor operation such as \textit{max}, rather than through a learned transformation, because the relatively expensive operation of learning the weights \cite{2017arXiv170603059K} is not needed. This way, useful spatial hierarchy at a fraction of the cost is obtained. A good spatial hierarchies summarize the data substantially when moving from bottom to top.
+Pooling is basically \textit{downscaling} the image obtained from the previous layers. It can be compared to shrinking an image to reduce its pixel density. Down-scaling is performed using a hard-coded tensor operation such as \textit{max}, rather than through a learned transformation, because the relatively expensive operation of learning the weights \cite{2017arXiv170603059K} is not needed. This way, useful spatial hierarchy at a fraction of the cost is obtained. A good spatial hierarchies summarize the data substantially when moving from bottom to top.
 
 \subsubsection{Flatten and Dropout \texorpdfstring{$\times$}{x} 2}
 \label{subsubsec:drptfltn}
 \hspace{0.5cm} Flattening a tensor means to remove all of the dimensions except for one. This is exactly what the \textit{Flatten} layer does.
 
-\textit{Dropout} layer randomly sets input units to 0 with a frequency of rate at each step during training time, which helps prevent overfitting. Inputs not set to 0 are scaled up by 1/(1 - rate) such that the sum over all inputs is unchanged.
+\textit{Dropout} layer randomly sets input units to 0 with a frequency of rate at each step during training time, which helps prevent over-fitting. Inputs not set to 0 are scaled up by 1/(1 - rate) such that the sum over all inputs is unchanged.
 
 \subsubsection{Dense Layer \texorpdfstring{$\times$}{x} 2}
 \label{subsubsec:dnslyr}
@@ -787,7 +787,7 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 \thispagestyle{fancy}
 \section{Image Processing Modules}
 \label{sec:cptpromd}
-\hspace{0.5cm} The input image is captured from a light senstive device and then processed before passing it onto the classifier. This is achieved by \textit{scavenger.py} and \textit{extractor.py} modules. The figure \eqref{fig:7.2} is an example input image which undergoes pre-processing.
+\hspace{0.5cm} The input image is captured from a light sensitive device and then processed before passing it onto the classifier. This is achieved by \textit{scavenger.py} and \textit{extractor.py} modules. The figure \eqref{fig:7.2} is an example input image which undergoes per-processing.
 
 \begin{figure}[!htbp]
     \centering
@@ -829,13 +829,13 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 \label{subsec:extraction}
 \hspace{0.5cm} This submodule reads in the saved model \eqref{sec:drm} and accepts the transformed grid \eqref{fig:7.4} as input. Then it uses a simple logic and the powerful \textit{numpy} to split the image into a 9 $\times$ 9 grid. This method is not fool proof but efficient. Since the input image can be of variable size it needs to be resized into a 28 $\times$ 28 dimension otherwise the model will reject the input image.
 
-A caveat with the classification model is that it has been trained only on numbers and so its univeral knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the clasiifier wrongly verdicts an empty cell as a digit. The current workaroud is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
+A caveat with the classification model is that it has been trained only on numbers and so its univeral knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the classifier wrongly verdicts an empty cell as a digit. The current workaround is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
 
 \section{Solver Module}
 \label{sec:solver}
 \hspace{0.5cm} The Sudoku from an image is encoded into an 81 bit long string with zeros indicating empty cells. This solver module performs a very simple backtracking operation. It first reshapes the input string into a 9 $\times$ 9 numpy array. Then for each row, at each empty cell, here 0, is replaced with a valid number.
 
-The validitiy of a number is checked by traversing the current row, column and the box. If validated then the operation is repeated. If not then it traces back to the previous empty cell an replaces the current number with an incremented one.
+The validity of a number is checked by traversing the current row, column and the box. If validated then the operation is repeated. If not then it traces back to the previous empty cell and replaces the current number with an incremented one.
 
 \section{Main Script}
 \label{sec:mainscrpt}
@@ -855,9 +855,13 @@ The validitiy of a number is checked by traversing the current row, column and t
 \chapter{Conclusion}
 \label{chap:conclusion}
 \thispagestyle{fancy}
-\hspace{0.5cm} When the Transformer was first released back in 2017 by the Google-Brain team, it received a lot of traction from the research community. The OpenAI built three successive versions of GPT, which took the social media by the storm, was based on the same Transformer model. The scientific research landscape is shifting, it is at a crucial infliction point. Whatever we've learned so far from Recurrent Nets, Long Short Term Memory, Convolution Neural Networks etc. has paved way towards newer thinking and better approaches. Not a month ago Google-Research released their Vision Transformer (ViT), which is at the heart of \emph{Vudoku}.
+\hspace{0.5cm} When the Transformer was first released back in 2017 by the Google-Brain team, it received a lot of traction from the research community. The OpenAI built three successive versions of GPT, which took the social media by the storm, was based on the same Transformer model. The scientific research landscape is shifting, it is at a crucial infliction point. Whatever we've learned so far from Recurrent Nets, Long Short Term Memory, Convolution Neural Networks etc. has paved way towards newer thinking and better approaches. Not a month ago Google-Research released their Vision Transformer (ViT), which was expected to be the at the heart of \emph{Vudoku}.
 
-Digit recognition is an interesting classical problem to embark the journey in the field of artificial intelligence. Sudoku, a mathematical puzzle is captivating beauty of the mystery that lies in various patterns and combinations in itself. Visualizing Sudoku will give an insight on many aspects, including accuracy, performance, complexity, precision, recall etc. This project could be an inspiring stepping stone for futures enthusiasts to work upon. On a personal note, I believe this project will be a crescendo of learning adventure.
+I was exploring the \href{https://github.com/google-research/vision\_transformer}{ViT's Jupyter notebook}, simultaneously trying to grab the Sudoku grid from an image using \href{https://docs.opencv.org/3.0-beta/doc/py\_tutorials/py\_imgproc/py\_houghlines/py\_houghlines.html#hough-tranform-in-opencv}{Hough lines transform}, but since the latter was messed up I ended up \href{https://github.com/google-research/vision\_transformer/issues/107}{enquiring} the possibility of using ViT directly. Little did I know that the very structure of ViT couldn't be used for such a task (as it was stated in a \href{https://github.com/google-research/vision\_transformer/issues/107#issuecomment-842877895}{comment} on my thread), or is it... still an unfinished reasearch.
+
+Some of the libraries I've used, like Streamlit, Streamlit\_Webrtc are very new and as of writing this, they are under heavy development. Hence it's likely that one will encounter hiccups while replicating this work. Another obstacle I found jutting out during development is the disparity in packages - one version of package is hard-bound to another version or a range of the same, updating them could be really messy. This is quite the reason that Streamlit hosting is failing. I've used \textit{conda} as my primary package manage but due to the unavailability of certain packages I've used \textit{pip} also.
+
+Digit recognition is an interesting classical problem to embark the journey in the field of artificial intelligence. Sudoku, a mathematical puzzle is captivating beauty of the mystery that lies in various patterns and combinations in itself. This project could be an inspiring stepping stone for futures enthusiasts to work upon. On a personal note, I believe this project has been a crescendo of learning adventure.
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Conclusion <<<<<<<<<<<<<<<<<<<<<<<
 
