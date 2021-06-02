@@ -1,7 +1,10 @@
 # Vudoku - A Visual Sudoku Solver
 
+[![Status](https://img.shields.io/badge/Project%20Completed-95%25-brightgreen)](https://github.com/joe733/vudoku)
+[![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-blue)](https://github.com/streamlit/streamlit/)
+[![Streamlit](https://img.shields.io/badge/PythonOpenCV-4.5.2-blue)](https://github.com/opencv/opencv-python)
 [![Git-emoji](https://img.shields.io/badge/Gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
-[![Status](https://img.shields.io/badge/Project%20Completed-90%25-green)](https://github.com/joe733/vudoku)
+[![](https://img.shields.io/github/languages/code-size/joe733/vudoku?color=red&label=Code%20Size)](https://github.com/joe733/vudoku)
 
 ## Sudoku
 
@@ -52,7 +55,8 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 > This app is in the process of deployment on Streamlit.
 
 - Meanwhile you can clone the repository
-- Create a conda environment `conda env create -f environment.yml`
+- Open the directory. `cd vudoku`
+- Create a conda environment `conda env create -f src/environment.yml`
 - Open terminal in the root of the clone repository and run `streamlit run src/main.py`
 - It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:8501`](http://localhost:8501/)
 
@@ -63,13 +67,14 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 - [X] Grab the Sudoku box using contours of the maximum area
 - [ ] Rectify flipped images after perspective transform
 - [X] Split the grid into Sudoku boxes to extract digits
-- [X] Train a logistic regression classifier on MNIST data set - current random accuracy is around `91%`
+- [X] ~~Train a logistic regression classifier on MNIST data set - current random accuracy is around `91%`~~
+- [X] Build and Train a keras Sequential Model (2 x Conv2D + MaxPool2D + Dropout + Flatten + Dense[ReLu] Dropout + Dense[SoftMax])
 - [ ] Work on improving sudoku grabbing quality
   - [X] Get the digits recognized correctly
   - [ ] Preprocess the image (of a single digit) to remove excess / thick border
   - [ ] Scale and center the image
   - [X] ~~If nothing works, try a different solver or even another classifier.~~
-  - [ ] Encode the classified image into a 81 bit string
+  - [X] Encode the classified image into a 81 bit string
 - [X] Solve the Sudoku using simple backtracking
 - [X] ~~Additional module just to validate solved sudoku~~
 - [X] Restructure the code and add a logical connections and control flow
@@ -77,6 +82,6 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 
 ### Extras
 
-- [ ] Good to have a solid CLI and GUI interface
+- [ ] Good to have a solid CLI interface
 - [ ] Improve the grid and number detection algorithm
 - [ ] Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)
