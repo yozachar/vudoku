@@ -2,9 +2,10 @@
 
 [![Status](https://img.shields.io/badge/Project%20Completed-95%25-brightgreen)](https://github.com/joe733/vudoku)
 [![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-blue)](https://github.com/streamlit/streamlit/)
+[![Streamlit](https://img.shields.io/badge/Keras-2.4.3-blue)](https://github.com/opencv/opencv-python)
 [![Streamlit](https://img.shields.io/badge/PythonOpenCV-4.5.2-blue)](https://github.com/opencv/opencv-python)
 [![Git-emoji](https://img.shields.io/badge/Gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
-[![](https://img.shields.io/github/languages/code-size/joe733/vudoku?color=red&label=Code%20Size)](https://github.com/joe733/vudoku)
+[![CodeSize](https://img.shields.io/github/languages/code-size/joe733/vudoku?color=red&label=Code%20Size)](https://github.com/joe733/vudoku)
 
 ## Sudoku
 
@@ -50,7 +51,7 @@ This project aims to solve 9x9 Sudoku squares using computer vision techniques. 
 
 Asking a computer to solve it requires translating Sudoku into code. This can be achieved in many ways, linear arrays, encoded and decoded strings, two dimensional arrays etc. This project uses simple string expression.
 
-## How to try
+## How to test
 
 > This app is in the process of deployment on Streamlit.
 
@@ -85,3 +86,5 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 - [ ] Good to have a solid CLI interface
 - [ ] Improve the grid and number detection algorithm
 - [ ] Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)
+
+> **NB**: *If you find anything in this repositry that is not properly citerd please let me know, I'm be more than happy to rectify it.*
