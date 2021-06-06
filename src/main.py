@@ -5,8 +5,8 @@ The project path is laid out as follows:
 Video Input --> Sudoku Grabber -->  Solver --> Visualizer
 '''
 
-from scavenger import sr
-from extractor import de, np
+from scavenger import sr, cv
+from extractor import de, np, Image
 from solver import SudokuSolver
 
 import streamlit as st
@@ -31,11 +31,9 @@ class Receiver(VideoProcessorBase):
         ss = SudokuSolver(string=p_string)
         isSolved, s_board = ss.solveRecursively()  # returns puzzle status and 
         # print(s_board) # convert this to an image
-        # output = scv.sr.relay(image=image)
+
         if isSolved:
             return s_board
-
-        # return scv.result
 
 
 with col1:
@@ -44,4 +42,5 @@ with col1:
 
 with col2:
     st.header(body='Output')
-    st.image(image='') # final image
+    result = cv.cvtColor(src=cv.imread(filename='src/sample/result.jpg'), code=cv.COLOR_BGR2RGB)
+    st.image(image=result) # final image
