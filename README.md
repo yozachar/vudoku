@@ -53,7 +53,7 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 
 ## How to test
 
-> This app is in the process of deployment on Streamlit.
+The application has been deployed. Please visit [Streamlit Share](https://share.streamlit.io/joe733/vudoku/main/src/main.py).
 
 - Meanwhile you can clone the repository
 - Open the directory. `cd vudoku`
@@ -80,11 +80,12 @@ Asking a computer to solve it requires translating Sudoku into code. This can be
 - [X] ~~Additional module just to validate solved sudoku~~
 - [X] Restructure the code and add a logical connections and control flow
 - [X] Adds Streamlit GUI support
+- [X] Deployed on Streamlit
 
 ### Extras
 
 - [ ] Good to have a solid CLI interface
-- [ ] Improve the grid and number detection algorithm
-- [ ] Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)
+- [ ] Improve the number detection and grid splitting algorithm
+- [X] ~~Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)~~
 
-> **NB**: *If you find anything in this repositry that is not properly citerd please let me know, I'm be more than happy to rectify it.*
+> **NB**: *If you find anything in this repositry that is not properly cited please let me know, I'm be more than happy to rectify it.*
