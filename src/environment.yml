@@ -1,6 +1,7 @@
 name: vudoku
 dependencies:
 - pip:
+    - streamlit_webrtc==0.20.1
     - streamlit_webcam_example==0.1.0
     - streamlit==0.82.0
     - Keras==2.4.3

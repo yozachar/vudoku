@@ -1,7 +1,8 @@
-tensorflow==2.5.0
-streamlit_webcam_example
-streamlit
-Pillow
-keras
+streamlit_webrtc==0.20.1
+streamlit_webcam_example==0.1.0
+streamlit==0.82.0
+Keras==2.4.3
+numpy==1.20.3
+Pillow==8.2.0
+# to host on streamlit
 opencv-python-headless
-numpy
