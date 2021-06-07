@@ -21,12 +21,6 @@
 %% General packages
 \usepackage[utf8]{inputenc}	% allow utf-8 input
 \usepackage[T1]{fontenc}	% use 8-bit T1 fonts
-\usepackage{xcolor}		% colors for hyperlinks
-\usepackage[colorlinks = true,
-            linkcolor = purple,
-            urlcolor  = blue,
-            citecolor = cyan,
-            anchorcolor = black]{hyperref}	% Color links to references, figures, etc.
 \usepackage{booktabs} 		% professional-quality tables
 \usepackage{nicefrac}		% compact symbols for 1/2, etc.
 \usepackage{microtype}		% microtypography
@@ -34,7 +28,7 @@
 \usepackage{float}			% Allows for figures within multicol
 %\usepackage{multicol}		% Multiple columns (Method B)
 
-\usepackage{lipsum}		%  Filler text
+% \usepackage{lipsum}		%  Filler text
 \usepackage{listings}   % Code formatter
 
 \graphicspath{{images/}}
@@ -60,7 +54,18 @@
 \titlespacing\subsubsection{0pt}{8pt plus 3pt minus 3pt}{1pt plus 1pt minus 1pt}
 
 % ORCiD insertion
-\usepackage{tikz,xcolor,hyperref}
+\usepackage{tikz, xcolor, hyperref}
+% \usepackage[[pdftex, pdfauthor={Jovial Joe Jayarson}, pdftitle={Vudoku - Visual Sudoku Solver}, pdfsubject={Digit Recognition, Computer Vision}]{hyperref}
+
+\hypersetup{
+  colorlinks      = true,
+  urlcolor        = gray,
+  linkcolor       = magenta,
+  citecolor       = brown,
+  citebordercolor = green,
+  urlbordercolor  = white,
+  linkbordercolor = blue,
+}
 
 \definecolor{lime}{HTML}{A6CE39}
 \DeclareRobustCommand{\orcidicon}{
@@ -77,8 +82,8 @@
 			{\noexpand\orcidicon}}
 }
 % Define the ORCID iD command for each author separately. Here done for two authors.
-\newcommand{\orcidauthorA}{0000-0001-8302-796X}
-% \newcommand{\orcidauthorB}{0000-0000-0000-0002}
+\newcommand{\orcidauthorA}{0000-0001-7002-9923}
+\newcommand{\orcidauthorB}{0000-0001-8302-796X}
 % \newcommand{\orcidauthorC}{0000-0000-0000-0003}
 % \newcommand{\orcidauthorD}{0000-0000-0000-0004}
 
@@ -97,8 +102,8 @@
 %%%%%%%%%%%%%%%  Author list  %%%%%%%%%%%%%%%
 \usepackage{authblk}
 \renewcommand*{\Authfont}{\bfseries}
-\author[+\thanks{\tt{jovial7joe@hotmail.com}}]{Jovial Joe Jayarson}
-\author[+]{Ebin P M\orcidA{}}
+\author[+\thanks{\tt{jovial7joe@hotmail.com}}]{Jovial Joe Jayarson\orcidA{}}
+\author[+]{Ebin P M\orcidB{}}
 
 \affil[+]{Department of Computer Science \& Engineering, IESCE}
 \affil[+]{APJ Kalam Technological University}
