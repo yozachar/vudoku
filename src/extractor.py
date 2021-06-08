@@ -57,6 +57,3 @@ class DigitExtractor:
         self.splitGrid(frame=image)
         self.genString()
         return self.string
-
-
-de = DigitExtractor()

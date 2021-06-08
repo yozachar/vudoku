@@ -100,6 +100,3 @@ class SudokuRecognizer:
         #         break
         # capture.release()
         # cv.destroyAllWindows()
-
-
-sr = SudokuRecognizer()

@@ -95,6 +95,3 @@ class DigitClassifier:
     def saveModel(self):
         # creates a HDF5 file
         self.model.save(filepath='mnist_trained_model.h5')
-
-
-clf = DigitClassifier()
