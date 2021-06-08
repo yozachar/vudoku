@@ -72,26 +72,23 @@ class SudokuRecognizer:
         return flipped_h
 
     def getBlobs(self, frame, image):
-        buffer_copy = image.copy()
 
         contours, _ = cv.findContours(
             image=frame, mode=cv.RETR_EXTERNAL, method=cv.CHAIN_APPROX_SIMPLE)
         contours = sorted(contours, key=cv.contourArea, reverse=True)
 
-        curve = contours[0]
-        peri = cv.arcLength(curve=curve, closed=True)
+        peri = cv.arcLength(curve=contours[0], closed=True)
         # epsilon=0.12*peri is magic ?!
-        approx = cv.approxPolyDP(curve=curve, epsilon=0.12*peri, closed=True)
+        approx = cv.approxPolyDP(curve=contours[0], epsilon=0.12*peri, closed=True)
 
-        # print(approx)
         blob = cv.drawContours(
-            image=buffer_copy, contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
+            image=image.copy(), contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
         cv.imwrite(filename='src/assets/images/out/contours.jpg',
                    img=blob)
 
-        return blob, approx
+        return frame, approx
 
-    def relay(self, image=cv.imread(filename='assets/images/sample/sudoku10.jpg')):
+    def relay(self, image=cv.imread(filename='src/assets/images/sample/sudoku10.jpg')):
         # 6 does not unpack, # 2 - 5 keeps flipping
         resized_img = self.rescaleFrame(frame=image, flag=False)
         blank = np.zeros(shape=resized_img, dtype=np.uint8)
