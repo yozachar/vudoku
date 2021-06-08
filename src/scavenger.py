@@ -13,6 +13,11 @@ class SudokuRecognizer:
         sc_dimensions = (width, height)
         return cv.resize(src=frame, dsize=sc_dimensions, interpolation=cv.INTER_CUBIC) if flag else tr_dimensions
 
+    def getDistance(self, pt1, pt2):
+        diff_x = pt2[0] - pt1[0]
+        diff_y = pt2[1] - pt2[1]
+        return np.sqrt((diff_x ** 2) + (diff_y ** 2))
+
     def preprocessFrame(self, frame, superimposed):
         # scaled_sdk = rescaleFrame(frame=frame)
         gray_sdk = cv.cvtColor(src=frame, code=cv.COLOR_BGR2GRAY)
@@ -25,11 +30,6 @@ class SudokuRecognizer:
         cv.imwrite(filename='src/assets/images/out/dilated.jpg',
                    img=dilated_sdk)
         return dilated_sdk
-
-    def getDistance(self, pt1, pt2):
-        diff_x = pt2[0] - pt1[0]
-        diff_y = pt2[1] - pt2[1]
-        return np.sqrt((diff_x ** 2) + (diff_y ** 2))
 
     def perspectiveTransform(self, image, corners):
         # Order points in clockwise order
@@ -64,7 +64,12 @@ class SudokuRecognizer:
         matrix = cv.getPerspectiveTransform(src=ordered_corners, dst=grid_dim)
 
         # Return the transformed image
-        return cv.warpPerspective(src=image, M=matrix, dsize=(side, side))
+        transformed = cv.warpPerspective(
+            src=image, M=matrix, dsize=(side, side))
+        flipped_h = cv.flip(src=transformed, flipCode=1)
+
+        cv.imwrite(filename='src/assets/images/out/flipped.jpg', img=flipped_h)
+        return flipped_h
 
     def getBlobs(self, frame, image):
         buffer_copy = image.copy()
@@ -79,25 +84,21 @@ class SudokuRecognizer:
         approx = cv.approxPolyDP(curve=curve, epsilon=0.12*peri, closed=True)
 
         # print(approx)
-        drawn_cntrs = cv.drawContours(
+        blob = cv.drawContours(
             image=buffer_copy, contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
         cv.imwrite(filename='src/assets/images/out/contours.jpg',
-                   img=drawn_cntrs)
+                   img=blob)
 
-        transformed = self.perspectiveTransform(image=frame, corners=approx)
-        flipped_h = cv.flip(src=transformed, flipCode=1)
+        return blob, approx
 
-        cv.imwrite(filename='src/assets/images/out/flipped.jpg', img=flipped_h)
-        return flipped_h
-
-    def relay(self, image):
+    def relay(self, image=cv.imread(filename='assets/images/sample/sudoku10.jpg')):
         # 6 does not unpack, # 2 - 5 keeps flipping
-        # image = cv.imread(filename='sdk10.jpg')  # test 10
         resized_img = self.rescaleFrame(frame=image, flag=False)
         blank = np.zeros(shape=resized_img, dtype=np.uint8)
         p_frame = self.preprocessFrame(frame=image, superimposed=blank)
-        result = self.getBlobs(frame=p_frame, image=image)
-        return result
+        blob_img, apx_pts = self.getBlobs(frame=p_frame, image=image)
+        p_transform = self.perspectiveTransform(image=blob_img, corners=apx_pts)
+        return p_transform
         # while True:
         #     isTrue, frame = capture.read()
         #     cv.imshow(winname='Webcam', mat=preprocessFrame(frame=frame))
