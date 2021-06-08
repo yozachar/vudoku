@@ -432,5 +432,5 @@ htmldocs/
 
 # >>> Misc >>>
 .vscode/
-white-paper/templates/
+src/assets/images/out
 # <<< Misc <<<
