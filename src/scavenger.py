@@ -56,7 +56,7 @@ class SudokuRecognizer:
         # Construct new points to obtain top-down view of image in
         # top_r, top_l, bottom_l, bottom_r order
         grid_dim = np.array(object=[(0, 0), (side - 1, 0), (side - 1, side - 1),
-                                     (0, side - 1)], dtype=np.float32)
+                                    (0, side - 1)], dtype=np.float32)
 
         # Find perspective transform matrix
         matrix = cv.getPerspectiveTransform(src=ordered_corners, dst=grid_dim)

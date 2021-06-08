@@ -9,7 +9,7 @@ class DigitExtractor:
         self.cells = []
         self.temp_digit = None
         self.string = ''
-    
+
     def preprocess(self, image):
         # resize image
         basewidth = 28
@@ -17,11 +17,11 @@ class DigitExtractor:
         w_percent = (basewidth / float(resized_img.size[0]))
         h_size = int((float(resized_img.size[1]) * float(w_percent)))
         resized_img = resized_img.resize((basewidth, h_size), Image.ANTIALIAS)
-        
+
         # clean and center digits
-        
+
         self.temp_digit = np.asarray(resized_img)  # dtype=np.float32 ?
-        
+
         #cv.imshow('grid', cv.imread('result.jpg'))
         # margin = 4
         # crop_img = cells[5][margin:-margin, margin:-margin].copy()
@@ -52,7 +52,7 @@ class DigitExtractor:
             predictions = model.predict(rs_cell)
             digit = predictions[0].tolist().index(max(predictions[0].tolist()))
             self.string += str(digit)
-    
+
     def miner(self, image):
         self.splitGrid(frame=image)
         self.genString()
