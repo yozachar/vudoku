@@ -5,42 +5,30 @@ The project path is laid out as follows:
 Video Input --> Sudoku Grabber -->  Solver --> Visualizer
 '''
 
-from scavenger import sr, cv
-from extractor import de, np, Image
+from artist import cap_img, Layout, st
 from solver import SudokuSolver
-
-import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
+from extractor import DigitExtractor, np
+from scavenger import SudokuRecognizer, cv
 
 isSolved = False
 bw_sdk = p_string = s_board = None
+image = cv.cvtColor(src=cv.imread(filename='src/assets/images/sample/result.jpg'), code=cv.COLOR_BGR2RGB)
 
-st.title("Vudoku")
+lyt = Layout()
+dex = DigitExtractor()
+srg = SudokuRecognizer()
 
-col1, col2 = st.beta_columns(spec=2)
+if lyt.capture:
+    image = cap_img if cap_img else image
 
-class Receiver(VideoProcessorBase):
+if lyt.edges or lyt.contours or lyt.transform:
+    bw_sdk = srg.relay(image=image)  # returns a black and white sudoku grid
 
-    def transform(self, frame):
-        image = frame.to_ndarray(format='bgr24')
-        
-        yield image # need to work on generators
+if lyt.solve:
+    p_string = dex.miner(image=bw_sdk)  # returns a 81 bit string
+    ss = SudokuSolver(string=p_string)
+    isSolved, s_board = ss.solveRecursively()  # returns puzzle status and 
+# print(s_board) # convert this to an image
 
-        bw_sdk = sr.relay(image=image)  # returns a black and white sudoku grid
-        p_string = de.miner(image=bw_sdk)  # returns a 81 bit string
-        ss = SudokuSolver(string=p_string)
-        isSolved, s_board = ss.solveRecursively()  # returns puzzle status and 
-        # print(s_board) # convert this to an image
-
-        if isSolved:
-            return s_board
-
-
-with col1:
-    st.header(body='Input')
-    webrtc_streamer(key='Output', video_transformer_factory=Receiver)
-
-with col2:
-    st.header(body='Output')
-    result = cv.cvtColor(src=cv.imread(filename='src/sample/result.jpg'), code=cv.COLOR_BGR2RGB)
-    st.image(image=result) # final image
+lyt.sample = image
+lyt.topCols()
