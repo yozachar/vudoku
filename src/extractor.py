@@ -1,6 +1,5 @@
 import cv2 as cv
 import numpy as np
-from PIL import Image
 from keras import models
 
 
@@ -15,10 +14,12 @@ class DigitExtractor:
         for idx, row in enumerate(rows):
             columns = np.array_split(ary=row, indices_or_sections=9, axis=1)
             for jdx, column in enumerate(columns):
-                resized_img = Image.fromarray(obj=column).resize((28, 28), Image.ANTIALIAS)
-                np_fmt = np.asarray(a=resized_img)
-                cv.imwrite(filename=f'src/assets/images/out/cells/cell{idx}{jdx}.jpg', img=np_fmt)
-                self.cells.append(np_fmt)
+                resized_img = cv.resize(column[3:-3, 3:-3],  # the 3:-3 slice removes the borders from each image
+                                        dsize=(28, 28),
+                                        interpolation=cv.INTER_CUBIC)
+                cv.imwrite(
+                    filename=f'src/assets/images/out/cells/cell{idx}{jdx}.jpg', img=resized_img)
+                self.cells.append(resized_img)
 
     def genString(self):
         # check if model exists if not, prompt user to run classifier
@@ -32,7 +33,6 @@ class DigitExtractor:
             self.string += str(digit)
 
     def miner(self, image):
-        print(image.shape)
         self.splitGrid(frame=image)
         self.genString()
         return self.string
