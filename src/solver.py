@@ -2,8 +2,8 @@ import numpy as np
 
 
 class SudokuSolver:
-    def __init__(self, string='003000000400000020080120006000000000200060007000807031010640900605008000908300040'):
-        self.board = np.array(list(string), dtype=np.int32).reshape(9, 9)
+    def __init__(self):
+        self.board = None
 
     def solveRecursively(self):
         cell = self.isEmptyCell()
@@ -43,3 +43,10 @@ class SudokuSolver:
                 if self.board[idx][jdx] == 0:
                     return (idx, jdx)  # row, col
         return None
+
+    def gateway(self, string='003000000400000020080120006000000000200060007000807031010640900605008000908300040'):
+        self.board = np.array(list(string), dtype=np.int32).reshape(9, 9)
+        return self.solveRecursively()
+
+
+slr = SudokuSolver()

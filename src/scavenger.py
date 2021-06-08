@@ -22,6 +22,8 @@ class SudokuRecognizer:
             src=gaussian_sdk, maxValue=255, adaptiveMethod=cv.ADAPTIVE_THRESH_GAUSSIAN_C, thresholdType=cv.THRESH_BINARY, blockSize=13, C=3)
         superimposed = cv.bitwise_not(src=adaptive_sdk)
         dilated_sdk = cv.dilate(src=superimposed, kernel=(9, 9), iterations=1)
+        cv.imwrite(filename='src/assets/images/out/dilated.jpg',
+                   img=dilated_sdk)
         return dilated_sdk
 
     def getDistance(self, pt1, pt2):
@@ -65,7 +67,7 @@ class SudokuRecognizer:
         return cv.warpPerspective(src=image, M=matrix, dsize=(side, side))
 
     def getBlobs(self, frame, image):
-        # buffer_copy = image.copy()
+        buffer_copy = image.copy()
 
         contours, _ = cv.findContours(
             image=frame, mode=cv.RETR_EXTERNAL, method=cv.CHAIN_APPROX_SIMPLE)
@@ -75,13 +77,17 @@ class SudokuRecognizer:
         peri = cv.arcLength(curve=curve, closed=True)
         # epsilon=0.12*peri is magic ?!
         approx = cv.approxPolyDP(curve=curve, epsilon=0.12*peri, closed=True)
+
         # print(approx)
-        # drawn_cntrs = cv.drawContours(
-        #     image=buffer_copy, contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
-        # cv.imshow(winname='contours', mat=drawn_cntrs)
+        drawn_cntrs = cv.drawContours(
+            image=buffer_copy, contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
+        cv.imwrite(filename='src/assets/images/out/contours.jpg',
+                   img=drawn_cntrs)
+
         transformed = self.perspectiveTransform(image=frame, corners=approx)
         flipped_h = cv.flip(src=transformed, flipCode=1)
 
+        cv.imwrite(filename='src/assets/images/out/flipped.jpg', img=flipped_h)
         return flipped_h
 
     def relay(self, image):
@@ -100,3 +106,6 @@ class SudokuRecognizer:
         #         break
         # capture.release()
         # cv.destroyAllWindows()
+
+
+srg = SudokuRecognizer()
