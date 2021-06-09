@@ -1,5 +1,6 @@
 # Vudoku - A Visual Sudoku Solver
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/joe733/vudoku/main/src/main.py)
 [![Status](https://img.shields.io/badge/Project%20Completed-95%25-brightgreen)](https://github.com/joe733/vudoku)
 [![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-blue)](https://github.com/streamlit/streamlit/)
 [![Streamlit](https://img.shields.io/badge/Keras-2.4.3-blue)](https://github.com/opencv/opencv-python)
@@ -60,6 +61,10 @@ The application has been deployed. Please visit [Streamlit Share](https://share.
 - Create a conda environment `conda env create -f src/environment.yml`
 - Open terminal in the root of the clone repository and run `streamlit run src/main.py`
 - It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:8501`](http://localhost:8501/)
+
+## Current UI
+
+![InitialUI](src/assets/images/screens/initial_ui.png)
 
 ## Task List
 
