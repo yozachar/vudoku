@@ -23,7 +23,7 @@ class DigitExtractor:
 
     def genString(self):
         # check if model exists if not, prompt user to run classifier
-        model = models.load_model(filepath='src/mnist_trained_model.h5')
+        model = models.load_model(filepath='src/assets/models/mnist_trained_model_v1.h5')
 
         for cell in self.cells:
             # Mark empty cells are marked as zero the converted into a string

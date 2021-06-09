@@ -94,4 +94,4 @@ class DigitClassifier:
 
     def saveModel(self):
         # creates a HDF5 file
-        self.model.save(filepath='mnist_trained_model.h5')
+        self.model.save(filepath='src/assets/models/mnist_trained_model_v1.h5')
