@@ -10,34 +10,33 @@ from builder import ibg
 from extractor import dex, np
 from scavenger import srg, cv
 
+import av
 import streamlit as st
 from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
 
 btn_pressed = False
 capture_img = dilated_img = contour_img = flipped_img = None
-sampled_img = cv.cvtColor(src=cv.imread(
-    filename='src/assets/images/sample/sudoku04.jpg'), code=cv.COLOR_BGR2RGB)
 
 
 st.markdown("<h1 style='text-align: center;'>Vudoku - Visual Sudoku Solver</h1>",
             unsafe_allow_html=True)
 
 
-class Receiver(VideoProcessorBase):
+class OpenCVVideoProcessor(VideoProcessorBase):
     # Overridden class
-
-    def transform(self, frame):
+    def recv(self, frame: av.VideoFrame) -> av.VideoFrame:
         # Overridden function
         global capture_img
         capture_img = frame.to_ndarray(format='bgr24')
-        return capture_img
+        return av.VideoFrame.from_ndarray(capture_img, format="bgr24")
 
 
 col1, col2 = st.beta_columns(spec=2)
 with col1:
     # 1. Input
     st.header(body='Input')
-    webrtc_streamer(key='Output', video_transformer_factory=Receiver)
+    webrtc_streamer(
+        key='Input', video_processor_factory=OpenCVVideoProcessor)
 
 with col2:
     # 5. Output
@@ -46,11 +45,13 @@ with col2:
     if btn_pressed:
         isSolved = False
         bw_sdk = p_board = p_string = None
+        sampled_img = capture_img  # if capture_img else cv.cvtColor(src=cv.imread(
+        # filename='src/assets/images/sample/sudoku04.jpg'), code=cv.COLOR_BGR2RGB)
 
         # returns a black and white sudoku grid
         bw_sdk = srg.relay(image=sampled_img)
         p_string = dex.miner(image=bw_sdk)
-        print(len(p_string), p_string)
+        # print(len(p_string), p_string)
         isSolved, p_board = slr.gateway(
             string=p_string)  # returns a 81 bit string
         if isSolved:
