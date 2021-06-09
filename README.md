@@ -58,7 +58,8 @@ The application has been deployed. Please visit [Streamlit Share](https://share.
 
 - Meanwhile you can clone the repository
 - Open the directory. `cd vudoku`
-- Create a conda environment `conda env create -f src/environment.yml`
+- Creating a conda or virtual environment is highly recommended.
+- Install the dependencies `pip install -r requirements.txt`.
 - Open terminal in the root of the clone repository and run `streamlit run src/main.py`
 - It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:8501`](http://localhost:8501/)
 
