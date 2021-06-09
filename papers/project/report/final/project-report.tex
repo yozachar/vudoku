@@ -140,10 +140,12 @@
 
 \noindent Heartfelt thanks to the project coordinators \textbf{Ms. Shejina N M}, and \textbf{Ms. Mithu Varghese}, Assistant Professors, who kept reminding me of the deadlines and appreciated at each step of progress.\\
 
-\noindent Last but not the least, I convey my warm regards to my family members, my friends and all well wishers, who had been there during the needed times.\\
+\noindent I must mention the vibrant \textbf{open source community} which played a crucial role in making this project a wonderful experience. I thank them whole heatedly for providing me with great tools like Git, awesome libraries like Streamlit, but beyond that for clarifying my doubts and encouraging my progress with a positive motion.\\
+
+\noindent Last but not the least, I convey my warm regards to my \textbf{family members}, \textbf{friends} and all well wishers, who had been there during the needed times.\\
 
 \begin{center}
-    May God bless us all.\\[4cm]
+    May God bless us all.\\[3cm]
     Jovial Joe Jayarson\\
     IES17CS016\\
     IES College of Engineering\\
@@ -479,7 +481,7 @@ Therefore for a single training sample the minimized cost function will be as in
     \end{bmatrix}
 \end{equation}
 
-This is propagated backwards, errors are minimised after each sample and hence the digits are recognized correctly \cite{yt:3b1b:nnp1}.
+This is propagated backwards, errors are minimized after each sample and hence the digits are recognized correctly \cite{yt:3b1b:nnp1}.
 
 \section{Digit Recognition with CNN}
 \label{sec:cnn}
@@ -679,7 +681,7 @@ The input consists of queries and keys of dimension $d_k$, and values of dimensi
         \hline                                                                        \\
         CPU: 2+Cores, 2.46+GHz                & Code Editor: VSCode/OSS               \\
         RAM: 6 to 8GB                         & Language(s): Python/Nim               \\
-        Disk: 5+GB (free space)               & Libraries: OpenCV, Tensorflow etc.    \\
+        Disk: 5+GB (free space)               & Libraries: OpenCV, TensorFlow etc.    \\
         Capture Device: Camera or Scanner     & Dataset: MNIST
     \end{tabular}
 \end{center}
@@ -702,9 +704,10 @@ For exhaustive development a version control system is inevitable. This project 
         \2 \textit{scavenger.py} - obtains Sudoku from image
         \2 \textit{extractor.py} - grabs grid and digits from Sudoku
         \2 \textit{solver.py} - solves the puzzle
+        \2 \textit{builder.py} - builds a mapped Sudoku
     \1 a primary script
         \2 \textit{main.py} - control script of the project
-    \1  neual network model
+    \1  neural network model
         \2 \textit{classifier.py} - a dense CNN keras model
 \end{outline}
 
@@ -712,8 +715,11 @@ To follow along it's best to refer the \href{https://github.com/joe733/vudoku}{r
 
 \begin{lstlisting}
     |- src/
-        |- samples/
-            |- sample images
+        |- assets/
+            |- digit_map/
+            |- sample/
+            |- screens/
+        |- builder.py
         |- classifier.py
         |- extractor.py
         |- main.py
@@ -750,7 +756,7 @@ The digit recognition model is structured as a sandwich of layers which is eluci
 \end{lstlisting}
 
 
-\subsubsection{Convolution Layer 2D \texorpdfstring{$\times$}{x}  2} % PDF book marks maynot contain such symbols on heading as they serve as bookmarks
+\subsubsection{Convolution Layer 2D \texorpdfstring{$\times$}{x}  2} % PDF book marks may not contain such symbols on heading as they serve as bookmarks
 \label{subsubsec:convl2d2}
 \hspace{0.5cm} This layer creates a convolution kernel that is convoluted with the input layer to produce a tensor of outputs. When using this layer as the first layer in the model, a keyword argument \textit{input\_shape} is provided as a tuple (28, 28) which comes from the fact that MNIST dataset has 28 $\times$ 28 sized images only. There are two of these layer back-to-back which is because higher-level patterns cannot be seen with just one convolution layer. 
 
@@ -781,7 +787,7 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 
 \subsubsection{Adelta Optimization}
 \label{subsubsec:adltoptz}
-\hspace{0.5cm} It is a stochastic gradient descent method that is based on adaptive learning rate per dimensionto address two drawbacks: one \textit{the continual decay of learning rates throughout training} and \textit{the need for a manually selected global learning rate}. Adadelta is a more robust extension of Adagrad that adapts learning rates based on a moving window of gradient updates, instead of accumulating all past gradients.
+\hspace{0.5cm} It is a stochastic gradient descent method that is based on adaptive learning rate per dimensions addresses two drawbacks: one \textit{the continual decay of learning rates throughout training} and \textit{the need for a manually selected global learning rate}. Adadelta is a more robust extension of Adagrad that adapts learning rates based on a moving window of gradient updates, instead of accumulating all past gradients.
 
 \newpage
 \thispagestyle{fancy}
@@ -794,7 +800,7 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
     \begin{minipage}{0.45\textwidth}
         \centering
         \includegraphics[height=0.7\textwidth]{sample_puzzle.jpg}
-        \caption[Sample Input]{\centering Sampel Input}
+        \caption[Sample Input]{\centering Sample Input}
         \label{fig:7.2}
     \end{minipage}\hfill
     \begin{minipage}{0.45\textwidth}
@@ -811,13 +817,13 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 
 \begin{figure}[!htbp]
 \centering
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.5\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{transformed_puzzle.jpg}
-    \caption[Sample Input]{\centering Sampel Input}
+    \includegraphics[height=0.5\textwidth]{transformed_puzzle.jpg}
+    \caption[Sample Input]{\centering Transformed}
     \label{fig:7.4}
 \end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.5\textwidth}
     \centering
     \includegraphics[height=0.5\textwidth]{ui_wireframe.png}
     \caption[Wireframe UI]{\centering Wireframe UI}
@@ -829,7 +835,7 @@ $$\textstyle\text{loss}(p^\text{true}, p^\text{predict}) = -\sum_i p_i^\text{tru
 \label{subsec:extraction}
 \hspace{0.5cm} This submodule reads in the saved model \eqref{sec:drm} and accepts the transformed grid \eqref{fig:7.4} as input. Then it uses a simple logic and the powerful \textit{numpy} to split the image into a 9 $\times$ 9 grid. This method is not fool proof but efficient. Since the input image can be of variable size it needs to be resized into a 28 $\times$ 28 dimension otherwise the model will reject the input image.
 
-A caveat with the classification model is that it has been trained only on numbers and so its univeral knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the classifier wrongly verdicts an empty cell as a digit. The current workaround is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
+A caveat with the classification model is that it has been trained only on numbers and so its universal knowledge set consists only of images with digits. But Sudoku puzzle contains empty grids, it is observed that the classifier wrongly verdicts an empty cell as a digit. The current workaround is to skip the empty cells. The classifier spits out digits from the cells that it recognizes and they are encoded into an 81 bits long string.
 
 \section{Solver Module}
 \label{sec:solver}
@@ -837,15 +843,47 @@ A caveat with the classification model is that it has been trained only on numbe
 
 The validity of a number is checked by traversing the current row, column and the box. If validated then the operation is repeated. If not then it traces back to the previous empty cell and replaces the current number with an incremented one.
 
+\section{Builder Module}
+\label{sec:builder}
+\hspace{0.5cm} Once Sudoku is solved it is highly recommended to verify it (which is marked in the project roadmap). To display the solved Sudoku grid, each numbers from $0$ to $9$ is mapped to a 28 $\times$ 28 image containing corresponding digit. The board is traversed and each of these images are stitched horizontally and vertically.
+
+\begin{figure}[!htbp]
+\centering
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[height=0.6\textwidth]{ui_processing.png}
+    \caption[Live Image Processing]{\centering Live Image Processing}
+    \label{fig:7.6}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+    \centering
+    \includegraphics[height=0.6\textwidth]{stiched.jpg}
+    \caption[Wireframe UI]{\centering Stitched Image}
+    \label{fig:7.7}
+\end{minipage}
+\end{figure}
+
+Since images are considered as n-dimensions (here n = 3) numpy arrays, they can be concatenated. Stitching horizontally takes place along the ndarray's axis = 0 and vertically along ndarray's axis = 1, see \eqref{fig:7.7}
+
 \section{Main Script}
 \label{sec:mainscrpt}
-\hspace{0.5cm} This is a small controls script which provides an overall finish to the project. It includes Streamlit \cite{gh:Streamlit:streamlit}, Webcam and/or Streamlit\_Webrtc for the frontend. They manage async operations with the UI. Rest of it is function calls to the imported local modules. The following figure \eqref{fig:7.6} shows the processing of a live image from left to right.
+\hspace{0.5cm} This is a small controls script which provides an overall finish to the project. It includes Streamlit \cite{gh:Streamlit:streamlit} and Streamlit-Webrtc \cite{gh:whitphx:streamlit-webrtc} for the frontend. They manage async operations with the UI. Rest of it is function calls to the imported local modules. Figure \eqref{fig:7.6} shows the processing of a live image from left to right.
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[height=0.5\textwidth]{ui_processing.png}
-    \caption[Live Image Processing]{Live Image Processing}
-    \label{fig:7.6}
+    \includegraphics[width=0.9\textwidth]{testing_canny.png}
+    \caption[Testing Edge Detection]{Testing Edge Detection}
+    \label{fig:7.8}
+\end{figure}
+\vspace*{\fill}
+
+The above image \eqref{fig:7.8} shows the author testing a live edge detector. After hours of work and with more than a hundred commits Vudoku became a web application with a beautiful interface as seen in \eqref{fig:7.9}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{initial_ui.png}
+    \caption[User Interface]{User Interface}
+    \label{fig:7.9}
 \end{figure}
 \vspace*{\fill}
 %<<<<<<<<<<<<<<<<<<<<<<< Implementation <<<<<<<<<<<<<<<<<<<<<<<
@@ -857,7 +895,7 @@ The validity of a number is checked by traversing the current row, column and th
 \thispagestyle{fancy}
 \hspace{0.5cm} When the Transformer was first released back in 2017 by the Google-Brain team, it received a lot of traction from the research community. The OpenAI built three successive versions of GPT, which took the social media by the storm, was based on the same Transformer model. The scientific research landscape is shifting, it is at a crucial infliction point. Whatever we've learned so far from Recurrent Nets, Long Short Term Memory, Convolution Neural Networks etc. has paved way towards newer thinking and better approaches. Not a month ago Google-Research released their Vision Transformer (ViT), which was expected to be the at the heart of \emph{Vudoku}.
 
-I was exploring the \href{https://github.com/google-research/vision\_transformer}{ViT's Jupyter notebook}, simultaneously trying to grab the Sudoku grid from an image using \href{https://docs.opencv.org/3.0-beta/doc/py\_tutorials/py\_imgproc/py\_houghlines/py\_houghlines.html#hough-tranform-in-opencv}{Hough lines transform}, but since the latter was messed up I ended up \href{https://github.com/google-research/vision\_transformer/issues/107}{enquiring} the possibility of using ViT directly. Little did I know that the very structure of ViT couldn't be used for such a task (as it was stated in a \href{https://github.com/google-research/vision\_transformer/issues/107#issuecomment-842877895}{comment} on my thread), or is it... still an unfinished reasearch.
+I was exploring the \href{https://github.com/google-research/vision\_transformer}{ViT's Jupyter notebook}, simultaneously trying to grab the Sudoku grid from an image using \href{https://docs.opencv.org/3.0-beta/doc/py\_tutorials/py\_imgproc/py\_houghlines/py\_houghlines.html#hough-tranform-in-opencv}{Hough lines transform}, but since the latter was messed up I ended up \href{https://github.com/google-research/vision\_transformer/issues/107}{enquiring} the possibility of using ViT directly. Little did I know that the very structure of ViT couldn't be used for such a task (as it was stated in a \href{https://github.com/google-research/vision\_transformer/issues/107#issuecomment-842877895}{comment} on my thread), or is it... still an unfinished research.
 
 Some of the libraries I've used, like Streamlit, Streamlit\_Webrtc are very new and as of writing this, they are under heavy development. Hence it's likely that one will encounter hiccups while replicating this work. Another obstacle I found jutting out during development is the disparity in packages - one version of package is hard-bound to another version or a range of the same, updating them could be really messy. This is quite the reason that Streamlit hosting is failing. I've used \textit{conda} as my primary package manage but due to the unavailability of certain packages I've used \textit{pip} also.
 
