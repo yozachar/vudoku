@@ -45,17 +45,16 @@ with col2:
     if btn_pressed:
         isSolved = False
         bw_sdk = p_board = p_string = None
-        sampled_img = capture_img  # if capture_img else cv.cvtColor(src=cv.imread(
-        # filename='src/assets/images/sample/sudoku04.jpg'), code=cv.COLOR_BGR2RGB)
+        sampled_img = capture_img if capture_img else cv.cvtColor(src=cv.imread(
+            filename='src/assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
 
         # returns a black and white sudoku grid
         bw_sdk = srg.relay(image=sampled_img)
         p_string = dex.miner(image=bw_sdk)
         # print(len(p_string), p_string)
-        isSolved, p_board = slr.gateway(
+        p_board = slr.gateway(
             string=p_string)  # returns a 81 bit string
-        if isSolved:
-            ibg.buildImage(p_board)
+        ibg.buildImage(p_board)
 
         p_board = cv.cvtColor(src=cv.imread(
             filename='src/assets/images/out/solution.jpg'), code=cv.COLOR_BGR2RGB)
