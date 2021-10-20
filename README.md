@@ -1,5 +1,7 @@
 # Vudoku - A Visual Sudoku Solver
 
+> [Commit](https://github.com/joe733/vudoku/tree/0b9f38e86119c4031e7668375236a37aaadde22d) when the project was submitted.
+
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/joe733/vudoku/main/src/main.py)
 [![Status](https://img.shields.io/badge/Project%20Completed-95%25-brightgreen)](https://github.com/joe733/vudoku)
 [![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-blue)](https://github.com/streamlit/streamlit/)
