@@ -424,13 +424,6 @@ dmypy.json
 
 # <<< Python <<<
 
-# >>> Nim >>>
-nimcache/
-nimblecache/
-htmldocs/
-# <<< Nim <<<
-
 # >>> Misc >>>
 .vscode/
-src/assets/images/out
 # <<< Misc <<<
