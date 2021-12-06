@@ -2,7 +2,7 @@
 
 > [Commit](https://github.com/joe733/vudoku/tree/0b9f38e86119c4031e7668375236a37aaadde22d) when the project was submitted.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/joe733/vudoku/main/src/main.py)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/joe733/vudoku/main/main.py)
 [![Status](https://img.shields.io/badge/Project%20Completed-95%25-brightgreen)](https://github.com/joe733/vudoku)
 [![Streamlit](https://img.shields.io/badge/Streamlit-0.82.0-blue)](https://github.com/streamlit/streamlit/)
 [![Streamlit](https://img.shields.io/badge/Keras-2.4.3-blue)](https://github.com/opencv/opencv-python)
@@ -15,7 +15,7 @@
 - Sudoku is a mathematical puzzle.
 - Regular or a common Sudoku is a 9x9 grid split into 9 sub squares with sparse entries.
 
-```text
+```txt
 ╔═══╤═══╤═══╦═══╤═══╤═══╦═══╤═══╤═══╗
 ║ 8 │ 5 │   ║   │   │ 2 ║ 4 │   │   ║
 ╟───┼───┼───╫───┼───┼───╫───┼───┼───╢
@@ -54,46 +54,47 @@ This project aims to solve 9x9 Sudoku squares using computer vision techniques. 
 
 Asking a computer to solve it requires translating Sudoku into code. This can be achieved in many ways, linear arrays, encoded and decoded strings, two dimensional arrays etc. This project uses simple string expression.
 
-## How to test
+### How to test
 
-The application has been deployed. Please visit [Streamlit Share](https://share.streamlit.io/joe733/vudoku/main/src/main.py).
+The application has been deployed. Please visit [Streamlit Share](https://share.streamlit.io/joe733/vudoku/main/main.py).
 
 - Meanwhile you can clone the repository
 - Open the directory. `cd vudoku`
 - Creating a conda or virtual environment is highly recommended.
 - Install the dependencies `pip install pipenv` then `pipenv shell`, finally `pipenv install`
 - Open terminal in the root of the clone repository and run `streamlit run main.py`
-- It should automatically redirect you to the browser, if not open the browser and go to [`https://localhost:8501`](http://localhost:8501/)
+- It should automatically redirect you to the browser, if not open the browser and go to [`http://localhost:8501`](http://localhost:8501/)
 
-## Current UI
+### UI
 
-![InitialUI](src/assets/images/screens/initial_ui.png)
+| ![InitialUI](assets/images/screens/initial_ui.png) | ![CurrentUI](assets/images/screens/current.png) |
+| -------------------------------------------------- | ----------------------------------------------- |
 
-## Task List
+### Task List
 
-- [X] Get input frames from still images or video capture
-- [X] Preprocess image, prep it to extract Sudoku grid
-- [X] Grab the Sudoku box using contours of the maximum area
+- [x] Get input frames from still images or video capture
+- [x] Preprocess image, prep it to extract Sudoku grid
+- [x] Grab the Sudoku box using contours of the maximum area
 - [ ] Rectify flipped images after perspective transform
-- [X] Split the grid into Sudoku boxes to extract digits
-- [X] ~~Train a logistic regression classifier on MNIST data set - current random accuracy is around `91%`~~
-- [X] Build and Train a keras Sequential Model (2 x Conv2D + MaxPool2D + Dropout + Flatten + Dense[ReLu] Dropout + Dense[SoftMax])
+- [x] Split the grid into Sudoku boxes to extract digits
+- [x] ~~Train a logistic regression classifier on MNIST data set - current random accuracy is around `91%`~~
+- [x] Build and Train a keras Sequential Model (2 x Conv2D + MaxPool2D + Dropout + Flatten + Dense[ReLu] Dropout + Dense[SoftMax])
 - [ ] Work on improving sudoku grabbing quality
-  - [X] Get the digits recognized correctly
+  - [x] Get the digits recognized correctly
   - [ ] Preprocess the image (of a single digit) to remove excess / thick border
   - [ ] Scale and center the image
-  - [X] ~~If nothing works, try a different solver or even another classifier.~~
-  - [X] Encode the classified image into a 81 bit string
-- [X] Solve the Sudoku using simple backtracking
-- [X] ~~Additional module just to validate solved sudoku~~
-- [X] Restructure the code and add a logical connections and control flow
-- [X] Adds Streamlit GUI support
-- [X] Deployed on Streamlit
+  - [x] ~~If nothing works, try a different solver or even another classifier.~~
+  - [x] Encode the classified image into a 81 bit string
+- [x] Solve the Sudoku using simple backtracking
+- [x] ~~Additional module just to validate solved sudoku~~
+- [x] Restructure the code and add a logical connections and control flow
+- [x] Adds Streamlit GUI support
+- [x] Deployed on Streamlit
 
-### Extras
+#### Extras
 
 - [ ] Good to have a solid CLI interface
 - [ ] Improve the number detection and grid splitting algorithm
-- [X] ~~Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)~~
+- [x] ~~Host it on services like [PythonAnywhere](https://www.pythonanywhere.com/) / [Streamlit](https://streamlit.io/)~~
 
-> **NB**: *If you find anything in this repositry that is not properly cited please let me know, I'm be more than happy to rectify it.*
+> **NB**: _If you find anything in this repositry that is not properly cited please let me know, I'm be more than happy to rectify it._
