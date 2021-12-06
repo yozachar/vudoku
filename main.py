@@ -31,7 +31,7 @@ class OpenCVVideoProcessor(VideoProcessorBase):
         return av.VideoFrame.from_ndarray(capture_img, format="bgr24")
 
 
-col1, col2 = st.beta_columns(spec=2)
+col1, col2 = st.columns(spec=2)
 with col1:
     # 1. Input
     st.header(body='Input')
@@ -46,7 +46,7 @@ with col2:
         isSolved = False
         bw_sdk = p_board = p_string = None
         sampled_img = capture_img if capture_img else cv.cvtColor(src=cv.imread(
-            filename='src/assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
 
         # returns a black and white sudoku grid
         bw_sdk = srg.relay(image=sampled_img)
@@ -56,12 +56,12 @@ with col2:
             string=p_string)  # returns a 81 bit string
         ibg.buildImage(p_board)
 
-        p_board = cv.cvtColor(src=cv.imread(
-            filename='src/assets/images/out/solution.jpg'), code=cv.COLOR_BGR2RGB)
-        st.image(image=p_board)
+        solution = cv.cvtColor(src=cv.imread(
+            filename='assets/images/out/solution.jpg'), code=cv.COLOR_BGR2RGB)
+        st.image(image=solution)
 
 
-col1, col2 = st.beta_columns(spec=2)
+col1, col2 = st.columns(spec=2)
 with col1:
     # 2. Capture image
     st.header('Captured Image')
@@ -74,17 +74,17 @@ with col2:
     st.header('Detect Edges')
     if btn_pressed:
         dilated_img = cv.cvtColor(src=cv.imread(
-            filename='src/assets/images/out/dilated.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='assets/images/out/dilated.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=dilated_img)
 
 
-col1, col2 = st.beta_columns(spec=2)
+col1, col2 = st.columns(spec=2)
 with col1:
     # 3.Mark contour points
     st.header('Mark Contours')
     if btn_pressed:
         contour_img = cv.cvtColor(src=cv.imread(
-            filename='src/assets/images/out/contours.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='assets/images/out/contours.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=contour_img)
 
 with col2:
@@ -92,5 +92,5 @@ with col2:
     st.header('Perspective Transform')
     if btn_pressed:
         flipped_img = cv.cvtColor(src=cv.imread(
-            filename='src/assets/images/out/flipped.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='assets/images/out/flipped.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=flipped_img)

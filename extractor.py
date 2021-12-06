@@ -18,12 +18,12 @@ class DigitExtractor:
                                         dsize=(28, 28),
                                         interpolation=cv.INTER_CUBIC)
                 cv.imwrite(
-                    filename=f'src/assets/images/out/cells/cell{idx}{jdx}.jpg', img=resized_img)
+                    filename=f'assets/images/out/cells/cell{idx}{jdx}.jpg', img=resized_img)
                 self.cells.append(resized_img)
 
     def genString(self):
         # check if model exists if not, prompt user to run classifier
-        model = models.load_model(filepath='src/assets/models/mnist_trained_model_v1.h5')
+        model = models.load_model(filepath='assets/models/mnist_trained_model_v1.h5')
 
         for cell in self.cells:
             # Mark empty cells are marked as zero the converted into a string

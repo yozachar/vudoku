@@ -11,9 +11,9 @@ class ImageBuilder:
 
     def buildImage(self, board):
 
-        for idx, file in enumerate(sorted(Path('src/assets/images/digit_map/').iterdir())):
-            # print('src/assets/images/digit_map/'+file.name)
-            self.dig_map[idx] = cv.imread(filename='src/assets/images/digit_map/'+file.name)
+        for idx, file in enumerate(sorted(Path('assets/images/digit_map/').iterdir())):
+            # print('assets/images/digit_map/'+file.name)
+            self.dig_map[idx] = cv.imread(filename='assets/images/digit_map/'+file.name)
 
         for idx in range(9):
             for jdx in range(9):
@@ -27,6 +27,6 @@ class ImageBuilder:
                 continue
             self.row = np.concatenate((self.row, new_map), axis=1)
 
-        cv.imwrite(filename='src/assets/images/out/solution.jpg', img=self.row)
+        cv.imwrite(filename='assets/images/out/solution.jpg', img=self.row)
 
 ibg = ImageBuilder()
