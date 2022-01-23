@@ -67,7 +67,7 @@ The application has been deployed. Please visit [Streamlit Share](https://share.
 
 ### UI
 
-| ![InitialUI](assets/images/screens/initial_ui.png) | ![CurrentUI](assets/images/screens/current.png) |
+| ![InitialUI](vudoku/assets/images/screens/initial_ui.png) | ![CurrentUI](vudoku/assets/images/screens/current.png) |
 | -------------------------------------------------- | ----------------------------------------------- |
 
 ### Task List
