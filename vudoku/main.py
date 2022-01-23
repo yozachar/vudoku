@@ -46,7 +46,7 @@ with col2:
         isSolved = False
         bw_sdk = p_board = p_string = None
         sampled_img = capture_img if capture_img else cv.cvtColor(src=cv.imread(
-            filename='assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='vudoku/assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
 
         # returns a black and white sudoku grid
         bw_sdk = srg.relay(image=sampled_img)
@@ -57,7 +57,7 @@ with col2:
         ibg.buildImage(p_board)
 
         solution = cv.cvtColor(src=cv.imread(
-            filename='assets/images/out/solution.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='vudoku/assets/images/out/solution.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=solution)
 
 
@@ -74,7 +74,7 @@ with col2:
     st.header('Detect Edges')
     if btn_pressed:
         dilated_img = cv.cvtColor(src=cv.imread(
-            filename='assets/images/out/dilated.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='vudoku/assets/images/out/dilated.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=dilated_img)
 
 
@@ -84,7 +84,7 @@ with col1:
     st.header('Mark Contours')
     if btn_pressed:
         contour_img = cv.cvtColor(src=cv.imread(
-            filename='assets/images/out/contours.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='vudoku/assets/images/out/contours.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=contour_img)
 
 with col2:
@@ -92,5 +92,5 @@ with col2:
     st.header('Perspective Transform')
     if btn_pressed:
         flipped_img = cv.cvtColor(src=cv.imread(
-            filename='assets/images/out/flipped.jpg'), code=cv.COLOR_BGR2RGB)
+            filename='vudoku/assets/images/out/flipped.jpg'), code=cv.COLOR_BGR2RGB)
         st.image(image=flipped_img)

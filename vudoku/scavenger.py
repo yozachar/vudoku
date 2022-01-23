@@ -27,7 +27,7 @@ class SudokuRecognizer:
             src=gaussian_sdk, maxValue=255, adaptiveMethod=cv.ADAPTIVE_THRESH_GAUSSIAN_C, thresholdType=cv.THRESH_BINARY, blockSize=13, C=3)
         superimposed = cv.bitwise_not(src=adaptive_sdk)
         dilated_sdk = cv.dilate(src=superimposed, kernel=(9, 9), iterations=1)
-        cv.imwrite(filename='assets/images/out/dilated.jpg',
+        cv.imwrite(filename='vudoku/assets/images/out/dilated.jpg',
                    img=dilated_sdk)
         return dilated_sdk
 
@@ -68,7 +68,7 @@ class SudokuRecognizer:
             src=image, M=matrix, dsize=(side, side))
         flipped_h = cv.flip(src=transformed, flipCode=1)
 
-        cv.imwrite(filename='assets/images/out/flipped.jpg', img=flipped_h)
+        cv.imwrite(filename='vudoku/assets/images/out/flipped.jpg', img=flipped_h)
         return flipped_h
 
     def getBlobs(self, frame, image):
@@ -83,12 +83,12 @@ class SudokuRecognizer:
 
         blob = cv.drawContours(
             image=image.copy(), contours=approx, contourIdx=-1, color=(0, 255, 0), thickness=10)
-        cv.imwrite(filename='assets/images/out/contours.jpg',
+        cv.imwrite(filename='vudoku/assets/images/out/contours.jpg',
                    img=blob)
 
         return frame, approx
 
-    def relay(self, image=cv.imread(filename='assets/images/sample/sudoku10.jpg')):
+    def relay(self, image=cv.imread(filename='vudoku/assets/images/sample/sudoku10.jpg')):
         # 6 does not unpack, # 2 - 5 keeps flipping
         resized_img = self.rescaleFrame(frame=image, flag=False)
         blank = np.zeros(shape=resized_img, dtype=np.uint8)
