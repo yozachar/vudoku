@@ -54,13 +54,12 @@ class SudokuSolver:
                 z = 4
             else:
                 z = 5
+        elif y == 3:
+            z = 6
+        elif y == 6:
+            z = 7
         else:
-            if y == 3:
-                z = 6
-            elif y == 6:
-                z = 7
-            else:
-                z = 8
+            z = 8
 
         print(swapped[z])
         if num in swapped[z]:

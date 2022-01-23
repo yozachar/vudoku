@@ -45,8 +45,11 @@ with col2:
     if btn_pressed:
         isSolved = False
         bw_sdk = p_board = p_string = None
-        sampled_img = capture_img if capture_img else cv.cvtColor(src=cv.imread(
-            filename='vudoku/assets/images/sample/sudoku10.jpg'), code=cv.COLOR_BGR2RGB)
+        sampled_img = capture_img or cv.cvtColor(
+            src=cv.imread(filename='vudoku/assets/images/sample/sudoku10.jpg'),
+            code=cv.COLOR_BGR2RGB,
+        )
+
 
         # returns a black and white sudoku grid
         bw_sdk = srg.relay(image=sampled_img)
@@ -66,7 +69,7 @@ with col1:
     # 2. Capture image
     st.header('Captured Image')
     if btn_pressed:
-        sampled_img = capture_img if capture_img else sampled_img
+        sampled_img = capture_img or sampled_img
         st.image(image=sampled_img)
 
 with col2:

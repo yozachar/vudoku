@@ -6,7 +6,7 @@ from pathlib import Path
 class ImageBuilder:
 
     def __init__(self):
-        self.dig_map = dict()
+        self.dig_map = {}
         self.row = None
 
     def buildImage(self, board):

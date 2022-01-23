@@ -94,8 +94,7 @@ class SudokuRecognizer:
         blank = np.zeros(shape=resized_img, dtype=np.uint8)
         p_frame = self.preprocessFrame(frame=image, superimposed=blank)
         blob_img, apx_pts = self.getBlobs(frame=p_frame, image=image)
-        p_transform = self.perspectiveTransform(image=blob_img, corners=apx_pts)
-        return p_transform
+        return self.perspectiveTransform(image=blob_img, corners=apx_pts)
         # while True:
         #     isTrue, frame = capture.read()
         #     cv.imshow(winname='Webcam', mat=preprocessFrame(frame=frame))
