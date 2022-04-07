@@ -7,6 +7,8 @@
 [![Git-emoji](https://img.shields.io/badge/Gitmoji-%20😎-FFDD67.svg)](https://gitmoji.dev)
 [![CodeSize](https://img.shields.io/github/languages/code-size/joe733/vudoku?color=red&label=Code%20Size)](https://github.com/joe733/vudoku)
 
+⚠️ **untested dependency update** ⚠️
+
 ## Sudoku
 
 - Sudoku is a mathematical puzzle.
