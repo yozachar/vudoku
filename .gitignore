@@ -426,4 +426,6 @@ dmypy.json
 
 # >>> Misc >>>
 .vscode/
+# # asdf
+.tool-versions
 # <<< Misc <<<
