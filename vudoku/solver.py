@@ -1,3 +1,4 @@
+import itertools
 import numpy as np
 
 
@@ -7,13 +8,11 @@ class SudokuSolver:
 
     def solveRecursively(self, board):
 
-        cell = self.isEmptyCell(self.board)
-
-        if not cell:
-            return True
-        else:
+        if cell := self.isEmptyCell(self.board):
             row, col = cell
 
+        else:
+            return True
         for sol in range(1, 10):
             if self.isValid(self.board, sol, (row, col)):
                 self.board[row, col] = sol
@@ -62,17 +61,19 @@ class SudokuSolver:
             z = 8
 
         print(swapped[z])
-        if num in swapped[z]:
-            return False
-
-        return True
+        return num not in swapped[z]
 
     def isEmptyCell(self, board):
-        for idx in range(len(self.board)):
-            for jdx in range(len(self.board[0])):
-                if self.board[idx, jdx] == 0:
-                    return (idx, jdx)  # row, col
-        return None
+        return next(
+            (
+                (idx, jdx)
+                for idx, jdx in itertools.product(
+                    range(len(self.board)), range(len(self.board[0]))
+                )
+                if self.board[idx, jdx] == 0
+            ),
+            None,
+        )
 
     def gateway(self, string='780400120600075009000601078007040260001050930904060005070300012120007400049206007'):
         self.board = np.array(list(string), dtype=np.int32).reshape(9, 9)
