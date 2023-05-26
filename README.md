@@ -63,9 +63,7 @@ The application has been deployed. Please visit [this link](https://share.stream
 
 - You can clone the repository: `git clone https://github.com/joe733/vudoku.git`
 - Enter the project directory `cd vudoku`
-- Install dependencies by first running:
-  - `pip install pipenv` (if pipenv is not installed already) then
-  - `pipenv install --dev` which will automatically create a virtual env before installing dependencies.
+- Install dependencies by first running: `poetry shell && poetry install` which will create a virtual environment and install dependencies.
 - Finally run `streamlit run vudoku/main.py`.
 - It should automatically redirect you to the browser, if not open the browser and go to [`http://localhost:8501`](http://localhost:8501/).
 

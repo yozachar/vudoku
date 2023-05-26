@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "vudoku"
+version = "0.1.0"
+description = "Final year project - A visual sudoku solver"
+authors = ["Jovial Joe Jayarson <jovial7joe@hotmail.com>"]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.9.7 || >3.9.7,<3.12"
+keras = "^2.12.0"
+numpy = "1.23"
+opencv-python-headless = "^4.7.0.72"
+streamlit = "^1.22.0"
+streamlit-webrtc = "^0.45.0"
+tensorflow = "^2.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
