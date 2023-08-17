@@ -6,7 +6,7 @@ groups = ["default", "tooling"]
 cross_platform = true
 static_urls = false
 lock_version = "4.3"
-content_hash = "sha256:0517dd8fdecfb1ad504af7d9c6742c4ea581e4c8411fd27f85e2946a940c2add"
+content_hash = "sha256:d1a0887fa83b4361a5498acb8f9892ea0133c7b1faf411cd1555e99a090cfa53"
 
 [[package]]
 name = "aioice"
