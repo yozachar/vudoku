@@ -1,31 +1,80 @@
-[tool.poetry]
+[project]
 name = "vudoku"
 version = "0.1.0"
-description = "Final year project - A visual sudoku solver"
-authors = ["Jovial Joe Jayarson <jovial7joe@hotmail.com>"]
-license = "MIT"
+description = "A visual sudoku solver"
+authors = [{ name = "Jovial Joe Jayarson", email = "jovial7joe@hotmail.com" }]
+license = { text = "MIT" }
 readme = "README.md"
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "keras>=2.13.1",
+    "numpy>=1.25.2",
+    "opencv-python-headless>=4.8.0.76",
+    "streamlit>=1.25.0",
+    "streamlit-webrtc>=0.45.1",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.8,<3.9.7 || >3.9.7,<3.12"
-keras = "^2.12.0"
-numpy = "1.23"
-opencv-python-headless = "^4.7.0.72"
-streamlit = "^1.22.0"
-streamlit-webrtc = "^0.45.0"
-tensorflow = "^2.12.0"
+[project.optional-dependencies]
+tooling = [
+    "bandit>=1.7.5",
+    "black>=23.7.0",
+    "ruff>=0.0.284",
+    "pyright>=1.1.323",
+]
 
+# [build-system]
+# requires = ["setuptools>=61"]
+# build-backend = "setuptools.build_meta"
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+####################
+#  Configurations  #
+####################
+
+[tool.bandit]
+exclude_dirs = [".github", "tests", ".venv", ".vscode"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.pyright]
+exclude = ["**/__pycache__", ".venv/"]
+pythonVersion = "3.11"
+pythonPlatform = "All"
+typeCheckingMode = "strict"
+
+[tool.ruff]
+select = [
+    # Pyflakes
+    "F",
+    # pycodestyle
+    "W",
+    "E",
+    # mccabe
+    # C90
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    # pydocstyle
+    "D",
+]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["**/__pycache__"]
+
+[tool.ruff.isort]
+# case-sensitive = true
+combine-as-imports = true
+force-sort-within-sections = true
+force-wrap-aliases = true
+relative-imports-order = "closest-to-furthest"
+
+[tool.ruff.pydocstyle]
+convention = "google"

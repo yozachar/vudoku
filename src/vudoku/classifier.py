@@ -1,13 +1,14 @@
-from keras import models
-from keras import losses
-from keras import optimizers
-from keras import backend as kb
+from keras import (
+    backend as kb,
+    losses,
+    optimizers,
+)
 from keras.datasets import mnist
+
+# says it changed to => keras.utils.to_categorical ?np_utils?
+from keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2D
 from keras.models import Sequential
 from keras.utils.np_utils import to_categorical
-# says it changed to => keras.utils.to_categorical ?np_utils?
-from keras.layers import Dense, Dropout, Flatten
-from keras.layers import Conv2D, MaxPooling2D
 
 
 class DigitClassifier:

@@ -1,18 +1,16 @@
 # This the project entry point
-'''
-The project path is laid out as follows:
+'''The project path is laid out as follows:
 
 Video Input --> Sudoku Grabber -->  Solver --> Visualizer
 '''
 
-from solver import slr
-from builder import ibg
-from extractor import dex, np
-from scavenger import srg, cv
-
 import av
+from builder import ibg
+from extractor import dex
+from scavenger import cv, srg
+from solver import slr
 import streamlit as st
-from streamlit_webrtc import webrtc_streamer, VideoProcessorBase
+from streamlit_webrtc import VideoProcessorBase, webrtc_streamer
 
 btn_pressed = False
 capture_img = dilated_img = contour_img = flipped_img = None
