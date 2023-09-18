@@ -14,19 +14,19 @@ classifiers = [
 requires-python = ">=3.11"
 dependencies = [
     "av>=10.0.0",
-    "keras>=2.13.1",
+    "keras>=2.14.0",
     "numpy>=1.25.2",
     "opencv-python-headless>=4.8.0.76",
-    "streamlit>=1.25.0",
-    "streamlit-webrtc>=0.45.1",
+    "streamlit>=1.26.0",
+    "streamlit-webrtc>=0.47.0",
 ]
 
-[project.optional-dependencies]
+[tool.pdm.dev-dependencies]
 tooling = [
     "bandit>=1.7.5",
-    "black>=23.7.0",
-    "ruff>=0.0.284",
-    "pyright>=1.1.323",
+    "black>=23.9.1",
+    "ruff>=0.0.290",
+    "pyright>=1.1.327",
 ]
 
 # [build-system]
